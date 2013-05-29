@@ -1,5 +1,16 @@
 *.class
-
+bin/
+.settings/
+output/
+data/
+target/
+.classpath
+.project
+.rar
+.zip
+libs/
+lib/
+.log
 # Package Files #
 *.jar
 *.war
