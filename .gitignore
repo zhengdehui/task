@@ -6,11 +6,11 @@ data/
 target/
 .classpath
 .project
-.rar
-.zip
+*.rar
+*.zip
 libs/
 lib/
-.log
+*.log
 # Package Files #
 *.jar
 *.war
