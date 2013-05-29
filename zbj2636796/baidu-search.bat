@@ -1,0 +1,1 @@
+jre6\bin\java -jar baidu-search.jar
