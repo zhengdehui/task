@@ -73,6 +73,21 @@ public abstract class Controller implements Runnable {
         }
     }
 
+    protected void stopLoading() {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    webBrowser.stopLoading();
+                }
+            });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
     protected static void sleep(int millis) {
         try {
             Thread.sleep(millis);
@@ -90,6 +105,7 @@ public abstract class Controller implements Runnable {
 
     public void stop() {
         started = false;
+        status = Status.UNSTARRED;
         webBrowser.stopLoading();
     }
 
