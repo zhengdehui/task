@@ -21,8 +21,19 @@ import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 
 public class MainFrame extends JFrame {
+
+    private static final String GET_URLS_JS        = "var urls=new Array();"
+                                                           + "var as=document.getElementById('ContainerFrame').contentWindow.document.getElementsByTagName('a');"
+                                                           + "for(var i = 0; i < as.length; i++){"
+                                                           + "if(as[i].innerHTML=='修改'){"
+                                                           + "var onclickText=as[i].getAttribute('onclick').toString();"
+                                                           + "var begin=onclickText.indexOf(\"'\")+1;"
+                                                           + "var end=onclickText.indexOf(\"'\",begin);"
+                                                           + "var url=onclickText.substring(begin,end);"
+                                                           + "urls.push(url);}}" + "return urls;";
 
     private static final long   serialVersionUID   = 6144722027050898517L;
 
@@ -51,7 +62,7 @@ public class MainFrame extends JFrame {
 
     boolean                     on                 = false;
 
-    boolean                     toSubmit           = true;
+    //    boolean                     toSubmit           = true;
 
     /**
      * Launch the application.
@@ -75,112 +86,121 @@ public class MainFrame extends JFrame {
     JWebBrowser createBrowser() {
         final JWebBrowser webBrowser = new JWebBrowser();
         webBrowser.setMenuBarVisible(false);
-        //        webBrowser.setBarsVisible(true);
-        //        webBrowser.setButtonBarVisible(true);
-
-        //        webBrowser.navigate("about:blank");
 
         webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+
             @Override
             public void loadingProgressChanged(WebBrowserEvent e) {
                 super.loadingProgressChanged(e);
-
                 if (webBrowser.getLoadingProgress() == 100) {
-                    String location = webBrowser.getResourceLocation();
-                    System.out.println("Location: " + location);
 
-                    if (location.startsWith("https://passport.58.com/pso/viplogin/")) {
-                        doLogin();
-                    } else if (location.startsWith("http://vip.58.com/app/position/")) {
-                        if (!on) {
-                            return;
-                        }
-                        if (urls != null) {
-                            return;
-                        }
-
-                        //                        String js = "var urls = new Array();"
-                        //                                + "var as = document.getElementById('ContainerFrame').contentWindow.document.getElementsByTagName('a');"
-                        //                                + "for(var i = 0; i < as.length; i++){"
-                        //                                + "if(as[i].innerHTML == '修改'){"
-                        //                                + "var url = as[i].href.substring(as[i].href.indexOf(\"'\") + 1, as[i].href.length - 1);"
-                        //                                + "urls.push(url);}}" + "return urls;";
-
-                        String js = "var urls=new Array();"
-                                + "var as=document.getElementById('ContainerFrame').contentWindow.document.getElementsByTagName('a');"
-                                + "for(var i = 0; i < as.length; i++){" + "if(as[i].innerHTML=='修改'){"
-                                + "var onclickText=as[i].getAttribute('onclick');"
-                                + "var begin=onclickText.indexOf(\"'\")+1;"
-                                + "var end=onclickText.indexOf(\"'\",begin);"
-                                + "var url=onclickText.substring(begin,end);" + "urls.push(url);}}" + "return urls;";
-
-                        urls = (Object[]) webBrowser.executeJavascriptWithResult(js);
-
-                        if (urls.length > 0) {
-                            webBrowser.navigate((String) urls[urlIndex++]);
-                            toSubmit = true;
-                        }
-                    } else if (location.startsWith("http://vip.58.com/fun/postposition/")) {
-                        if (!on) {
-                            webBrowser.stopLoading();
-                            webBrowser.navigate("http://vip.58.com/app/position/");
-                            return;
-                        }
-
-                        if (toSubmit) {
-                            System.out.println("into submit...");
-
-                            Object buttonTitle = webBrowser.executeJavascriptWithResult(GET_BUTTON_TEXT_JS);
-                            System.out.println("buttonTitle: " + buttonTitle);
-                            if (buttonTitle != null) {
-                                webBrowser.stopLoading();
-                                toSubmit = false;
-                                webBrowser.executeJavascript(SUBMIT_JS);
-                            }
-                        } else {
-                            System.out.println("into confirm...");
-                            webBrowser.stopLoading();
-                            try {
-                                Thread.sleep(interval);
-                            } catch (InterruptedException e1) {
-                                e1.printStackTrace();
-                            }
-                            if (urlIndex == urls.length) {
-                                urlIndex = 0;
-                            }
-                            toSubmit = true;
-                            webBrowser.navigate((String) urls[urlIndex++]);
-                        }
-                    }
                 }
+            }
+
+            @Override
+            public void locationChanged(WebBrowserNavigationEvent e) {
+                super.locationChanged(e);
+                int count = 0;
+                do {
+                    sleep(100);
+                    if (webBrowser.getLoadingProgress() == 100) {
+                        break;
+                    }
+                } while (count++ < 50);
+
+                handle(e);
             }
         });
         return webBrowser;
+    }
+
+    private void handle(WebBrowserNavigationEvent e) {
+        //        String location = webBrowser.getResourceLocation();
+        String location = e.getNewResourceLocation();
+        //        System.out.println("Location: " + location);
+
+        if (location.startsWith("https://passport.58.com/pso/viplogin/")) {
+            doLogin();
+        } else if (location.startsWith("http://vip.58.com/app/position/")) {
+            if (!on) {
+                return;
+            }
+            if (urls != null) {
+                return;
+            }
+
+            //                        String js = "var urls = new Array();"
+            //                                + "var as = document.getElementById('ContainerFrame').contentWindow.document.getElementsByTagName('a');"
+            //                                + "for(var i = 0; i < as.length; i++){"
+            //                                + "if(as[i].innerHTML == '修改'){"
+            //                                + "var url = as[i].href.substring(as[i].href.indexOf(\"'\") + 1, as[i].href.length - 1);"
+            //                                + "urls.push(url);}}" + "return urls;";
+
+            urls = (Object[]) webBrowser.executeJavascriptWithResult(GET_URLS_JS);
+
+            if (urls.length > 0) {
+                String url = (String) urls[urlIndex++];
+                webBrowser.navigate(url);
+                System.out.println("修改: " + url);
+                //                toSubmit = true;
+            }
+        } else if (location.startsWith("http://vip.58.com/fun/postposition/")) {
+            if (!on) {
+                webBrowser.stopLoading();
+                webBrowser.navigate("http://vip.58.com/app/position/");
+                return;
+            }
+
+            sleep(interval);
+            webBrowser.executeJavascript(SUBMIT_JS);
+            System.out.println("发布: " + location);
+
+            //                System.out.println("into submit...");
+            //
+            //                Object buttonTitle = webBrowser.executeJavascriptWithResult(GET_BUTTON_TEXT_JS);
+            //                System.out.println("buttonTitle: " + buttonTitle);
+            //                if (buttonTitle != null) {
+            //                    webBrowser.stopLoading();
+            //                    toSubmit = false;
+            //                    sleep(interval);
+            //                    webBrowser.executeJavascript(SUBMIT_JS);
+            //                }
+        } else if (location.startsWith("http://v.58.com/v2/zppostreceive")) {
+            if (!on) {
+                webBrowser.stopLoading();
+                webBrowser.navigate("http://vip.58.com/app/position/");
+                return;
+            }
+            sleep(1000);
+            if (urlIndex == urls.length) {
+                urlIndex = 0;
+            }
+            String url = (String) urls[urlIndex++];
+            webBrowser.navigate(url);
+            System.out.println("修改: " + url);
+
+            //                System.out.println("into confirm...");
+            //                webBrowser.stopLoading();
+            //                sleep(1000);
+            //                if (urlIndex == urls.length) {
+            //                    urlIndex = 0;
+            //                }
+            //                toSubmit = true;
+            //                webBrowser.navigate((String) urls[urlIndex++]);
+        }
+    }
+
+    protected static void sleep(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void doLogin() {
         System.out.println("start login...");
         webBrowser.executeJavascript(LOGIN_JS);
-    }
-
-    private JWebBrowser createSubBrowser() {
-        final JWebBrowser webBrowser = new JWebBrowser();
-        webBrowser.setMenuBarVisible(false);
-
-        webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
-            @Override
-            public void loadingProgressChanged(WebBrowserEvent e) {
-                super.loadingProgressChanged(e);
-
-                if (webBrowser.getLoadingProgress() == 100) {
-                    String location = webBrowser.getResourceLocation();
-                    System.out.println("Location: " + location);
-
-                }
-            }
-
-        });
-        return webBrowser;
     }
 
     /**
@@ -226,7 +246,7 @@ public class MainFrame extends JFrame {
 
                     urls = null;
                     urlIndex = 0;
-                    toSubmit = true;
+                    //                    toSubmit = true;
                     on = true;
                     startBtn.setText("停止刷新");
                     interval = Integer.parseInt(intervalTextField.getText().trim());
@@ -244,10 +264,6 @@ public class MainFrame extends JFrame {
         contentPane.add(tabbedPane, BorderLayout.CENTER);
 
         webBrowser = createBrowser();
-        //        contentPane.add(webBrowser, BorderLayout.CENTER);
         tabbedPane.add("job.58", webBrowser);
-
-        //        subBrowser = createSubBrowser();
-        //        tabbedPane.add("子页面", subBrowser);
     }
 }
