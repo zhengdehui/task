@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.search.commonthread;
+package cn.dehui.task.browser.search.util;
 
 public interface Callback<T> {
 

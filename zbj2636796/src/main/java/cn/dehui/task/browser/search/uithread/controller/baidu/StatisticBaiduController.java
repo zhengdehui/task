@@ -1,68 +1,56 @@
 package cn.dehui.task.browser.search.uithread.controller.baidu;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import javax.swing.SwingUtilities;
-
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import cn.dehui.task.browser.search.uithread.controller.manager.ControllerManager;
+import cn.dehui.task.browser.search.uithread.controller.manager.IStatisticController;
+import cn.dehui.task.browser.search.util.Status;
+import cn.dehui.task.browser.search.util.Utils;
 
-public class StatisticBaiduController extends BaiduController {
+public class StatisticBaiduController extends UrlBaiduController implements IStatisticController {
 
-    private Map<String, Integer> statisticMap;
+    private int    urlIndex              = 0;
 
-    private int                  urlIndex              = 0;
+    private int    currentUrlResultCount = 0;
 
-    private int                  currentUrlResultCount = 0;
+    private Random random                = new Random();
 
-    private Random               random                = new Random();
+    private int    maxResultPerUrl;
 
-    private int                  maxUrlResultCount;
+    private int    waitTime;
 
-    private int                  waitTime;
-
-    private File                 outputFolder;
-
-    public StatisticBaiduController(final JWebBrowser webBrowser) {
-        super(webBrowser);
+    public StatisticBaiduController(ControllerManager controllerManager) {
+        super(controllerManager);
     }
 
     /**
      * 输出统计结果
      */
-    private void printToFile() {
-        System.out.print("outputing...");
-        String format = "\"%s\",\"%d\"\r\n";
-        BufferedWriter bw = null;
-        try {
-            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
-                    new File(outputFolder, keyword + ".csv")), "GBK"));
-            for (Map.Entry<String, Integer> entry : statisticMap.entrySet()) {
-                bw.write(String.format(format, entry.getKey(), entry.getValue()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (bw != null) {
-                try {
-                    bw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        System.out.println("finished");
-    }
+    //    private void printToFile() {
+    //        System.out.print("outputing...");
+    //        String format = "\"%s\",\"%d\"\r\n";
+    //        BufferedWriter bw = null;
+    //        try {
+    //            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+    //                    new File(outputFolder, keyword + ".csv")), "GBK"));
+    //            for (Map.Entry<String, Integer> entry : statisticMap.entrySet()) {
+    //                bw.write(String.format(format, entry.getKey(), entry.getValue()));
+    //            }
+    //        } catch (IOException e) {
+    //            e.printStackTrace();
+    //        } finally {
+    //            if (bw != null) {
+    //                try {
+    //                    bw.close();
+    //                } catch (IOException e) {
+    //                    e.printStackTrace();
+    //                }
+    //            }
+    //        }
+    //        System.out.println("finished");
+    //    }
 
     @Override
     protected List<String> collectUrls() {
@@ -80,159 +68,111 @@ public class StatisticBaiduController extends BaiduController {
         super.run();
     }
 
-    @Override
-    protected void restartPage() {
-        System.out.println("restart searching keyword: " + keyword);
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                stop();
-                initControl();
-                setStatus(Status.UNSTARRED);
-                StatisticBaiduController.this.run();
-            }
-        });
-    }
-
-    @Override
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-        statisticMap = new HashMap<String, Integer>();
-    }
-
     private void searchUrlInResultPage() {
-        if (urlIndex >= Math.min(URL_TO_SEARCH_COUNT, urlList.size())) {
+        if (urlIndex >= Math.min(URL_TO_SEARCH_COUNT, searchContext.urlList.size())) {
             // output
-            printToFile();
+            //            printToFile();
 
             callback.execute();
             return;
         }
 
-        String url = urlList.get(urlIndex).toString();
-        url = getRealUrl(url);
-        int begin = url.indexOf("//") + 2;
-        int end = url.charAt(url.length() - 1) == '/' ? url.length() - 1 : url.length();
-        url = url.substring(begin, end);
-        System.out.printf("start url: (%d) %s \r\n", urlIndex, url);
+        String url = searchContext.urlList.get(urlIndex).toString();
+        //        url = getRealUrl(url);
+        //        int begin = url.indexOf("//") + 2;
+        //        int end = url.charAt(url.length() - 1) == '/' ? url.length() - 1 : url.length();
+        //        url = url.substring(begin, end);
+
+        url = Utils.removeHeadFootForUrl(url);
+        System.out.printf("start url: (%d) %s .", urlIndex, url);
 
         if (waitTime > 0) {
-            try {
-                Thread.sleep(random.nextInt(waitTime));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(random.nextInt(waitTime));
         }
 
         searchKeywordInMainPage("\"" + url + "\"");
     }
 
-    public void setMaxUrlResultCount(int maxUrlResultCount) {
-        this.maxUrlResultCount = maxUrlResultCount;
+    @Override
+    public void setMaxResultPerUrl(int maxResultPerUrl) {
+        this.maxResultPerUrl = maxResultPerUrl;
     }
 
+    @Override
     public void setWaitTime(int waitTime) {
         this.waitTime = waitTime;
     }
 
-    public void setOutputPath(File outputFolder) {
-        this.outputFolder = outputFolder;
+    @Override
+    protected void handleSearchResult(JWebBrowser webBrowser) {
+        switch (status) {
+            case KEYWORD_SEARCHING:
+                List<String> urls = collectUrls();
+                searchContext.urlList.addAll(urls);
+                if (searchContext.urlList.size() < URL_TO_SEARCH_COUNT && !meetEnd() && !urls.isEmpty()) {
+                    webBrowser.executeJavascript(nextPageJs);
+                } else {
+                    status = Status.URL_SEARCHING;
+                    renewBrowser();
+                    currentUrlResultCount = 0;
+                }
+                break;
+            case URL_SEARCHING:
+                //1. get all results, calc into <keyword, Map<domain, count>>, inc currentUrlResultCount
+                List<String> resultUrls = collectUrls();
+
+                for (String url : resultUrls) {
+                    //                    url = getRealUrl(url);
+
+                    String[] parts = url.split("/", 4);
+                    if (parts.length < 3) {
+                        System.out.println("结果中有非法URL：" + url);
+                        continue;
+                    }
+
+                    String domain = parts[2];
+
+                    int currentCount = searchContext.statisticMap.containsKey(domain) ? searchContext.statisticMap
+                            .get(domain) : 0;
+                    searchContext.statisticMap.put(domain, currentCount + 1);
+                }
+                currentUrlResultCount += resultUrls.size();
+
+                if (currentUrlResultCount > maxResultPerUrl || meetEnd() || resultUrls.isEmpty()) {
+                    urlIndex++;
+
+                    if (urlIndex < maxUrlPerKeyword) {
+                        currentUrlResultCount = 0;
+                        System.out.println("Used time: " + (System.currentTimeMillis() - timestamp));
+                        renewBrowser();
+                    } else {
+                        System.out.printf("Used time: %d ms\r\n", System.currentTimeMillis() - timestamp);
+                        callback.execute();
+                    }
+
+                } else {
+                    webBrowser.executeJavascript(nextPageJs);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void renewBrowser() {
+        // renew browser
+        controllerManager.renewWebBrowser();
+        getWebBrowser().navigate(BAIDU_URL);
     }
 
     @Override
-    protected WebBrowserAdapter getWebBrowserAdapter() {
-        return new WebBrowserAdapter() {
-            @Override
-            public void loadingProgressChanged(WebBrowserEvent e) {
-                super.loadingProgressChanged(e);
+    protected void enterMainPage() {
+        if (status == Status.URL_SEARCHING) {
+            timestamp = System.currentTimeMillis();
+            searchUrlInResultPage();
+            return;
+        }
 
-                if (webBrowser.getLoadingProgress() > PROGRESS) {
-                    SwingUtilities.invokeLater(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            int progress = webBrowser.getLoadingProgress();
-                            String location = webBrowser.getResourceLocation();
-                            updateLocation(location);
-                            //                            System.out.println("--> " + location);
-
-                            if (progress > PROGRESS && location.equals(BAIDU_URL)) {
-                                webBrowser.stopLoading();
-                                if (status == Status.UNSTARRED) {
-                                    status = Status.KEYWORD_SEARCHING;
-                                    searchKeywordInMainPage(keyword);
-                                }
-                            } else if (progress == 100 && (location.startsWith("http://www.baidu.com/s"))) {
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException ex) {
-                                    ex.printStackTrace();
-                                }
-                                webBrowser.stopLoading();
-                                try {
-                                    switch (status) {
-                                        case KEYWORD_SEARCHING:
-                                            List<String> urls = collectUrls();
-                                            urlList.addAll(urls);
-                                            if (urlList.size() < URL_TO_SEARCH_COUNT && !meetEnd() && !urls.isEmpty()) {
-                                                webBrowser.executeJavascript(nextPageJs);
-                                            } else {
-                                                status = Status.URL_SEARCHING;
-                                                searchUrlInResultPage();
-                                                currentUrlResultCount = 0;
-                                            }
-                                            break;
-                                        case URL_SEARCHING:
-                                            //1. get all results, calc into <keyword, Map<domain, count>>, inc currentUrlResultCount
-                                            List<String> resultUrls = collectUrls();
-
-                                            for (String url : resultUrls) {
-                                                url = getRealUrl(url);
-
-                                                String[] parts = url.split("/", 4);
-                                                if (parts.length < 3) {
-                                                    System.out.println("结果中有非法URL：" + url);
-                                                    continue;
-                                                }
-
-                                                String domain = parts[2];
-
-                                                int currentCount = statisticMap.containsKey(domain) ? statisticMap
-                                                        .get(domain) : 0;
-                                                statisticMap.put(domain, currentCount + 1);
-                                            }
-                                            currentUrlResultCount += resultUrls.size();
-
-                                            if (currentUrlResultCount > maxUrlResultCount || meetEnd()
-                                                    || resultUrls.isEmpty()) {
-                                                urlIndex++;
-                                                //                                                System.out.println("urlIndex: " + urlIndex);
-                                                if (urlIndex < URL_TO_SEARCH_COUNT) {
-                                                    currentUrlResultCount = 0;
-                                                    searchUrlInResultPage();
-                                                } else {
-                                                    // output
-                                                    printToFile();
-
-                                                    callback.execute();
-                                                }
-                                            } else {
-                                                webBrowser.executeJavascript(nextPageJs);
-                                            }
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                    restartPage();
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-        };
+        super.enterMainPage();
     }
 }

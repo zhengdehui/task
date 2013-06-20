@@ -27,9 +27,9 @@ import org.htmlparser.visitors.NodeVisitor;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
-import cn.dehui.task.browser.search.commonthread.Callback;
-import cn.dehui.task.browser.search.commonthread.WithResultRunnable;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import cn.dehui.task.browser.search.util.Callback;
+import cn.dehui.task.browser.search.util.Status;
+import cn.dehui.task.browser.search.util.WithResultRunnable;
 
 public abstract class GoogleController implements Runnable {
 
@@ -144,7 +144,7 @@ public abstract class GoogleController implements Runnable {
             //            if (NativeInterface.isUIThread(true)) {
             //                SwingUtilities.invokeLater(doRun);
             //            } else {
-                SwingUtilities.invokeAndWait(doRun);
+            SwingUtilities.invokeAndWait(doRun);
             //            }
         } catch (Exception e) {
             e.printStackTrace();

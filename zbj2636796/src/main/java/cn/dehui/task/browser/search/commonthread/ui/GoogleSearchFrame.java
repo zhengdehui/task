@@ -16,10 +16,10 @@ import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
-import cn.dehui.task.browser.search.commonthread.Callback;
 import cn.dehui.task.browser.search.commonthread.controller.StatisticGoogleController;
 import cn.dehui.task.browser.search.commonthread.controller.UrlGoogleController;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import cn.dehui.task.browser.search.util.Callback;
+import cn.dehui.task.browser.search.util.Status;
 
 public class GoogleSearchFrame extends SearchFrame {
 
