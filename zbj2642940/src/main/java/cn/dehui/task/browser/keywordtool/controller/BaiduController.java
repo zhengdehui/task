@@ -2,11 +2,9 @@ package cn.dehui.task.browser.keywordtool.controller;
 
 import java.awt.AWTException;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import org.htmlparser.Parser;
@@ -30,7 +27,7 @@ import org.htmlparser.util.ParserException;
 import org.htmlparser.visitors.NodeVisitor;
 
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import cn.dehui.task.browser.keywordtool.controller.util.BaiduKeywordInfo;
 import cn.dehui.task.browser.keywordtool.controller.util.Status;
 
@@ -63,128 +60,183 @@ public class BaiduController extends Controller {
     protected WebBrowserAdapter getWebBrowserListener() {
         return new WebBrowserAdapter() {
 
+            //            @Override
+            //            public void loadingProgressChanged(WebBrowserEvent e) {
+            //                super.loadingProgressChanged(e);
+            //                if (webBrowser.getLoadingProgress() == 100) {
+            //
+            //                }
+            //            }
+
             @Override
-            public void loadingProgressChanged(WebBrowserEvent e) {
-                super.loadingProgressChanged(e);
-                if (webBrowser.getLoadingProgress() == 100) {
-                    String location = webBrowser.getResourceLocation();
-                    if (location == null) {
-                        return;
-                    }
+            public void locationChanged(final WebBrowserNavigationEvent e) {
+                super.locationChanged(e);
 
-                    // detect duplicate entry
-                    if (!location.startsWith(CAS_BAIDU_URL) && location.equals(lastSearchUrl)) {
-                        return;
-                    }
-                    lastSearchUrl = location;
-
-                    System.out.println("Loaded: " + location);
-                    if (location.startsWith(CAS_BAIDU_URL)) {
-                        if (status == Status.UNSTARRED
-                                || Boolean.parseBoolean(webBrowser.executeJavascriptWithResult(isLoginErrorJs)
-                                        .toString())) {
-                            doLogin();
-                            status = Status.WAIT_FOR_FC;
-                        }
-                    } else if (location.startsWith("https://cas.baidu.com/?")) {
-                        JOptionPane.showMessageDialog(webBrowser, "请回答验证问题");
-                    } else if ((location.startsWith(FENGCHAO_BAIDU_URL + "main.html") || location
-                            .startsWith(TUIGUANG_BAIDU_URL + "main.html")) && location.endsWith("#")) {
-                        if (status == Status.UNSTARRED || status == Status.WAIT_FOR_FC) {
-                            status = Status.WAIT_FOR_MP;
-                            sleep(2000);
-                            webBrowser.stopLoading();
-
-                            // http://fengchao.baidu.com/main.html?userid=6187503#
-                            //                            waitUntilLoadingFinished(true);
-
-                            webBrowser.navigate(FENGCHAO_BAIDU_URL + "nirvana/main.html"
-                                    + location.substring(location.indexOf('?')) + "/manage/plan");
-                            // goto http://fengchao.baidu.com/nirvana/main.html?userid=6187503
-                        }
-                    } else if (location.startsWith(FENGCHAO_BAIDU_URL + "nirvana/main.html")
-                            && location.endsWith("#/manage/plan")) {
-                        if (status == Status.WAIT_FOR_MP) {
-                            status = Status.EMTER_TARGET_TOOL;
-                            System.out.println("EMTER_TARGET_TOOL");
-
-                            Runnable thread = new Runnable() {
-                                @Override
-                                public void run() {
-                                    //                                    sleep(5000);
-                                    //                                    webBrowser.stopLoading();
-                                    while (started) {
-
-                                        if (keywordIndex == keywordList.size()) {
-                                            System.out.println("All done.");
-                                            break;
-                                        }
-
-                                        waitUntilLoadingFinished(false);
-
-                                        // 清除“读取数据异常”那个窗口
-                                        executeJavascript("if(document.getElementById('ctrldialogAjaxFailDialogfoot')) document.getElementById('ctrldialogAjaxFailDialogfoot').children[0].children[0].click();");
-
-                                        // 第一次进来也初始化一些函数，打开关键词页面，初始化筛选参数
-                                        if (status == Status.EMTER_TARGET_TOOL) {
-                                            initFuncs();
-                                            executeJavascript("findAndClick('a', '关键词工具')");
-                                            waitUntilLoadingFinished(false);
-                                            initSearchConfig();
-                                        }
-
-                                        String keyword = keywordList.get(keywordIndex++);
-                                        System.out.printf("[%s] started, number: %d.\r\n", keyword, keywordIndex - 1);
-                                        // input keyword
-                                        String js = "var inputs=document.getElementsByTagName('input');"
-                                                + "for(var i=0;i<inputs.length;i++){"
-                                                + "if(inputs[i].type=='text'&&inputs[i].getAttribute('_placeholder')&&inputs[i].getAttribute('_placeholder')=='请输入关键词或URL以搜索相关词...'){"
-                                                + "var className=inputs[i].className; inputs[i].className=className.replace(/input-placeholder/,''); inputs[i].value='"
-                                                + keyword + "';}}";
-                                        executeJavascript(js);
-
-                                        // input Include terms
-                                        js = "var className=document.getElementsByTagName('textarea')[0].className;"
-                                                + "document.getElementsByTagName('textarea')[0].className=className.replace(/input-placeholder/,'');"
-                                                + "document.getElementsByTagName('textarea')[0].value='[" + keyword
-                                                + "]';";
-                                        executeJavascript(js);
-
-                                        boolean conditionSuccess = false;
-                                        do {
-                                            // click search
-                                            stopLoading();
-                                            executeJavascript("document.getElementById('krSearchBtn').click();");
-
-                                            status = Status.SEARCHING_RESULT;
-
-                                            System.out.printf("[%s] searching....\r\n", keyword);
-
-                                            conditionSuccess = waitUntilConditionComeTrue("return getElementsByClassName('table-group','div').length>=1;");
-                                        } while (!conditionSuccess);
-                                        sleep(2000);
-
-                                        List<BaiduKeywordInfo> infos = collectData();
-
-                                        System.out.printf("[%s] finished.\r\n", keyword);
-                                        output(infos, keyword);
-                                    }
-
-                                    if (!started) {
-                                        status = Status.UNSTARRED;
-                                        System.out.printf("<STOP> next keyword: %s, index: %d \r\n",
-                                                keywordList.get(keywordIndex), keywordIndex);
-                                    }
-                                }
-                            };
-                            new Thread(thread).start();
-                        }
-                    }
-
+                String newResourceLocation = e.getNewResourceLocation();
+                //                System.out.println(newResourceLocation);
+                if (!isWantedLocation(newResourceLocation)) {
+                    return;
                 }
 
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean pageLoadComplete = false;
+                        int count = 0;
+
+                        do {
+                            sleep(100);
+                            if (getLoadingProgress() == 100) {
+                                pageLoadComplete = true;
+                                break;
+                            }
+                        } while (!pageLoadComplete && count++ < 50);
+
+                        //                        if (!pageLoadComplete) {
+                        //                            System.err.println("pageLoad timeout");
+                        //                        }
+                        try {
+                            handle(e);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                }).start();
             }
+
         };
+    }
+
+    private boolean isWantedLocation(String newResourceLocation) {
+        if (newResourceLocation == null || newResourceLocation.endsWith(".gif") || newResourceLocation.endsWith(".png")
+                || newResourceLocation.endsWith(".bmp") || newResourceLocation.endsWith(".jpg")
+                || newResourceLocation.endsWith(".swf") || newResourceLocation.endsWith(".js")
+                || newResourceLocation.endsWith(".css")) {
+            return false;
+        }
+
+        return newResourceLocation.startsWith(CAS_BAIDU_URL)
+                || newResourceLocation.startsWith("https://cas.baidu.com/")
+                || newResourceLocation.startsWith(FENGCHAO_BAIDU_URL)
+                || newResourceLocation.startsWith(TUIGUANG_BAIDU_URL);
+    }
+
+    private void handle(WebBrowserNavigationEvent e) {
+        String location = e.getNewResourceLocation();
+        //        if (location == null) {
+        //            return;
+        //        }
+
+        // detect duplicate entry
+        if (!location.startsWith(CAS_BAIDU_URL) && location.equals(lastSearchUrl)) {
+            return;
+        }
+        lastSearchUrl = location;
+
+        //        System.out.println("Loaded: " + location);
+        if (location.startsWith(CAS_BAIDU_URL)) {
+            if (status == Status.UNSTARRED
+                    || Boolean.parseBoolean(executeJavascriptWithResult(isLoginErrorJs).toString())) {
+                doLogin();
+                status = Status.WAIT_FOR_FC;
+            }
+        } else if (location.startsWith("https://cas.baidu.com/?")) {
+            JOptionPane.showMessageDialog(webBrowser, "请回答验证问题");
+        } else if ((location.startsWith(FENGCHAO_BAIDU_URL + "main.html") || location.startsWith(TUIGUANG_BAIDU_URL
+                + "main.html"))
+                && location.endsWith("#")) {
+            if (status == Status.UNSTARRED || status == Status.WAIT_FOR_FC) {
+                status = Status.WAIT_FOR_MP;
+                //                sleep(2000);
+                stopLoading();
+
+                // http://fengchao.baidu.com/main.html?userid=6187503#
+                navigate(FENGCHAO_BAIDU_URL + "nirvana/main.html" + location.substring(location.indexOf('?'))
+                        + "/manage/plan");
+                // goto http://fengchao.baidu.com/nirvana/main.html?userid=6187503
+            }
+        } else if (location.startsWith(FENGCHAO_BAIDU_URL + "nirvana/main.html") && location.endsWith("#")) {
+            navigate(location + "/manage/plan");
+        } else if (location.startsWith(FENGCHAO_BAIDU_URL + "nirvana/main.html") && location.endsWith("#/manage/plan")) {
+            if (status == Status.WAIT_FOR_MP) {
+                status = Status.EMTER_TARGET_TOOL;
+                System.out.println("Enter keyword tool...");
+
+                Runnable thread = new Runnable() {
+                    @Override
+                    public void run() {
+                        //                                    sleep(5000);
+                        //                                    webBrowser.stopLoading();
+                        long timestamp;
+                        while (started) {
+
+                            if (keywordIndex == keywordList.size()) {
+                                System.out.println("All done.");
+                                break;
+                            }
+                            timestamp = System.currentTimeMillis();
+                            waitUntilLoadingFinished(false);
+
+                            // 清除“读取数据异常”那个窗口
+                            executeJavascript("if(document.getElementById('ctrldialogAjaxFailDialogfoot')) document.getElementById('ctrldialogAjaxFailDialogfoot').children[0].children[0].click();");
+
+                            // 第一次进来也初始化一些函数，打开关键词页面，初始化筛选参数
+                            if (status == Status.EMTER_TARGET_TOOL) {
+                                initFuncs();
+                                executeJavascript("findAndClick('a', '关键词工具')");
+                                waitUntilLoadingFinished(false);
+                                initSearchConfig();
+                            }
+
+                            String keyword = keywordList.get(keywordIndex++);
+                            System.out.printf("[%s] started, number: %d.\r\n", keyword, keywordIndex - 1);
+                            // input keyword
+                            String js = "var inputs=document.getElementsByTagName('input');"
+                                    + "for(var i=0;i<inputs.length;i++){"
+                                    + "if(inputs[i].type=='text'&&inputs[i].getAttribute('_placeholder')&&inputs[i].getAttribute('_placeholder')=='请输入关键词或URL以搜索相关词...'){"
+                                    + "var className=inputs[i].className; inputs[i].className=className.replace(/input-placeholder/,''); inputs[i].value='"
+                                    + keyword + "';}}";
+                            executeJavascript(js);
+
+                            // input Include terms
+                            js = "var className=document.getElementsByTagName('textarea')[0].className;"
+                                    + "document.getElementsByTagName('textarea')[0].className=className.replace(/input-placeholder/,'');"
+                                    + "document.getElementsByTagName('textarea')[0].value='[" + keyword + "]';";
+                            executeJavascript(js);
+
+                            boolean conditionSuccess = false;
+                            do {
+                                // click search
+                                stopLoading();
+                                executeJavascript("document.getElementById('krSearchBtn').click();");
+
+                                status = Status.SEARCHING_RESULT;
+
+                                System.out.printf("[%s] searching....\r\n", keyword);
+
+                                // wait for the result table to show
+                                conditionSuccess = waitUntilConditionComeTrue("return getElementsByClassName('table-group','div').length>=1;");
+                            } while (!conditionSuccess);
+                            sleep(2000);// wait for the javascript to load all the data, perhaps we need to check whether all data has been loaded
+
+                            List<BaiduKeywordInfo> infos = collectData();
+
+                            System.out.printf("[%s] finished. Used time: %d ms\r\n", keyword,
+                                    System.currentTimeMillis() - timestamp);
+                            output(infos, keyword);
+                        }
+
+                        if (!started) {
+                            status = Status.UNSTARRED;
+                            System.out.printf("<STOP> next keyword: %s, index: %d \r\n", keywordList.get(keywordIndex),
+                                    keywordIndex);
+                        }
+                    }
+                };
+                new Thread(thread).start();
+            }
+        }
     }
 
     private boolean waitUntilLoadingFinished(boolean isInGuiThread) {
@@ -192,7 +244,7 @@ public class BaiduController extends Controller {
             return started;
         }
         sleep(1000);
-        String js = "if(document.getElementById('Loading')){return document.getElementById('Loading').className.indexOf('hide')!=-1;}else{ return false;}";
+        String js = "if(document.getElementById('Loading')){var loadingDiv=document.getElementById('Loading'); if(loadingDiv.className){return loadingDiv.className.indexOf('hide')!=-1;}} return false;";
         boolean condition = false;
         while (!condition) {
             if (!started) {
@@ -299,7 +351,7 @@ public class BaiduController extends Controller {
 
     private void doLogin() {
         try {
-            sleep(3000);
+            sleep(1000);
             System.out.println("Logining...");
 
             Point browserLocation = webBrowser.getNativeComponent().getLocationOnScreen();
@@ -330,7 +382,7 @@ public class BaiduController extends Controller {
 
             String captcha = getCaptcha(browserLocation, robot);
 
-            webBrowser.executeJavascript(String.format(doLoginJs, username, captcha));
+            executeJavascript(String.format(doLoginJs, username, captcha));
 
         } catch (AWTException e1) {
             e1.printStackTrace();
@@ -393,13 +445,13 @@ public class BaiduController extends Controller {
     }
 
     private String getCaptcha(Point browserLocation, Robot robot) throws IOException {
-        //            Rectangle rect = new Rectangle(995, 272, 80, 30);
-        Rectangle rect = new Rectangle((int) (browserLocation.getX()) + 988, (int) (browserLocation.getY()) + 211, 80,
-                30);
-        BufferedImage img = robot.createScreenCapture(rect);
-        File outputfile = new File("captcha.png");
-        ImageIO.write(img, "png", outputfile);
-        System.out.println("img done");
+
+        //        Rectangle rect = new Rectangle((int) (browserLocation.getX()) + 988, (int) (browserLocation.getY()) + 211, 80,
+        //                30);
+        //        BufferedImage img = robot.createScreenCapture(rect);
+        //        File outputfile = new File("captcha.png");
+        //        ImageIO.write(img, "png", outputfile);
+        //        System.out.println("img done");
 
         return JOptionPane.showInputDialog(webBrowser, "输入验证码");
     }

@@ -88,6 +88,37 @@ public abstract class Controller implements Runnable {
         }
     }
 
+    protected void navigate(final String resourceLocation) {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    webBrowser.navigate(resourceLocation);
+                }
+            });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected int getLoadingProgress() {
+        WithResultRunnable<Integer> runnable = new WithResultRunnable<Integer>(new Callback<Integer>() {
+            @Override
+            public Integer execute() {
+                return webBrowser.getLoadingProgress();
+            }
+        });
+        try {
+            SwingUtilities.invokeAndWait(runnable);
+            return runnable.result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     protected static void sleep(int millis) {
         try {
             Thread.sleep(millis);
