@@ -1,0 +1,1 @@
+java -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8087 -jar adwords.jar

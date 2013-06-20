@@ -1,0 +1,5 @@
+shoe
+shirt
+skirt
+car
+woman

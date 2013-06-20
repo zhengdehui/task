@@ -1,0 +1,3161 @@
+"Apparel",10021,0
+"Apparel Accessories",10178,10021
+"Bags & Packs",10937,10021
+"Backpacks & Utility Bags",12262,10021
+"Briefcases",12264,10021
+"Handbags & Purses",12263,10021
+"Laptop & Computer Bags",12265,10021
+"Belts & Suspenders",10935,10021
+"Billfolds & Wallets",10938,10021
+"Eyewear",10936,10021
+"Reading Glasses",12260,10021
+"Sunglasses",12261,10021
+"Gloves & Mittens",10939,10021
+"Hair Accessories",10942,10021
+"Headwear",10941,10021
+"Hats",12266,10021
+"Headscarves & Bandanas",12267,10021
+"Key Chains & Key Rings",13701,10021
+"Parasols & Personal Sun Umbrellas",13409,10021
+"Scarves & Shawls",10943,10021
+"Ties",10940,10021
+"Clothing",10176,10021
+"Children's Clothing",13780,10021
+"Baby & Toddler Clothing",11019,10021
+"Baby & Toddler Shoes",12292,10021
+"Christening Gowns & Suits",12293,10021
+"Newborn Clothing",12288,10021
+"Costumes & Costume Rental",10924,10021
+"Culturally-Specific Clothing",10919,10021
+"Custom Clothing",10906,10021
+"Dancewear",10916,10021
+"Dresses",10915,10021
+"Formal Wear",10920,10021
+"Bridal Wear",12250,10021
+"Formal Wear Rentals",10905,10021
+"Prom Dresses",12252,10021
+"Tuxedos & Tuxedo Accessories",12251,10021
+"Men's Clothing",13778,10021
+"Outerwear",10917,10021
+"Coats",13356,10021
+"Slickers & Rainwear",13357,10021
+"Pants, Jeans & Trousers",12241,10021
+"Petite Clothing",10912,10021
+"Plus Size Clothing",10923,10021
+"Pullover Sweaters & Cardigans",12237,10021
+"Shirts, Tops & Blouses",12240,10021
+"Dress Shirts",13117,10021
+"Jerseys & Knit Shirts",13116,10021
+"T-Shirts",13315,10021
+"Polo Shirts",13118,10021
+"Shorts",12242,10021
+"Skirts",12244,10021
+"Sleepwear",10925,10021
+"Socks & Hosiery",10921,10021
+"Sport Coats & Jackets",12243,10021
+"Suits & Business Attire",10914,10021
+"Sweatshirts & Hoodies",12238,10021
+"Swimwear",11917,10021
+"Underwear",10913,10021
+"Boxers & Briefs",12246,10021
+"Lingerie & Intimate Apparel",12245,10021
+"Body Shapers, Girdles & Bustiers",13120,10021
+"Bras",13123,10021
+"Slips",13121,10021
+"Uniforms",10926,10021
+"School Uniforms",12254,10021
+"Work Uniforms",12253,10021
+"Hospitality Service Uniforms",13124,10021
+"Public Safety & Security Uniforms",13125,10021
+"Utility Clothing",10918,10021
+"Vests",12239,10021
+"Women's Clothing",13779,10021
+"Maternity Wear",10922,10021
+"Dry Cleaning & Alterations",10907,10021
+"Footwear",10177,10021
+"Athletic Shoes",10619,10021
+"Cleats",11895,10021
+"Cross-Training Shoes",11897,10021
+"Running Shoes",11898,10021
+"Skate Shoes",11899,10021
+"Tennis Shoes",11896,10021
+"Boots",10931,10021
+"Cowboy Boots",12259,10021
+"Fashion & Dress Boots",12258,10021
+"Work Boots",12257,10021
+"Casual Shoes",10930,10021
+"Clogs",12256,10021
+"Flats",12255,10021
+"Dress Shoes",10932,10021
+"Footwear Accessories",10172,10021
+"Moccasins",10933,10021
+"Roller Shoes",10929,10021
+"Sandals",10927,10021
+"Shoe Repair & Footwear Services",10173,10021
+"Slippers",10928,10021
+"Special Width & Orthopedic Shoes",10934,10021
+"Jewelry",10171,10021
+"Anklets",10902,10021
+"Antique Jewelry",10721,10021
+"Bracelets",10894,10021
+"Brooches & Pins",10904,10021
+"Cufflinks",10896,10021
+"Earrings",10901,10021
+"Jewelry Cleaning & Repair",10910,10021
+"Necklaces",10903,10021
+"Pearls & Pearl Jewelry",10897,10021
+"Precious & Semi-Precious Gems & Gemstone Jewelry",10893,10021
+"Birthstone Jewelry",12234,10021
+"Diamond Jewelry",12233,10021
+"Precious Metal Jewelry",10895,10021
+"Gold Jewelry",12235,10021
+"Gold Watches",13115,10021
+"Silver Jewelry",12236,10021
+"Rings",10892,10021
+"Engagement Rings",12231,10021
+"Wedding Rings",12232,10021
+"Watches & Watch Accessories",10899,10021
+"Rain Gear",13355,10021
+"Rain Umbrellas",13354,10021
+"Arts & Entertainment",10013,0
+"Arts & Entertainment Awards",13530,10013
+"Cartoons",13760,10013
+"Comics & Graphic Novels",10723,10013
+"Comic Strips",13443,10013
+"Independent & Alternative Comic Books",12001,10013
+"Manga",13570,10013
+"Superhero Comic Books",12002,10013
+"Entertainment Industry",10105,10013
+"Film & TV Industry",13536,10013
+"TV Broadcasting",10566,10013
+"Digital TV",11860,10013
+"Internet TV",11859,10013
+"TV Shows & Programs",10557,10013
+"Music & Recording Industry",13574,10013
+"Talent Promotion",10565,10013
+"Entertainment Media Retailers",13670,10013
+"Event Entertainment",10104,10013
+"Bachelor & Bachelorette Parties",10563,10013
+"Children's Parties",10564,10013
+"Fireworks",13751,10013
+"Wedding Entertainment",13492,10013
+"Events, Shows & Cultural Attractions",10111,10013
+"Art Fairs & Festivals",13499,10013
+"Event & Show Guides & Listings",10606,10013
+"Expo Events & Shows",10602,10013
+"Car & Vehicle Shows",11881,10013
+"Flower, Garden & Home Shows",11880,10013
+"Film Festivals",13498,10013
+"Food & Beverage Festivals",13500,10013
+"Live Comedy",13852,10013
+"Special Exhibits",11885,10013
+"Theater & Theater Tickets",11886,10013
+"Ticket Sales & Exchanges",10603,10013
+"Fun & Trivia",13425,10013
+"Fun Tests & Silly Surveys",13489,10013
+"Humor & Jokes",10106,10013
+"Movies & Films",13417,10013
+"Action & Adventure Films",13515,10013
+"Martial Arts Films",13516,10013
+"Superhero Films",13517,10013
+"Western Films",13853,10013
+"Animated Films",13518,10013
+"Anime",13663,10013
+"Bollywood & South Asian Film",13519,10013
+"Classic Films",13520,10013
+"Comedy Films",13523,10013
+"Cult & Indie Films",13521,10013
+"Documentary Films",13522,10013
+"Drama Films",13524,10013
+"Family & Children's Films",13532,10013
+"Film Noir",13531,10013
+"Filmmaking",13729,10013
+"Horror Films",13525,10013
+"Movie Theaters",13528,10013
+"Movie Tickets",10554,10013
+"Musical Films",13527,10013
+"Romance Films",13534,10013
+"Science Fiction & Fantasy Films",13526,10013
+"Sports Films",13535,10013
+"Thriller, Crime & Mystery Films",13533,10013
+"War Films",13529,10013
+"Music & Audio",10109,10013
+"Children's Music",13799,10013
+"Classical Music",13538,10013
+"Concerts & Music Festivals",10593,10013
+"Country Music",13539,10013
+"Dance & Electronic Music",13540,10013
+"Experimental & Industrial Music",13541,10013
+"Folk & Traditional Music",13542,10013
+"Indie & Alternative Music",13552,10013
+"Jazz & Blues",13543,10013
+"Blues",13545,10013
+"Jazz",13544,10013
+"Latin Music",13672,10013
+"Music & Audio CDs",10596,10013
+"Music & Audio Retailers",10595,10013
+"Music Education & Instruction",13427,10013
+"Music Streams & Downloads",10591,10013
+"Music Videos",10590,10013
+"Musical Instruments & Equipment",10592,10013
+"Drums & Percussion",13855,10013
+"Guitars",11879,10013
+"Music Recording Technology",13537,10013
+"Musical Instrument & Performance Amplifiers",11877,10013
+"Musical Instrument Digital Interfaces & Synthesizers",11878,10013
+"Pianos & Keyboards",13424,10013
+"Pop Music",13546,10013
+"Radio",10570,10013
+"Internet Radio",10587,10013
+"Radio Programs & Shows",11865,10013
+"Satellite Radio",12971,10013
+"Record Labels",10588,10013
+"Religious Music",13547,10013
+"Christian & Gospel Music",13548,10013
+"Rock Music",13549,10013
+"Classic Rock & Oldies",13550,10013
+"Hard Rock & Progressive",13551,10013
+"Metal (Music)",13553,10013
+"Punk Rock",13554,10013
+"Song Lyrics & Tabs",10589,10013
+"Songwriters & Composers",13568,10013
+"Soundtracks",13555,10013
+"Urban & Hip-Hop",13556,10013
+"Rap & Hip-Hop",13557,10013
+"Reggaeton",13743,10013
+"Soul & R&B",13558,10013
+"Vinyl Records",13832,10013
+"Vocals & Show Tunes",13559,10013
+"World Music",13560,10013
+"African Music",13561,10013
+"Arab & Middle Eastern Music",13562,10013
+"East Asian Music",13563,10013
+"Reggae & Caribbean Music",13564,10013
+"South Asian Music",13565,10013
+"Offbeat",13566,10013
+"Edgy & Bizarre",13567,10013
+"Sports Entertainment",10110,10013
+"Fantasy Sports",10598,10013
+"Sports Event Tickets & Ticketing Services",11883,10013
+"Sports Fan Sites & Blogs",10599,10013
+"Sports Score & Stat Services",10597,10013
+"TV & Video",10103,10013
+"Blu-Ray Discs",13511,10013
+"DVD & Blu-Ray Retailers",10561,10013
+"DVD & Video Rentals",13824,10013
+"Entertainment DVDs",10558,10013
+"Movie & TV Fan Sites",10553,10013
+"Movie & TV Reference",13572,10013
+"Movie Reviews, Previews & Listings",10560,10013
+"TV Guides & Reference",13730,10013
+"Video Clips",10556,10013
+"Video On Demand",10562,10013
+"Visual Art & Design",13388,10013
+"Painting",13595,10013
+"Beauty & Personal Care",10005,0
+"Anti-Aging",10050,10005
+"Anti-Aging Creams & Moisturizers",11434,10005
+"Wrinkle Treatments",12939,10005
+"Body Art",13422,10005
+"Body Jewelry & Piercings",10898,10005
+"Tattoo Removal",10315,10005
+"Fashion & Style",13636,10005
+"Fashion Designers & Collections",13637,10005
+"Fashion Modeling",13638,10005
+"Virtual Makeovers",11414,10005
+"Hair Care",10055,10005
+"Damaged Hair",10335,10005
+"Hair Dyes & Coloring",10337,10005
+"Hair Loss",10477,10005
+"Hair Loss Procedures",11727,10005
+"Hair Loss Products",11726,10005
+"Hair Straighteners & Relaxers",10336,10005
+"Hair Styling",10339,10005
+"Hair Brushes & Styling Equipment",10340,10005
+"Hair Salons & Styling Services",10333,10005
+"Shampoos & Conditioners",10338,10005
+"Wigs & Wig Accessories",10332,10005
+"Hygiene & Toiletries",10060,10005
+"Antiperspirants, Deodorants & Body Spray",10355,10005
+"Cotton Swabs, Balls & Pads",10354,10005
+"Feminine Hygiene Products",10356,10005
+"Sanitary Pads & Napkins",11432,10005
+"Tampons",11433,10005
+"Lip Care",10053,10005
+"Make-Up & Cosmetics",10054,10005
+"Blush",10325,10005
+"Concealer",10329,10005
+"Eye Make-Up",10324,10005
+"Eyeshadow",11419,10005
+"Mascara & Eyelash Products",11420,10005
+"Face Powder",10327,10005
+"Foundation",10330,10005
+"Lipsticks & Lip Glosses",10323,10005
+"Make-Up Brushes & Tools",10331,10005
+"Nail Care",10051,10005
+"Manicure & Pedicure Services",10322,10005
+"Nail Care Tools",10320,10005
+"Nail Fungus Products",10321,10005
+"Nail Polish & Nail Polish Accessories",10319,10005
+"Oral Care",10059,10005
+"Canker Sore Treatments",10345,10005
+"Dental Care Gum",10349,10005
+"Dental Floss & Gum Health",10347,10005
+"Denture Care",10353,10005
+"Mouthwash",10348,10005
+"Teeth Whitening",10346,10005
+"Toothache Relief",10351,10005
+"Toothbrushes & Toothbrush Accessories",10352,10005
+"Manual Toothbrushes",11431,10005
+"Powered Toothbrushes",11430,10005
+"Toothpaste",10350,10005
+"Perfumes & Fragrances",10057,10005
+"Shaving & Grooming",10058,10005
+"Personal Grooming Kits & Equipment",10342,10005
+"Razors & Shavers",11425,10005
+"Electric Shavers",12726,10005
+"Men's Electric Shavers",13244,10005
+"Women's Electric Shavers & Epilators",13243,10005
+"Razors",12727,10005
+"Men's Razors",13246,10005
+"Women's Razors",13245,10005
+"Unwanted Body & Facial Hair Removal",10343,10005
+"Electrolysis",12724,10005
+"Hair Removal Creams",11422,10005
+"Laser Hair Removal",12725,10005
+"Professional Waxing",12723,10005
+"Waxing Products & Accessories",11423,10005
+"Skin Care",10047,10005
+"Body Cleansing",10309,10005
+"Bath Additions",11410,10005
+"Bathing Equipment",11411,10005
+"Body Wipes",12721,10005
+"Hand & Body Soaps & Cleansers",11412,10005
+"Liquid Soaps",12722,10005
+"Body Lotions & Oils",10310,10005
+"Exfoliants & Scrubs",13850,10005
+"Face Care",10061,10005
+"Face Lotions & Moisturizers",10358,10005
+"Facial Cleansers & Make-Up Removers",10359,10005
+"Spa & Medical Spa",10049,10005
+"Aromatherapy & Essential Oils",10316,10005
+"At-Home Spa Equipment",10314,10005
+"Cosmetic Procedures",10317,10005
+"Laser Skin Treatments",11418,10005
+"Microdermabrasion",11417,10005
+"Non-Surgical Fat Loss",11416,10005
+"Permanent Make-up Services",11415,10005
+"Day Spas & Salon Spas",13704,10005
+"Destination & Resort Spas",13705,10005
+"Saunas",13446,10005
+"Tanning & Sun Care",10048,10005
+"Sun Lotions & Sunscreen",10311,10005
+"Self-Tanning Lotions & Products",11413,10005
+"Tanning Beds",10313,10005
+"Tanning Services",10312,10005
+"Business & Industrial",10004,0
+"Agriculture",13460,10004
+"Agricultural Equipment",11194,10004
+"Balers",12444,10004
+"Crop Sprayers",12438,10004
+"Cultivators",12440,10004
+"Farm Tractors",12443,10004
+"Front End Loaders",13159,10004
+"Walking Tractors",13160,10004
+"Feed Grinders",12439,10004
+"Grain Augers",12441,10004
+"Manure & Seed Spreaders",12434,10004
+"Rock Pickers",12436,10004
+"Agricultural Research",11074,10004
+"Agricultural Testing & Analysis",11076,10004
+"Crop Consulting",12357,10004
+"Soil Testing & Analysis",12356,10004
+"Agrochemicals",12552,10004
+"Aquaculture & Fishery Services",11073,10004
+"Crops",11188,10004
+"Cereal & Grain",12428,10004
+"Seed",12427,10004
+"Forestry",11083,10004
+"Firewood & Firewood Equipment",12423,10004
+"Firewood Processors",13156,10004
+"Log Splitters",13157,10004
+"Land-Clearing",12422,10004
+"Logging & Milling",12366,10004
+"Horticulture",11078,10004
+"Greenhouse & Nursery Equipment & Supplies",13375,10004
+"Irrigation",11190,10004
+"Sprinklers",12430,10004
+"Water Hoses & Accessories",12429,10004
+"Livestock",11192,10004
+"Cattle",12432,10004
+"Domestic Pigs",12433,10004
+"Livestock Auctioning",12365,10004
+"Livestock Breeding",12361,10004
+"Livestock Feed",12360,10004
+"Livestock Slaughtering & Processing",12364,10004
+"Poultry",12431,10004
+"Natural Fibers",11301,10004
+"Building Construction & Maintenance",10282,10004
+"Building Materials & Supplies",13797,10004
+"Architectural Salvage & Reclaimed Building Materials",10700,10004
+"Awnings & Canopies",11281,10004
+"Doors & Windows",11299,10004
+"Exterior & Interior Doors",12616,10004
+"Garage Doors",12617,10004
+"Windows",12613,10004
+"Window Repair",11139,10004
+"Window Screens & Outdoor Shutters",12614,10004
+"Drywall",11294,10004
+"Electrical Wiring",11295,10004
+"Exterior Siding",11286,10004
+"Stucco",12585,10004
+"Vinyl Siding",12586,10004
+"Wood Siding",12587,10004
+"Flooring",11288,10004
+"Concrete Flooring",12598,10004
+"Flooring Installation",11136,10004
+"Laminate Flooring",12599,10004
+"Linoleum & Marmoleum Flooring",12596,10004
+"Rugs & Carpet",12594,10004
+"Stone Flooring",12593,10004
+"Vinyl Flooring",12600,10004
+"Wood Flooring",12595,10004
+"Insulation",11283,10004
+"Wood & Lumber",12425,10004
+"Building Painting Services",11138,10004
+"Building Restoration & Preservation",11151,10004
+"Chimney Services",11133,10004
+"Commercial & General Contracting",11141,10004
+"Construction Consulting",11154,10004
+"Construction Estimation",11145,10004
+"Construction Trailers",11276,10004
+"Decking Products & Equipment",11297,10004
+"Demolition Services",11148,10004
+"Earth Movers & Construction Tractors",11275,10004
+"Back Hoe Loaders",13158,10004
+"Skid Steer Loaders",12445,10004
+"Eco-Friendly Building & Construction",13731,10004
+"Electrician Services",11143,10004
+"Excavation Services",11132,10004
+"HVAC & Climate Control",11284,10004
+"Air Conditioners",12582,10004
+"HVAC Service & Repair",11147,10004
+"Heaters & Furnaces",12584,10004
+"Residential Boilers",13803,10004
+"Ventilators",12583,10004
+"Handrails",11277,10004
+"Hardware Tools & Accessories",11287,10004
+"Drills",13219,10004
+"Hammers",13222,10004
+"Hardware Accessories",12589,10004
+"Ball Bearings",13199,10004
+"Belts & Belting",13193,10004
+"Coils & Springs",13196,10004
+"Drill Bits",13204,10004
+"Fasteners & Hooks",13200,10004
+"Gaskets & Seals",13201,10004
+"Grommets",13197,10004
+"Hinges & Latches",13203,10004
+"Knobs",13202,10004
+"Mechanical Bushings",13198,10004
+"Nails",13195,10004
+"Power Tool Accessories",13194,10004
+"Screws",13319,10004
+"Power Tools",12590,10004
+"Chainsaws",13213,10004
+"Grinders",13207,10004
+"Nailguns",13210,10004
+"Planers",13216,10004
+"Power Drills",13206,10004
+"Power Router",13215,10004
+"Power Saws",13212,10004
+"Band Saw",13675,10004
+"Table Saws",13321,10004
+"Rotary Tools",13211,10004
+"Sanders",13208,10004
+"Stud Sensors & Detectors",13205,10004
+"Riveters",13218,10004
+"Saws",13221,10004
+"Screwdrivers",13217,10004
+"Tool Belts",13674,10004
+"Tool Storage & Accessories",12592,10004
+"Woodworking Tools & Equipment",13823,10004
+"Wrenches",13220,10004
+"House Paints & Stains",11280,10004
+"Installation Lighting",11293,10004
+"Exit & Emergency Signs & Lights",11308,10004
+"Exterior Lighting",12611,10004
+"Interior Lighting",12610,10004
+"Lighting Fixtures",12612,10004
+"Track Lighting",12609,10004
+"Kitchen & Bathroom Counters",11278,10004
+"Landscaping & Landscape Design",11150,10004
+"Locks & Locksmiths",11153,10004
+"Key Making & Copying",12417,10004
+"Masonry",11292,10004
+"Bricks",12606,10004
+"Cement & Concrete",12607,10004
+"Concrete Mixing & Pouring",11146,10004
+"Stone",12608,10004
+"Plumbing",13462,10004
+"Indoor Fire Sprinklers",12603,10004
+"Plumbing Fixtures",12602,10004
+"Bathroom Fixtures",13228,10004
+"Bathroom Faucets & Shower Heads",13326,10004
+"Bathtubs",13325,10004
+"Showers, Shower Doors & Enclosures",13342,10004
+"Sinks & Basins",13328,10004
+"Toilets",13327,10004
+"Faucets",13230,10004
+"Kitchen Fixtures",13229,10004
+"Kitchen Faucets & Sprayers",13329,10004
+"Pumps, Valves & Accessories",12601,10004
+"Hoses",13227,10004
+"Pipe Fittings",13224,10004
+"Pipes, Tubes & Tubing",13226,10004
+"Plumbing Pumps",13225,10004
+"Valves",13223,10004
+"Water Heaters",13191,10004
+"Water Softeners",12605,10004
+"Prefabricated Buildings",11279,10004
+"Property Inspection & Coding",11149,10004
+"Rebar & Rebar Accessories",11298,10004
+"Roofing",11285,10004
+"Roofing Installation & Repair",11140,10004
+"Tiles & Tiling",12597,10004
+"Urban & Regional Planning",13848,10004
+"Business Management",10276,10004
+"Advertising & Marketing",11088,10004
+"Classified Ads",13412,10004
+"Direct Marketing",12379,10004
+"Dubbing, Narration & Voice-Over",12382,10004
+"Internet Marketing",12376,10004
+"Affiliate Marketing",13153,10004
+"Email Marketing",13154,10004
+"Pay Per Click Marketing",13155,10004
+"Search Engine Marketing",13152,10004
+"Search Engine Optimization",13316,10004
+"Search Engine Paid Placement",13317,10004
+"Loyalty Cards & Programs",13755,10004
+"Mailing Lists & Email Newsletters",11101,10004
+"Market Research",12381,10004
+"Surveys",13442,10004
+"Political Polls & Surveys",13728,10004
+"Marketing Consulting",12378,10004
+"Public Relations",12377,10004
+"Telemarketing",12380,10004
+"Business Opportunities",13411,10004
+"Home-Based Business Opportunities",13762,10004
+"MLM & Get Rich Quick Opportunities",13761,10004
+"Business Process Analysis",11089,10004
+"Business Security Investigation",11096,10004
+"Business Strategy Planning",11086,10004
+"Corporate Events",11090,10004
+"Corporate Entertainment",12386,10004
+"Corporate Event Planning",12385,10004
+"Team Building",12384,10004
+"Trade Fairs & Shows",12383,10004
+"Customer Support & Outreach",11092,10004
+"E-Commerce",13854,10004
+"Human Resources",11084,10004
+"Compensation & Benefits",12373,10004
+"Corporate Training",12370,10004
+"Employee Relations",12374,10004
+"Outsourcing & Outplacement",12369,10004
+"Payroll Services",12372,10004
+"Recruiting & Retention",12371,10004
+"Mail Order Services",11085,10004
+"Management Consulting",11098,10004
+"Office & Facilities Management",11099,10004
+"Document Management",12397,10004
+"Document Shredding & Destruction",12396,10004
+"Mail Processing",12398,10004
+"Office Automation",12399,10004
+"Physical Asset Management",11095,10004
+"Supply Chain Management",11097,10004
+"Technology Consulting",11094,10004
+"Transcription",11100,10004
+"Chemical Industry",13491,10004
+"Biochemistry",12345,10004
+"Chemicals & Chemical Products",11250,10004
+"Absorbents",12548,10004
+"Additives",12557,10004
+"Agents & Reagents",12559,10004
+"Chemical Adhesives",12551,10004
+"Chemical Removers & Solvents",12550,10004
+"Desiccants",12553,10004
+"Dyestuffs & Inks",12558,10004
+"Industrial Protectants & Sealers",12555,10004
+"Lubricants",12556,10004
+"Industrial Lubricants",13189,10004
+"Vehicle Lubricants",13188,10004
+"Paint Thinners",12549,10004
+"Plastics & Rubber",12547,10004
+"Refrigerants",12546,10004
+"Resins",11191,10004
+"Food Science",11163,10004
+"Commercial & Industrial Printing",10307,10004
+"Book Printing",11169,10004
+"CD & DVD Duplication & Printing",11392,10004
+"Check Printing",11168,10004
+"Large Format Printers",11397,10004
+"Pad Printing",11396,10004
+"Printing Presses",12708,10004
+"Screen Printing",11171,10004
+"UV Curing",11394,10004
+"Design & Engineering",10273,10004
+"Architecture",11130,10004
+"Architectural Engineering",12416,10004
+"Drafting Boards & Tables",11367,10004
+"Drafting Equipment",11369,10004
+"Drafting Services",11069,10004
+"Graphic Design",11068,10004
+"Industrial & Product Design",13733,10004
+"Industrial & Systems Engineering",13732,10004
+"Interior Design",13734,10004
+"Energy Industry",10295,10004
+"Energy Consulting",11176,10004
+"Energy Management",11173,10004
+"Energy Audits & Assessments",13603,10004
+"Energy Price Comparison",11174,10004
+"Energy Research",11175,10004
+"Generators",11263,10004
+"Industrial Magnets",11259,10004
+"Oil & Gas",12113,10004
+"Fuel",11261,10004
+"Fuel Cells",11257,10004
+"Biofuel",12569,10004
+"Biodiesel",13346,10004
+"Ethanol",13190,10004
+"Gasoline",12570,10004
+"Natural Gas",12572,10004
+"Propane",12571,10004
+"Renewable & Alternative Energy",12110,10004
+"Solar Power",11262,10004
+"Solar Chargers",12574,10004
+"Solar Panels",12573,10004
+"Wind Power",13838,10004
+"Waste Management",11388,10004
+"Recycling",12706,10004
+"Fishing Industry",13676,10004
+"Commercial Fishing",13677,10004
+"Food Production",13844,10004
+"Food Service Industry",10301,10004
+"Beverage & Bar Supplies",11340,10004
+"Beverage, Bar & Wineware",12651,10004
+"Mugs & Cups",13835,10004
+"Wine Glasses",13331,10004
+"Wine Openers & Accessories",13330,10004
+"Cold Beverage Dispensers",12646,10004
+"Catering & Bartending",11485,10004
+"Chafing Dishes",11347,10004
+"Commercial Food Preparation Equipment",11345,10004
+"Concession Equipment",11346,10004
+"Culinary Schools & Courses",12052,10004
+"Dish Dispensers",11341,10004
+"Food Consulting",11160,10004
+"Food Display Cases",11352,10004
+"Food Distribution",11162,10004
+"Food Import & Export",11159,10004
+"Food Marketing",11161,10004
+"Food Packing & Bottling",11156,10004
+"Food Scales",11354,10004
+"Food Transport Carts",11353,10004
+"Ice Machines",11348,10004
+"Industrial Food Storage",11355,10004
+"Industrial Refrigeration",11343,10004
+"Restaurant Suppliers",11155,10004
+"Salad & Cold Food Bars",11344,10004
+"Steam Tables & Food Warmers",11342,10004
+"Work & Dish Tables",11349,10004
+"Import & Export",13841,10004
+"Industrial Goods & Manufacturing",13464,10004
+"Industrial Electronics",10302,10004
+"Electronic Components",11359,10004
+"Attenuators",12680,10004
+"Capacitors",12679,10004
+"Circuit Boards",12688,10004
+"Circuit Breakers",12686,10004
+"Electrical Transformers",13845,10004
+"Electronic Chips",12699,10004
+"Electronic Circuits",12694,10004
+"Electronic Connectors & Terminals",12685,10004
+"Electronic Converters",12698,10004
+"Electronic Decoders & Encoders",12684,10004
+"Electronic Filters",12676,10004
+"Electronic Fuses & Fuseblocks",12677,10004
+"Electronic Inductors",12691,10004
+"Electronic Multiplexers",12693,10004
+"Electronic Oscillators",12692,10004
+"Electronic Resistors",12690,10004
+"Electronic Sockets",12682,10004
+"Electronic Terminal Blocks",12681,10004
+"Electronic Transistors",12697,10004
+"Electronic Transmitters",12696,10004
+"Potentiometers & Rheostats",12683,10004
+"Semiconductor Devices",12695,10004
+"Thermistors",12687,10004
+"Thermocouples",12675,10004
+"Transceivers",12689,10004
+"Transducers",12678,10004
+"Electronic Consoles & Enclosures",11363,10004
+"Electronic Test & Measurement Equipment",11360,10004
+"Electronic Wires & Tubing",11358,10004
+"Industrial Control Starters",11361,10004
+"Industrial Electronic Fans",11362,10004
+"Industrial Electronic Power Supplies",11357,10004
+"Optoelectronic & Fiber Electronic Products",11356,10004
+"Proximity Sensors",11364,10004
+"Industrial Manufacturing",10281,10004
+"Contract Manufacturing & Outsourcing",11118,10004
+"Industrial Brazing",11128,10004
+"Industrial Coating",11109,10004
+"Industrial Cutting",11124,10004
+"Industrial Drilling",11108,10004
+"Industrial Embossing & Engraving",11111,10004
+"Marking Devices",12517,10004
+"Industrial Filling",11121,10004
+"Industrial Finishing",11119,10004
+"Industrial Forming",11113,10004
+"Injection Molding",11114,10004
+"Thermoforming",11115,10004
+"Industrial Grinding",11120,10004
+"Industrial Handling & Processing",11117,10004
+"Industrial Handling & Processing Equipment",11238,10004
+"Actuators",12497,10004
+"Autoclaves & Sterilizers",12524,10004
+"Cargo Carriers",12496,10004
+"Chemical Reactors",12519,10004
+"Conveyors & Conveyor Parts",12522,10004
+"Dampers",12521,10004
+"Dehumidifiers",12512,10004
+"Dehydrators",12516,10004
+"Distilling Equipment",12515,10004
+"Dollies",12514,10004
+"Elevators & Lifts",11384,10004
+"Evaporators",12504,10004
+"Heat Exchangers & Pumps",12508,10004
+"Heat Sinks",12510,10004
+"Heat Treating Equipment",12498,10004
+"Hoists & Winches",12518,10004
+"Industrial & Protective Cases",12523,10004
+"Industrial Benches & Tables",12501,10004
+"Industrial Boilers",12525,10004
+"Industrial Burners",12509,10004
+"Industrial Carts",12505,10004
+"Industrial Crushers & Compactors",12506,10004
+"Industrial Kilns",12511,10004
+"Industrial Storage Containers",12513,10004
+"Lifting Jacks",12502,10004
+"Pallets",12499,10004
+"Reclaimers",12507,10004
+"Refractory Equipment",12520,10004
+"Vats",12503,10004
+"Industrial Heat Sealing & Treating",11125,10004
+"Industrial Lubrication",11126,10004
+"Industrial Measurement & Control",11123,10004
+"Industrial Slitting",11129,10004
+"Industrial Storage",11127,10004
+"Industrial Tools & Equipment",10293,10004
+"Air Compressors",11248,10004
+"Applicators & Dispensers",11242,10004
+"Bellows",11245,10004
+"Dies & Molds",11243,10004
+"Drill Presses",11240,10004
+"Industrial Abrasives",11244,10004
+"Industrial Blowers",11249,10004
+"Industrial Cutting Equipment",11247,10004
+"Industrial Chainsaws",12544,10004
+"Industrial Tablesaws",12543,10004
+"Industrial Grinders",11246,10004
+"Industrial Lasers",13763,10004
+"Industrial Lubricators",11239,10004
+"Industrial Measurement & Control Equipment",11241,10004
+"Accelerometers",12531,10004
+"Alignment & Calibration",12532,10004
+"Laser Alignment",13187,10004
+"Anemometers",12526,10004
+"Borescopes",12535,10004
+"Comparators",12530,10004
+"Dynamometers",12533,10004
+"Flowmeters",12528,10004
+"Gauges",12527,10004
+"Micrometer Screw Gauges",13186,10004
+"Industrial Scales",12529,10004
+"Industrial Thermometers",12536,10004
+"Industrial Thermostats",12541,10004
+"Limiters",12538,10004
+"Pyrometers",12537,10004
+"Regulators",12534,10004
+"Tachometers",12540,10004
+"Test Probes",12539,10004
+"Laser Marking",11110,10004
+"Metalworking",11122,10004
+"I-Beams",11196,10004
+"Industrial Forging",12415,10004
+"Metal Alloys",11197,10004
+"Carbide & Carbide Products",12446,10004
+"Metal Casting, Molding & Machining",12409,10004
+"Metal Fabrication",12414,10004
+"Metal Plating & Finishing",12407,10004
+"Metal Stamping",12411,10004
+"Metallurgical Engineering",12408,10004
+"Metalworking Tools",11201,10004
+"Scrap Metal",11204,10004
+"Sheet & Plate Metal",11200,10004
+"Steel Angles & Channels",11195,10004
+"Welding",12413,10004
+"Welding Tools & Equipment",12456,10004
+"Mining",12410,10004
+"Mine Working Products & Equipment",10291,10004
+"Product Assembly",11112,10004
+"Metals",11198,10004
+"Aluminum",12450,10004
+"Brass",12455,10004
+"Bronze",12452,10004
+"Cobalt",12448,10004
+"Copper",12447,10004
+"Powdered Metals",12454,10004
+"Precious Metals",12449,10004
+"Gold",13163,10004
+"Platinum",13164,10004
+"Silver",13162,10004
+"Steel",12451,10004
+"Tin",12453,10004
+"Minerals",11202,10004
+"Occupational Health & Safety",11067,10004
+"Hazardous Material Control",11383,10004
+"Industrial Safety Supplies & Equipment",13746,10004
+"Plant & Facility",10306,10004
+"Acoustic Materials & Noise Control",11390,10004
+"Air Handling",11387,10004
+"Building Automation",11386,10004
+"Environmental Control",11182,10004
+"Robotics & Factory Automation",12566,10004
+"Textiles & Textile Services",10298,10004
+"Feathers & Down",11303,10004
+"Leather & Fur",11300,10004
+"Textile Manufacturing",11060,10004
+"Textile Spinning",11116,10004
+"Janitorial Products & Services",10308,10004
+"Electric Hand Dryers",11401,10004
+"Floor Cleaning",11400,10004
+"Automatic Floor Scrubbers",12716,10004
+"Carpet Fans",12718,10004
+"Industrial Brooms & Brushes",11409,10004
+"Industrial Floor Burnishers & Polishers",12717,10004
+"Industrial Mops & Mop Buckets",11405,10004
+"Industrial Vacuum Cleaners",12715,10004
+"Janitorial Carts",11402,10004
+"Janitorial Signs",11398,10004
+"ADA Signs",12710,10004
+"Wet Floor Signs",12709,10004
+"Odor Control Devices",11406,10004
+"Soap Dispensers",11408,10004
+"Touch-Free Devices",11399,10004
+"Automatic Faucets",12713,10004
+"Automatic Flush Valves",12712,10004
+"Automatic Soap Dispensers",12711,10004
+"Automatic Towel Dispensers",12714,10004
+"Towel Dispensers",11407,10004
+"Urinal Supplies",11403,10004
+"Waste Receptacles",11404,10004
+"Manufacturing",13804,10004
+"Consumer Goods Manufacturing",10271,10004
+"Apparel Manufacturing",11056,10004
+"Auto Industry & Vehicle Manufacturing",11055,10004
+"Consumer Electronics Manufacturing",11061,10004
+"Furniture Manufacturing",11058,10004
+"Home Appliance Manufacturing",11059,10004
+"Plaques, Awards & Trophies",13814,10004
+"Office",10300,10004
+"Binders, Binding & Laminating",11338,10004
+"Business Cards, Stationery & Forms",11325,10004
+"Calculators",11328,10004
+"Calendars & Planners",11334,10004
+"Calendar & Scheduling Software",12580,10004
+"Desk Organizers",11332,10004
+"Glue & Paste",11329,10004
+"Labels & Labeling",11336,10004
+"Lanyards & Badge Holders",11324,10004
+"Microcassette Recorders",11337,10004
+"Office Appliances",11339,10004
+"Copiers",12638,10004
+"Desktop Printers",12640,10004
+"Inkjet Printers",13235,10004
+"Laser Printers",13233,10004
+"Multi-Function Printers",13236,10004
+"Photo Printers",13234,10004
+"Electronic Whiteboards",12641,10004
+"Fax Machines & Accessories",12637,10004
+"Overhead Projectors",12642,10004
+"Paper Shredders",12639,10004
+"Office Furniture",11323,10004
+"Bookcases & Shelving",12635,10004
+"Cubicle Walls & Panels",12630,10004
+"Desk Lamps & Table Lamps",12634,10004
+"Filing Cabinets",12632,10004
+"Office & Computer Desks",12631,10004
+"Task Chairs",12633,10004
+"Paper",11305,10004
+"Paper Clips & Rubber Bands",11326,10004
+"Pens & Writing Instruments",11370,10004
+"Portfolios & Presentation Cases",11333,10004
+"Printer Accessories",11335,10004
+"Staplers, Scissors & Punchers",11330,10004
+"Retail Trade",10290,10004
+"Apparel Retail Supplies",11210,10004
+"Clothing & Accessory Hangers",12466,10004
+"Mannequins",12468,10004
+"Ash Tray Receptacles",11227,10004
+"Bar Code Scanners",11208,10004
+"Bill & Coin Counters",11207,10004
+"CD & DVD Jewelboxes & Cases",11380,10004
+"Cash Registers & Cash Register Supplies",11233,10004
+"Counterfeit Money Detectors",11224,10004
+"Floor Mats",11216,10004
+"Hand Trucks & Utility Carts",11206,10004
+"Inventorying",11181,10004
+"Jewelry Bags, Boxes & Displays",11230,10004
+"Loss Prevention",11178,10004
+"Merchant Point-of-Sale Systems",11232,10004
+"Merchant Services & Payment Systems",11180,10004
+"Paper & Plastic Bags",11211,10004
+"Pegboard & Slatwall",11214,10004
+"Retail Display Supplies",11219,10004
+"Display Racks & Cases",12475,10004
+"Kiosks",12471,10004
+"Retail Signs & Banners",11205,10004
+"LED Signs",12459,10004
+"Neon Signs",12458,10004
+"Open & Closed Signs",12460,10004
+"Sign Holders & Easels",12462,10004
+"Shopping Baskets & Carts",11231,10004
+"Shrink Wrapping Systems",11217,10004
+"Tagging Guns",11229,10004
+"Time Clocks & Time Cards",11220,10004
+"Turnstiles & Traffic Control Devices",11209,10004
+"Vending",11179,10004
+"Vending Machines",11228,10004
+"Scientific Equipment & Services",10294,10004
+"Bioremediation",11047,10004
+"Biotechnology Equipment",11252,10004
+"Laboratory Equipment & Supplies",11254,10004
+"Lab Safety Equipment",12560,10004
+"Laboratory Incubators",12561,10004
+"Microscopes & Microscope Accessories",12567,10004
+"Mobile Labs",12565,10004
+"Scientific Centrifuges",12564,10004
+"Materials Testing",11054,10004
+"Scientific Books & Journals",11253,10004
+"Scientific Glassware & Accessories",11255,10004
+"Security Equipment & Services",10299,10004
+"Body Guards",11062,10004
+"Car Alarm Systems",11322,10004
+"Electronic Voice Changers",11311,10004
+"Guns & Firearms",13423,10004
+"Intercoms",11316,10004
+"Night Vision Goggles & Scopes",11310,10004
+"Safes",11309,10004
+"Security Alarm Services",11066,10004
+"Security Guards",11065,10004
+"Security Weapons",11321,10004
+"Batons",12626,10004
+"Handcuffs",12625,10004
+"Mace & Pepper Spray",12629,10004
+"Stun Guns & Tasers",12627,10004
+"Surveillance Equipment",11313,10004
+"Alarm Systems & Equipment",12620,10004
+"Motion Detectors",12622,10004
+"Phone Recorders & Phone Tap Detectors",12619,10004
+"Security Cameras",12621,10004
+"Weather Alert Radios",11320,10004
+"Shipping & Packing",10305,10004
+"Cargo Containers",11374,10004
+"Couriers & Messengers",13604,10004
+"Express & Expedited Shipping",11104,10004
+"Freighting",11103,10004
+"Air Cargo",12401,10004
+"Containerization",12403,10004
+"Freight Forwarding",12400,10004
+"LTL (Less Than Truckload) Shipping",12402,10004
+"Maritime Freighting",12405,10004
+"Rail Freighting",12404,10004
+"Trucking",12406,10004
+"Mail & Package Delivery",13724,10004
+"Mailing Tubes",11376,10004
+"Packing Cushioning & Packing Paper",11381,10004
+"Shipping Boxes",11382,10004
+"Stamps & Envelopes",11327,10004
+"Strapping Equipment & Devices",11377,10004
+"Tape & Tape Dispensers",11373,10004
+"Warehousing",11102,10004
+"Veterinary Equipment & Supplies",11235,10004
+"Computers & Consumer Electronics",10019,0
+"Computers",10168,10019
+"Computer Accessories",10886,10019
+"Computer Adapters",12214,10019
+"Computer Cables",12212,10019
+"Computer Cases & Case Accessories",12217,10019
+"Computer Keyboards",12222,10019
+"Computer Monitor Accessories",12219,10019
+"Computer Power Supplies",12221,10019
+"Computer Speakers",13400,10019
+"Fans & Cooling Equipment",12218,10019
+"Graphics Tablets",12223,10019
+"Laptop Batteries",13815,10019
+"Mice & Pointing Devices",12216,10019
+"Networking Accessories",12213,10019
+"PDA Accessories",12220,10019
+"Scanner Accessories",12215,10019
+"Webcams",12224,10019
+"Computer Consulting",12203,10019
+"Computer Hardware",10883,10019
+"Computer Components",12188,10019
+"Computer Processors",13071,10019
+"Microprocessors",13312,10019
+"Ethernet Cards",13074,10019
+"Graphic & Video Cards",13073,10019
+"Motherboards",13072,10019
+"Sound Cards",13075,10019
+"Computer Memory & Storage Devices",12194,10019
+"CD & DVD Storage Media",13080,10019
+"Desktop Memory Cards & Devices",13081,10019
+"External Hard Drives",13078,10019
+"Flash Memory Devices & Memory Sticks",13082,10019
+"Internal Hard Drives",13077,10019
+"Laptop Memory Cards & Devices",13084,10019
+"Memory Card Readers",13079,10019
+"Tape Back-Up Drives & Media",13083,10019
+"Computer Monitors & Projectors",12185,10019
+"CRT Monitors",13067,10019
+"Electronic Projectors",13065,10019
+"LCD Monitors",13066,10019
+"Computer Networking Devices",12184,10019
+"Ethernet Networking Devices",13063,10019
+"Network Hubs & Adapters",13311,10019
+"Firewall & Spam Filter Hardware",13059,10019
+"Modems",13064,10019
+"Network Routers",13060,10019
+"Network Switches",13061,10019
+"Computer Server Components",12189,10019
+"Computer Server Processors",13076,10019
+"Computer Servers",12195,10019
+"Blade Servers",13087,10019
+"Desktop Servers",13085,10019
+"Rack-Mount Servers",13086,10019
+"Computer Workstations",12192,10019
+"DVD & CD Drives, Burners & Recorders",12186,10019
+"Desktop Computers",12193,10019
+"Gaming Computers",13851,10019
+"Laptop Computers",12187,10019
+"Netbooks & Ultra-Mobile PCs",13070,10019
+"Tablet PCs",13068,10019
+"Ultra-Thin Laptops",13069,10019
+"Scanners",12190,10019
+"Thin Clients",12191,10019
+"Computer Manufacturing",11057,10019
+"Computer Rentals",12196,10019
+"Computer Repair",12201,10019
+"Data Recovery",13090,10019
+"Motherboard Repair",13091,10019
+"Computer Tech Support",12202,10019
+"Hosted Data Storage",12156,10019
+"Software",10885,10019
+"Business & Productivity Software",12209,10019
+"Accounting & Financial Software",10537,10019
+"Time Management & Time Tracking Software",13744,10019
+"Building & Construction Software",11289,10019
+"Business Management Software",10296,10019
+"Business Intelligence Software",11274,10019
+"Content & Knowledge Management Software",11272,10019
+"Customer Service & Support Software",11265,10019
+"Data Management Software",11271,10019
+"Facilities Management Software",11266,10019
+"Human Resources Software",11269,10019
+"Process Management Software",11264,10019
+"Procurement & Purchasing Software",11268,10019
+"Project Management Software",11270,10019
+"Collaboration Software",12579,10019
+"Enterprise Resource Planning Software",12578,10019
+"Inventory & Asset Management Software",12581,10019
+"Sales & Marketing Software",11273,10019
+"Supply Chain Management Software",11267,10019
+"Chemical Software",12554,10019
+"E-Commerce & Retail Software",11221,10019
+"Energy & Utility Software",11258,10019
+"Legal Software",10155,10019
+"Medical Software",13107,10019
+"Real Estate Software & Tools",13108,10019
+"Scientific Software",11251,10019
+"Translation Software",13817,10019
+"Virtual Tour Software",13106,10019
+"Computer Monitoring & Spy Software",13789,10019
+"Device Drivers",12207,10019
+"CD-ROM Drivers",13103,10019
+"DVD-ROM Drivers",13102,10019
+"Printer Drivers",13101,10019
+"Drafting & Design Software",13602,10019
+"Educational Software",12206,10019
+"Freeware & Shareware",13816,10019
+"Graphics & Multimedia Software",11368,10019
+"Audio & Music Software",12703,10019
+"Desktop Publishing Software",12700,10019
+"Digital Media Players",13440,10019
+"Font Design Software",12704,10019
+"Photo Software",12701,10019
+"Video Software",12705,10019
+"Web Design Software",12702,10019
+"Internet Software & Web Goodies",12204,10019
+"Clip Art & Animated GIFs",13597,10019
+"Network Management Software",13095,10019
+"Network Security Software",13092,10019
+"Anti-Spam Software",13313,10019
+"Anti-Virus Software",13314,10019
+"Screensavers & Digital Wallpaper",13372,10019
+"Site Management Software",13096,10019
+"Social Network Apps & Add-ons",13371,10019
+"Toolbars",13713,10019
+"Web Applications",13097,10019
+"Web Browsers",13406,10019
+"Web Stats & Internet Analytics",11497,10019
+"Web Templates",13404,10019
+"Mac Software",13112,10019
+"Middleware",12205,10019
+"Application Server Software",13099,10019
+"Database Software",13100,10019
+"Service Oriented Architecture",13098,10019
+"Operating Systems & OS Emulators",12208,10019
+"Operating Systems",13104,10019
+"Virtualization Software",13105,10019
+"Remote Desktop & VPN Software",13413,10019
+"Software Development",12197,10019
+"Programming & Developer Software",12211,10019
+"C & C++ Software",13113,10019
+"Debugging Software",13110,10019
+"Java Software",13111,10019
+"Software & Application Frameworks",13642,10019
+"Software Testing",13643,10019
+"Version Control Software",13750,10019
+"Software Utilities",12210,10019
+"Unix Software",13114,10019
+"Windows & .NET Software",13109,10019
+"Technology News & Publications",10882,10019
+"Technology Specs, Reviews & Comparisons",12199,10019
+"Consumer Electronics",10167,10019
+"Car Audio & Video",10881,10019
+"CB Radios",11314,10019
+"Car Audio Accessories",12130,10019
+"Car Audio Amplifiers",12178,10019
+"Car Audio Equalizers",12183,10019
+"Car CD Players & Changers",12181,10019
+"Car DVD Players",12172,10019
+"Car Speakers",12179,10019
+"Car Stereos",12182,10019
+"Car Video Accessories",12175,10019
+"Car Video Screens",12173,10019
+"In-Dash Video Units",12174,10019
+"Consumer Electronic Accessories",10872,10019
+"Batteries & Chargers",13402,10019
+"Multi-Purpose Batteries & Chargers",13401,10019
+"Consumer Electronic Donation",12149,10019
+"Consumer Electronic Service & Repair",12150,10019
+"Consumer Electronic Warranty Plans",12148,10019
+"Electronic Waste Disposal",12153,10019
+"GPS & Navigation",10880,10019
+"GPS Accessories",12131,10019
+"GPS Devices",12177,10019
+"Handheld GPS Devices",11893,10019
+"Vehicle GPS Devices",13056,10019
+"Automotive GPS Systems",13309,10019
+"Marine GPS Systems",13310,10019
+"Home Audio & Video",10873,10019
+"Blu-Ray Players & Recorders",13047,10019
+"DVD Players",12146,10019
+"DVRs & Set Top Boxes",12145,10019
+"HD Players & Recorders",12136,10019
+"Headphones",13776,10019
+"Home Audio & Video Accessories",12132,10019
+"Television Accessories",13030,10019
+"Television Receivers",13307,10019
+"Home Theater Projectors",12140,10019
+"Home Theater Systems",12137,10019
+"Music Systems & Music Components",12134,10019
+"CD-Players & Changers",13034,10019
+"Home Audio Amplifiers",13036,10019
+"Home Audio Equalizers",13037,10019
+"Home Audio Receivers",13033,10019
+"Record Players",13038,10019
+"Tape Players",13035,10019
+"Radios & Radio Equipment",12144,10019
+"AM-FM Radios",13044,10019
+"DAB Radios",13045,10019
+"Satellite Radio Receivers & Players",13046,10019
+"Speakers",12138,10019
+"Televisions",12143,10019
+"HDTVs",13042,10019
+"LCD TVs",13041,10019
+"Plasma TVs",13043,10019
+"VCRs",12142,10019
+"Portable Media Devices",10877,10019
+"Digital Book Readers",13495,10019
+"MP3 Player Accessories",12165,10019
+"MP3 Players",12164,10019
+"Portable CD Players",12167,10019
+"Portable DVD Players",12163,10019
+"Portable Stereos & Boomboxes",12166,10019
+"Radar Detectors",11318,10019
+"Wireless Devices",10876,10019
+"Bluetooth Wireless Accessories & Devices",12160,10019
+"PDAs",12159,10019
+"Walkie-Talkies",12162,10019
+"Dining & Nightlife",10020,0
+"Dining & Nightlife Reviews, Guides & Listings",11870,10020
+"Bar, Club & Nightlife Reviews, Guides & Listings",12974,10020
+"Restaurant Reviews, Guides & Listings",12975,10020
+"Nightclubs, Bars & Music Clubs",13439,10020
+"Restaurants",10169,10020
+"Bakeries",13693,10020
+"Dine-In Restaurants",10890,10020
+"Fast Food Restaurants",10891,10020
+"Pizzerias & Pizza Delivery",12228,10020
+"Restaurant Reservations & Booking",10888,10020
+"Restaurant Take-out & Delivery",10887,10020
+"Family & Community",10002,0
+"Baby, Parenting & Family",10030,10002
+"Baby",10235,10002
+"Baby Care & Hygiene",10052,10002
+"Baby Diapering & Toilet Training",11020,10002
+"Baby Wipes",12296,10002
+"Diaper Pails & Disposal Accessories",12298,10002
+"Diaper Rash",12295,10002
+"Diapers",12294,10002
+"Potties",12299,10002
+"Baby Shampoo & Lotion",13134,10002
+"Baby Feeding",11022,10002
+"Baby Bottles",12312,10002
+"Baby Feeding Pillows",12307,10002
+"Baby Food",12317,10002
+"Baby Formula",12314,10002
+"Breastfeeding Equipment & Supplies",12304,10002
+"Burp Cloths & Baby Bibs",12309,10002
+"Highchairs & Booster Seats",12308,10002
+"Pacifiers",12303,10002
+"Baby Gear",11018,10002
+"Baby Carriers",12283,10002
+"Baby Swings, Baby Bouncers & Gliders",12285,10002
+"Baby Walkers",12281,10002
+"Diaper Bags",12282,10002
+"Play Pens",12287,10002
+"Play Tents",12286,10002
+"Play Yards & Accessories",12284,10002
+"Baby Names",13712,10002
+"Baby Safety",11023,10002
+"Baby Car Safety",12326,10002
+"Car Seats & Safety Boosters",13133,10002
+"Baby Monitors",12321,10002
+"Safety Gates",12323,10002
+"Shopping Cart Covers",12325,10002
+"Toddler Safety Harnesses",12322,10002
+"Nursery Furniture & Decor",11025,10002
+"Baby Bedding",12329,10002
+"Baby Blankets",13143,10002
+"Baby Co-Sleepers",13336,10002
+"Baby Dressers",13255,10002
+"Changing Tables",13259,10002
+"Cradles & Bassinets",13337,10002
+"Crib Mattresses",13338,10002
+"Cribs",13335,10002
+"Moses Baskets",13334,10002
+"Nursery Lamps",13137,10002
+"Nursery Mobiles",13136,10002
+"Toddler Beds & Bedding",13333,10002
+"Strollers & Stroller Accessories",11021,10002
+"Bike Trailer Strollers",12302,10002
+"Jogging Strollers",12301,10002
+"Prams & Baby Carriages",12300,10002
+"Parenting & Family",10236,10002
+"Adoption",11032,10002
+"Child Care",11031,10002
+"Au Pair & Nannies",12340,10002
+"Baby Sitting",12339,10002
+"Day Care",12341,10002
+"Special Needs Care",12338,10002
+"Kids' Camps & Youth Programs",11030,10002
+"Maternity & New Parent",11028,10002
+"Breastfeeding",12335,10002
+"Fetal Development",12334,10002
+"Community Service & Social Organizations",10028,10002
+"AIDS & HIV Support",10223,10002
+"Alcohol & Substance Abuse",10224,10002
+"Alcohol & Health",11003,10002
+"Alcoholism & Treatment",12277,10002
+"Blood Alcohol Monitors & Breathalyzers",12279,10002
+"Underage Drinking & Underage Alcohol Abuse",12278,10002
+"Drug & Alcohol Rehab Programs",11002,10002
+"Drug Abuse & Treatment",11001,10002
+"Home Drug Tests",12276,10002
+"Community Outreach",10229,10002
+"Child Welfare Services",11012,10002
+"Crime Prevention",13737,10002
+"Domestic Violence",11010,10002
+"Food Outreach & Food Banks",11013,10002
+"Homeless Outreach Programs",11011,10002
+"Literacy",11014,10002
+"Consumer Resources",10222,10002
+"Consumer Advocacy & Protection",11087,10002
+"Product Reviews & Price Comparisons",13813,10002
+"Disability Resources",10220,10002
+"Disaster Relief & Emergency Management",10219,10002
+"Environmentalism",11077,10002
+"Environmental Research",12358,10002
+"Ethnic Identity Resources",10221,10002
+"GLBT Resources",10226,10002
+"Multilateral & Non-Governmental Organizations",13599,10002
+"Nonprofit Services",10230,10002
+"Donations & Charitable Giving",11015,10002
+"Selective Service",13393,10002
+"Self-Defense Training",11063,10002
+"Senior Resources",13709,10002
+"Social Insurance Programs & Entitlements",13392,10002
+"Publicly Funded Health Programs",13390,10002
+"Welfare & Unemployment",13389,10002
+"Social Issues & Advocacy",10227,10002
+"Animal Rights Activism",11009,10002
+"Consumer Activism",12375,10002
+"Environmental Activism",11008,10002
+"Environmental Watchdogs",12359,10002
+"Human Rights Activism",11007,10002
+"Peace Activism",11004,10002
+"Reproductive Rights",11006,10002
+"Work & Labor Issues",11005,10002
+"Teen Advice & Support",10225,10002
+"Volunteer Opportunities",10218,10002
+"Youth Organizations & Resources",10228,10002
+"Domestic & Personal Resources",10029,10002
+"Personal Chefs",10234,10002
+"Personal Errand & Concierge Services",10233,10002
+"Faith & Belief",10231,10002
+"Astrology & Horoscopes",13469,10002
+"Buddhism",13474,10002
+"Christianity",13472,10002
+"Hinduism",13475,10002
+"Islam",13473,10002
+"Judaism",13476,10002
+"Meditation",13836,10002
+"Occult & Paranormal",10127,10002
+"Psychics & Fortune Telling",13470,10002
+"Spells, Potions & Curses",13471,10002
+"Tarot",13481,10002
+"Places of Worship & Worship Services",13434,10002
+"Prayers",13807,10002
+"Religious Instruction",13435,10002
+"Religious Media & Publications",13436,10002
+"Scientology",13479,10002
+"Self-Help & Motivational",13703,10002
+"Wicca & Esoteric Religions",13477,10002
+"Romance & Relationships",10031,10002
+"Dating & Marriage Matching",10240,10002
+"Dating Directories & Sites",10239,10002
+"Dating Forums & Chat",10241,10002
+"GLBT Dating",11035,10002
+"International Dating",11036,10002
+"Personals",13715,10002
+"Divorce & Separation",10238,10002
+"Online Divorce",11033,10002
+"Relationship Advice",10237,10002
+"Troubled Relationships",10242,10002
+"Family Counseling",11037,10002
+"Marriage & Couples Counseling",11038,10002
+"Finance",10012,0
+"ATM Sales & Processing",10100,10012
+"Accounting & Auditing",11093,10012
+"Billing Services",12388,10012
+"Bookkeeping",12391,10012
+"Cash Flow Management",12393,10012
+"Collection Services",12392,10012
+"Sarbanes-Oxley Compliance Management",12389,10012
+"Tax Preparation & Planning",12387,10012
+"Banking",10093,10012
+"Bank Accounts",11817,10012
+"Current Accounts & Checking Accounts",12947,10012
+"Savings Accounts",12949,10012
+"College Savings Plans",13277,10012
+"Money Market Accounts",13278,10012
+"Bill Payment Services",11811,10012
+"Debit & Check Cards",11816,10012
+"Fixed Deposit Accounts & Certificates",11818,10012
+"Mobile Banking",11815,10012
+"Offshore Banking",11812,10012
+"Online Banking",11814,10012
+"Private Banking",11813,10012
+"Student Banking",12948,10012
+"Business Finance",10096,10012
+"Investment Banking",13717,10012
+"Mergers & Acquisitions",13720,10012
+"Business News & Media",10098,10012
+"Credit & Lending",10097,10012
+"Credit Cards",11842,10012
+"Business Credit Cards",12967,10012
+"Low Interest & No Interest Credit Cards",12963,10012
+"Rewards Cards",12965,10012
+"Cashback Rewards Cards",13303,10012
+"Travel & Miles Rewards Cards",13304,10012
+"Student Credit Cards",13416,10012
+"Credit Counseling",11837,10012
+"Credit Reports & Reporting Services",11838,10012
+"Debt Management & Consolidation",11839,10012
+"Identity Theft & Credit Monitoring",11836,10012
+"Loans",11841,10012
+"Auto Financing",12957,10012
+"Auto Leasing",13284,10012
+"Auto Loans",13285,10012
+"Bad Credit & No Credit Credit & Lending",12953,10012
+"Commercial Lending",12956,10012
+"Commercial Mortgages",13283,10012
+"Farm Loans & Price Support",13281,10012
+"Home Loans & Mortgages",12960,10012
+"Adjustable Rate & Tracker Mortgages",13294,10012
+"Buy-To-Let Mortgages",13292,10012
+"First Time Buyer Mortgages",13295,10012
+"Fixed Rate Mortgages",13293,10012
+"Government Mortgages",13291,10012
+"Home Equity Loans & Lines of Credit",13296,10012
+"Home Refinancing Loans",13299,10012
+"Interest Only Mortgages",13289,10012
+"Reverse Mortgages",13290,10012
+"Subprime Mortgages",13297,10012
+"Personal Lending & Borrowing",12961,10012
+"Payday & Emergency Loans",13300,10012
+"Personal Loans & Lines of Credit",13301,10012
+"Title Loans",13286,10012
+"Purchase Financing",12959,10012
+"Computer & Consumer Electronics Financing",13288,10012
+"Home Appliance Financing",13287,10012
+"Unsecured Credit & Lending",11840,10012
+"Unsecured Loans",12955,10012
+"Financial Planning & Management",10092,10012
+"Inheritance & Estate Planning",10525,10012
+"Money Management",10524,10012
+"Retirement & Pension Planning",10527,10012
+"Wealth Management",10526,10012
+"Grants, Scholarships & Financial Aid",10099,10012
+"Government Grants",13437,10012
+"Student Loans",10536,10012
+"Study Grants & Scholarships",10535,10012
+"Insurance",10102,10012
+"Accident & Casualty Insurance",10551,10012
+"Annuities",10538,10012
+"Business & Commercial Insurance",10303,10012
+"Professional Liability & Malpractice Insurance",11366,10012
+"Worker's Compensation Insurance",11365,10012
+"Credit Insurance",10549,10012
+"Disability Insurance",10541,10012
+"Disaster Insurance",10548,10012
+"Health Insurance",10544,10012
+"Dental Insurance",11846,10012
+"Long-term Care Insurance",11843,10012
+"Supplemental Health Insurance",11844,10012
+"Vision Insurance",11845,10012
+"Home Warranties",10540,10012
+"Liability Insurance",10545,10012
+"Personal Liability Insurance",11848,10012
+"Life Insurance",10539,10012
+"Pet Insurance",10542,10012
+"Property Insurance",10547,10012
+"Homeowners Insurance",11849,10012
+"Building Insurance",12969,10012
+"Contents Insurance",12968,10012
+"Renters Insurance",11850,10012
+"Risk Management",12394,10012
+"Travel Insurance",10546,10012
+"Vehicle Insurance",10550,10012
+"Car Insurance",11854,10012
+"Commercial Vehicle Insurance",11855,10012
+"Motorcycle Insurance",11858,10012
+"Recreational Boat & Watercraft Insurance",11856,10012
+"Recreational Vehicle & Caravan Insurance",11857,10012
+"Van Insurance",11853,10012
+"Investing",10095,10012
+"Brokerages & Day Trading",11819,10012
+"Commodities & Futures Trading",11832,10012
+"Currencies & Foreign Exchange",11831,10012
+"Derivatives",11823,10012
+"Exchange Traded Funds",11826,10012
+"Hedge Funds",11835,10012
+"Interest Free & Tax-Deferred Savings Accounts",11833,10012
+"Investor Relations & Venture Capital",11820,10012
+"Mutual Funds",11828,10012
+"Precious Metals Trading",11834,10012
+"Real Estate Investments",10531,10012
+"Retirement Investments",11824,10012
+"401(K)s",12950,10012
+"IRAs",12952,10012
+"Pensions",12951,10012
+"Securities",11827,10012
+"Bonds",11830,10012
+"Stocks",13459,10012
+"Spread Betting",11825,10012
+"Money Transfer & Wire Services",10094,10012
+"Food & Groceries",10010,0
+"Beverages",10083,10010
+"Alcoholic Beverages",10445,10010
+"Beer",11651,10010
+"Liquor",11650,10010
+"Wine",11649,10010
+"Non-Alcoholic Beverages",10444,10010
+"Alcohol Free Drink Mixers",11646,10010
+"Bottled Water & Water Delivery",13748,10010
+"Coffee",11644,10010
+"Energy Drinks",11647,10010
+"Juice",11643,10010
+"Soft Drinks",11642,10010
+"Sports Drinks",11648,10010
+"Tea",11645,10010
+"Food",10082,10010
+"Baked Goods & Bakery Items",10432,10010
+"Brownies",11610,10010
+"Cakes & Cupcakes",11607,10010
+"Birthday Cakes",13247,10010
+"Wedding Cakes",13837,10010
+"Cookies",11609,10010
+"Pies",11608,10010
+"Savory Pies",12831,10010
+"Sweet Pies",12830,10010
+"Baking Ingredients",10434,10010
+"Baking Chocolate & Cocoa",11615,10010
+"Baking Mixes",11616,10010
+"Syrups & Sweeteners",11614,10010
+"Sugar Substitutes",12837,10010
+"Breakfast Foods",10439,10010
+"Breakfast Cereals",11629,10010
+"Pancake, Waffle & Muffin Mixes",11628,10010
+"Candy, Gum & Mints",10438,10010
+"Chocolate",13846,10010
+"Cooking Oils & Spray",10433,10010
+"Olive Oil",11612,10010
+"Vegetable Oils",11611,10010
+"Dairy & Non-Dairy Alternatives",10440,10010
+"Cheese",11632,10010
+"Milk",11631,10010
+"Non-Dairy Alternatives",11633,10010
+"Yogurt",11630,10010
+"Desserts",10436,10010
+"Frozen Desserts, Frozen Novelties & Accompaniments",11623,10010
+"Fish & Seafood",10443,10010
+"Crab & Lobster",11639,10010
+"Salmon",11641,10010
+"Shrimp & Prawns",11640,10010
+"Gourmet Foods",13758,10010
+"Grains, Pasta & Side Dishes",10426,10010
+"Pasta",11600,10010
+"Herbs & Spices",11613,10010
+"Black Pepper",12835,10010
+"Cinnamon",12833,10010
+"Oregano",12834,10010
+"Salt",12832,10010
+"Jams, Jellies & Preserves",10427,10010
+"Meat & Poultry",10437,10010
+"Beef",11624,10010
+"Deli & Lunch Meats",11625,10010
+"Cured Meats",12839,10010
+"Pre-Packaged Deli Meats",12840,10010
+"Sausages",12838,10010
+"Game & Exotic Meat",11627,10010
+"Pork",11626,10010
+"Nut Butters",13747,10010
+"Organic & Natural Foods",13695,10010
+"Prepared Foods",10429,10010
+"Frozen Foods",11604,10010
+"Gourmet Prepared Foods",11605,10010
+"Produce",10441,10010
+"Fruit",11634,10010
+"Vegetables",11635,10010
+"Salad Dressing & Condiments",10430,10010
+"Sauces",10431,10010
+"BBQ & Grilling Sauces",11606,10010
+"Snacks & Treats",10435,10010
+"Crackers",11617,10010
+"Dried Fruit",11620,10010
+"Nuts",11621,10010
+"Popcorn",11618,10010
+"Snack Chips",11622,10010
+"Trail Mix",11619,10010
+"Soups, Stews & Beans",13843,10010
+"Special & Restricted Diet Foods",10442,10010
+"Diabetic Foods",12847,10010
+"Low Cholesterol Foods",12844,10010
+"Low-Sodium Foods",12846,10010
+"Religious Diet Foods",11637,10010
+"Kosher Foods & Resources",12848,10010
+"Wheat-free & Gluten-free Foods",12845,10010
+"Weight-Loss Foods & Nutrition Bars",10428,10010
+"Diet Bars",11603,10010
+"Meal Replacements",11602,10010
+"Nutrition Bars",11601,10010
+"Household Supplies",10081,10010
+"Charcoal & Barbecuing Supplies",10424,10010
+"Food Wraps & Food Storage",10422,10010
+"Food Savers & Food Storage Containers",11594,10010
+"Food Storage Bags",11592,10010
+"Lunch Boxes",13448,10010
+"Plastic Wrap & Foil",11593,10010
+"Household Cleaning Products",10423,10010
+"Air Fresheners & Deodorizers",11598,10010
+"Cleaning Implements",11596,10010
+"Dish Detergents",11597,10010
+"Fabric Care",11595,10010
+"Fabric Softeners & Dryer Sheets",12829,10010
+"Fabric Stain Removers",12827,10010
+"Laundry Detergents",12828,10010
+"Lint Removers",12470,10010
+"Household Bleach",13347,10010
+"Household Cleansers",11599,10010
+"Paper Towels & Household Paper Products",10421,10010
+"Facial Tissue",11591,10010
+"Toilet Tissue",11590,10010
+"Trash Bags",10425,10010
+"Online Grocery Shopping & Grocery Delivery",10084,10010
+"Tobacco",10080,10010
+"Health",10011,0
+"Biotech & Pharmaceutical",10088,10011
+"Gene Research",13369,10011
+"DNA & Genetic Testing",11791,10011
+"Gene Therapy",11049,10011
+"Genome Sequencing",10500,10011
+"Pharmaceutical Manufacturing",10499,10011
+"Protein Identification & Proteomics",10501,10011
+"Toxicology Services",11048,10011
+"Health Care Services",10091,10011
+"Abortion Services",10510,10011
+"Alternative & Natural Medicine",10507,10011
+"Acupuncture",11779,10011
+"Chinese Herbal Medicine",11781,10011
+"Chiropractors & Chiropractic",11780,10011
+"Cleansing & Detoxification",13722,10011
+"Colon Cleansing",11668,10011
+"Naturopathy",11782,10011
+"Blood & Organ Donations & Transplants",12106,10011
+"Dentists & Dental Services",10514,10011
+"Cosmetic Dentistry",11797,10011
+"Emergency Dental Services",11798,10011
+"General Dentistry",11796,10011
+"Orthodontists & Orthodontic Services",11795,10011
+"General Health Care Services",10513,10011
+"Geriatric & Aging Care Services",10517,10011
+"Assisted Living Services",11804,10011
+"In-Home Aging Care Services",11805,10011
+"Retirement Homes & Senior Living Communities",11806,10011
+"Hospice & Home Nursing Care",10521,10011
+"Hospitals & Health Clinics",10520,10011
+"Hospitals",13576,10011
+"Urgent Care Clinic Services",11809,10011
+"Immunology Services",11046,10011
+"Laboratory Testing & Medical Diagnostic Services",10509,10011
+"AIDS & HIV Testing Services",11788,10011
+"Blood Testing Services",11786,10011
+"Cancer Diagnosis & Screening",11785,10011
+"Breast Cancer Screening & Diagnosis",12944,10011
+"Prostate Cancer Screening & Diagnosis",12943,10011
+"Hepatitis Testing & Diagnosis",11789,10011
+"STD Testing",11787,10011
+"Medical Skin Care Services",10516,10011
+"Acne Treatment",11801,10011
+"Rosacea Treatment",11802,10011
+"Mental Health Services",10518,10011
+"Counseling Services",11808,10011
+"Mental Health In-Patient Services",11807,10011
+"Suicide Prevention",13822,10011
+"Orthopedics & Sports Medicine",10519,10011
+"Physical Rehabilitation",10511,10011
+"Occupational Therapy",11794,10011
+"Physical Therapy",11792,10011
+"Plastic & Cosmetic Surgery",10508,10011
+"Cosmetic Surgery & Medical Spa Services",11783,10011
+"Breast Enhancements",12942,10011
+"Brow Lifts",12937,10011
+"Eyelid Surgery",12940,10011
+"Face Lifts & Appearance Enhancement",12938,10011
+"Liposuction & Abdominoplasty",12941,10011
+"Rhinoplasty",12936,10011
+"Reconstructive Surgery",11784,10011
+"Sex Reassignment Therapy",13452,10011
+"Vision Services",10515,10011
+"Eye Exams & Optometry",11800,10011
+"Laser Vision Correction",11799,10011
+"Wellness Therapy & Massage",11793,10011
+"Hydrotherapy Services",12945,10011
+"Massage & Relaxation Services",12946,10011
+"Women's Health Care Services",10512,10011
+"Health Conditions & Concerns",10085,10011
+"AIDS & HIV",10476,10011
+"AIDS & HIV Medications",11725,10011
+"AIDS & HIV Testing",11724,10011
+"Allergy & Sinus",10446,10011
+"Air Cleaners & Filters",12849,10011
+"Allergy Medications",12850,10011
+"Corticosteroids",13265,10011
+"Injectable Epinephrine",13266,10011
+"Seasonal Allergy & Sinus Medication",13267,10011
+"Antihistamines",13339,10011
+"Decongestants",13340,10011
+"Food Allergies",11653,10011
+"Nasal Strips",12851,10011
+"Pet Allergies",11652,10011
+"Seasonal Allergies",11654,10011
+"Anemia",10459,10011
+"Arthritis",10479,10011
+"Arthritis Medications & Treatments",11735,10011
+"Osteoarthritis",11733,10011
+"Osteoarthritis Medications",12896,10011
+"Rheumatoid Arthritis",11734,10011
+"Rheumatoid Arthritis Medications",12897,10011
+"Bleeding Disorders",13358,10011
+"Blood Sugar & Diabetes",10483,10011
+"Diabetes Management",11741,10011
+"Glucose Meters & Test Strips",12900,10011
+"Cancer & Cancer Treatment",10464,10011
+"Breast Cancer",11692,10011
+"Breast Cancer Treatment",12879,10011
+"Cancer Awareness",11688,10011
+"Cancer Medications",11683,10011
+"Biological Therapies",12877,10011
+"Chemotherapy Medications",12876,10011
+"Cancer Research",11689,10011
+"Cancer Survival",11691,10011
+"Cancer Treatment",11684,10011
+"Cervical Cancer",11681,10011
+"Chemotherapy Anemia",11694,10011
+"Colon & Colorectal Cancer",11682,10011
+"Leukemia",11685,10011
+"Lung Cancer",11690,10011
+"Lymphoma",11680,10011
+"Melanoma",11693,10011
+"Ovarian Cancer",11686,10011
+"Prostate Cancer",11687,10011
+"Prostate Cancer Treatment",12878,10011
+"Cold Sores",10452,10011
+"Cold Sore Medications",11661,10011
+"Cystic Fibrosis",10451,10011
+"Dental Health",10487,10011
+"Orthodontia & Orthodontic Braces",11747,10011
+"Digestive Health & Disorders",10456,10011
+"Dyspepsia",11666,10011
+"GERD & Heartburn",12861,10011
+"Heartburn, Indigestion & GERD Medications",12858,10011
+"Indigestion",12859,10011
+"Inflammatory Bowel Disease",11667,10011
+"Colitis",12862,10011
+"Crohn's Disease",12863,10011
+"Ear, Nose & Throat",10472,10011
+"Hearing Loss",10481,10011
+"Hearing Assistance Products",11739,10011
+"Amplified Telephones & Accessories",12899,10011
+"Hearing Aids & Accessories",12898,10011
+"Hearing Tests",11740,10011
+"Motion Sickness & Balance Disorders",13364,10011
+"Eating Disorders",10449,10011
+"Anorexia",11658,10011
+"Bulimia",11659,10011
+"Epilepsy",10471,10011
+"Antiepileptic Medications",11709,10011
+"Foot Health",10485,10011
+"Arch Supports & Orthoses",11743,10011
+"Foot Anti-Fungal Remedies",11742,10011
+"Genetic Disorders",13362,10011
+"Geriatrics & Aging",10465,10011
+"Alzheimer's Disease",11695,10011
+"Alzheimer Medications",12880,10011
+"Alzheimer's Care & Treatment",11803,10011
+"Headache & Pain Management",10486,10011
+"Analgesics",11744,10011
+"Acetaminophen",12905,10011
+"Headache & Migraine Medications",12935,10011
+"Headache Medications",13273,10011
+"Migraine Medications",13272,10011
+"Ibuprofen & Anti-Inflammatory Medications",12904,10011
+"Muscle Relaxants",12903,10011
+"Narcotic Analgesics",12902,10011
+"Fibromyalgia",11745,10011
+"Headaches & Migraines",11746,10011
+"Headaches",12907,10011
+"Headache Medication",13271,10011
+"Migraines",12906,10011
+"Heart Health",10475,10011
+"Coronary Artery Disease & Heart Attacks",11720,10011
+"Heart Devices & Accessories",11723,10011
+"High Blood Pressure",11719,10011
+"Blood Pressure Medications",12893,10011
+"High Cholesterol",11721,10011
+"Cholesterol Medications",12894,10011
+"Peripheral Artery Disease & Peripheral Vascular Disease (PAD & PVD)",11722,10011
+"Hemorrhoids",10466,10011
+"Hepatitis",10467,10011
+"Hepatitis A",11697,10011
+"Hepatitis B",11696,10011
+"Hepatitis C",11699,10011
+"Hepatitis Medications",11698,10011
+"Infectious Diseases & Viruses",10468,10011
+"Cold & Flu",10455,10011
+"Cold & Flu Medicines",11665,10011
+"Cold & Congestion Nasal Sprays & Gels",12854,10011
+"Cough & Cold Medicines",12857,10011
+"Sore Throat Remedies",12855,10011
+"Colds",11663,10011
+"Flu Medications",12856,10011
+"Flu Vaccines",12853,10011
+"Vaccines & Immunizations",11700,10011
+"Viral Infections",10490,10011
+"Injury & Wound Care",10461,10011
+"Insomnia & Sleep Disorders",10478,10011
+"Hypersomnia",11731,10011
+"Excessive Daytime Sleepiness (EDS)",12895,10011
+"Insomnia",11729,10011
+"Narcolepsy",11728,10011
+"Sleep Medications",11730,10011
+"Snore Relief",11732,10011
+"Learning & Developmental Disabilities",10469,10011
+"ADD & ADHD",11702,10011
+"ADD & ADHD Medications",12881,10011
+"Autism",11701,10011
+"Lupus",10482,10011
+"Men's Health",10480,10011
+"Benign Prostatic Hyperplasia (BPH)",11737,10011
+"Erectile Dysfunction",11736,10011
+"Vasectomy",11738,10011
+"Mental Health",10488,10011
+"Anxiety & Stress",11748,10011
+"Obsessive-Compulsive Disorder",13819,10011
+"Bipolar Disorder",11749,10011
+"Depression",11751,10011
+"Mental Health Medications",11750,10011
+"Anxiety-Relief Medications",12908,10011
+"Depression Medications",12909,10011
+"Musculoskeletal Conditions",10484,10011
+"Osteoporosis",11707,10011
+"Neurological Conditions",10474,10011
+"Movement Disorders",10489,10011
+"Parkinson",11752,10011
+"Restless Leg Syndrome",11753,10011
+"Multiple Sclerosis",13361,10011
+"Stroke",13360,10011
+"Stroke Medications",11718,10011
+"Stroke Rehab & Treatment",11717,10011
+"Obesity",10450,10011
+"Obesity Surgery",11660,10011
+"Pediatrics & Children's Health",11026,10011
+"Baby Health",12332,10011
+"Teething",13808,10011
+"Childhood Vaccines",12330,10011
+"Children's Health Care",12331,10011
+"Respiratory Conditions",10448,10011
+"Asthma",11656,10011
+"Asthma Medicines & Care Products",12852,10011
+"Chronic Obstructive Pulmonary Disease (COPD)",11657,10011
+"Sexual & Reproductive Health",10462,10011
+"Family Planning",11674,10011
+"Contraception",12874,10011
+"Condoms",13270,10011
+"Contraceptive Drugs",12933,10011
+"Emergency Contraception",13269,10011
+"Hormonal Contraceptives",13268,10011
+"Fertility & Conception",12875,10011
+"Pregnancy Tests & Testing Services",11790,10011
+"Personal Lubricants",11673,10011
+"Sex Education & Counseling",13749,10011
+"Sexual Enhancements",13721,10011
+"Sexually Transmitted Diseases (STDs)",11672,10011
+"Genital Herpes",12869,10011
+"Genital Warts",12873,10011
+"Human Papillomavirus (HPV)",12870,10011
+"STD Medications & Treatments",12872,10011
+"Skin Conditions & Skin Health",10473,10011
+"Acne",11710,10011
+"Acne Medications",12886,10011
+"Blemish Control",12885,10011
+"Eczema",11711,10011
+"Eczema Medications & Creams",12887,10011
+"Psoriasis",11713,10011
+"Psoriasis Medications & Treatments",13818,10011
+"Rashes & Itches",11714,10011
+"Anti-Itch & Rash Medications",12890,10011
+"Rosacea",11715,10011
+"Skin Condition Medications",12934,10011
+"Skin Fungus",11716,10011
+"Skin Fungus Medications",12892,10011
+"Sunburn",11712,10011
+"Sunscreen",12888,10011
+"Warts",10454,10011
+"Wart Removers",11662,10011
+"Smoking & Smoking Cessation",10453,10011
+"Thyroid Conditions",13745,10011
+"Trauma & Stress Disorder",10458,10011
+"Urinary & Bladder Health",10463,10011
+"Bladder Cancer",11675,10011
+"Incontinence",11676,10011
+"Interstitial Cystitis",11679,10011
+"Overactive Bladder",11677,10011
+"Urinary Tract Infections",11678,10011
+"Vision",10460,10011
+"Cataracts",11671,10011
+"Contact Lenses & Accessories",12867,10011
+"Eyeglass Frames",12866,10011
+"Prescription Lenses",12868,10011
+"Vision Care Products",11670,10011
+"Weight Loss",10457,10011
+"Weight Loss Products",11669,10011
+"Weight Loss Drugs & Medications",12864,10011
+"Weight Loss Supplements",12865,10011
+"Women's Health & OBGYN",10470,10011
+"Menopause",11704,10011
+"Hormone Replacement Therapy",12882,10011
+"PMS",11705,10011
+"PMS Relief Medications",12883,10011
+"Uterine Fibroids & Heavy Periods",11703,10011
+"Yeast Infections",11706,10011
+"Yeast Infection Remedies",12884,10011
+"Medical Devices, Equipment & Supplies",10087,10011
+"Bathroom Safety Equipment",11765,10011
+"Defibrillators",13167,10011
+"Exam Tables & Surgery Tables",12488,10011
+"First Aid Supplies",10493,10011
+"Antibiotic & Antiseptic Medications",11759,10011
+"Bandages",11758,10011
+"First Aid Kits",11757,10011
+"Hot & Cold Pads & Packs",11756,10011
+"Hospital Beds, Stretchers & Accessories",11766,10011
+"Infusion Pumps",13169,10011
+"Medical Compression Garments & Stockings",11767,10011
+"Medical Diagnostic Equipment & Monitoring Devices",12494,10011
+"Blood Pressure Monitors & Accessories",12917,10011
+"Body Temperature Thermometers",13184,10011
+"Body Weight Scales",12919,10011
+"Bone Densitometers",13176,10011
+"CT Scanners",13168,10011
+"EKG Machines",13166,10011
+"Fetal Monitors",13172,10011
+"MRI Machines",13171,10011
+"Medical Alarms",12493,10011
+"Personal Health Monitors",11770,10011
+"Body Fat Monitors",12922,10011
+"Cholesterol Monitors & Accessories",12920,10011
+"Fertility Monitors & Ovulation Calculators",12915,10011
+"Heart Rate Monitors",12921,10011
+"Pedometers",12916,10011
+"Stethoscopes",13182,10011
+"Stress Test Devices",13175,10011
+"Ultrasound Devices",13173,10011
+"Vital Sign Monitors",13165,10011
+"X-Ray Machines",13170,10011
+"Medical Equipment Parts & Accessories",12492,10011
+"Medical Needles, Syringes & Injection Supplies",10495,10011
+"Insulin Syringes",12912,10011
+"Medical Scrubs",12491,10011
+"Medication Accessories",10496,10011
+"Mobility Equipment & Accessories",10494,10011
+"Canes",11763,10011
+"Crutches & Crutch Accessories",11761,10011
+"Personal Travel Scooters & Accessories",11760,10011
+"Walkers & Rollators",11762,10011
+"Wheelchairs & Wheelchair Accessories",11236,10011
+"Motorized Wheelchairs",12479,10011
+"Wheelchair Lifts & Ramps",12480,10011
+"Ophthalmological Instruments",12481,10011
+"Orthopedic Braces & Supports",11771,10011
+"Patient Gowns & Garments",12487,10011
+"Professional Dental Equipment & Supplies",11234,10011
+"Prosthetics & Artificial Limbs",11769,10011
+"Reachers & Grabbers",11768,10011
+"Surgical Instruments",12490,10011
+"Forceps",13181,10011
+"Medical Clamps",13178,10011
+"Scalpels & Operating Knives",13177,10011
+"Speculae",13179,10011
+"Utility Medical Equipment",12495,10011
+"Nutrition & Dieting",10086,10011
+"Diets & Diet Programs",10491,10011
+"Health-Related Restricted Diets",11755,10011
+"Low Cholesterol Diets",12911,10011
+"Low Sodium Diets",12910,10011
+"Weight Loss Diets & Diet Programs",11754,10011
+"Nutrition Counseling",10492,10011
+"Pharmacy",10089,10011
+"Drugs & Medications",11773,10011
+"Steroids & Performance-Enhancing Drugs",13706,10011
+"Vitamins & Supplements",11772,10011
+"Amino Acid Supplements",12927,10011
+"Calcium",12931,10011
+"Essential Fatty Acid & Omega-3s",12928,10011
+"Glucosamine & Chondroitin",12924,10011
+"Iron Supplements",12929,10011
+"Medicinal Herbs & Herbal Supplements",12930,10011
+"Multi-Vitamins",12926,10011
+"Prenatal Pills & Vitamins",12923,10011
+"Protein Supplements",12925,10011
+"Sports Nutrition Supplements",10118,10011
+"Super Food Supplements",13707,10011
+"Professional Medical Resources",10090,10011
+"Medical Research",10504,10011
+"Clinical Trials",11775,10011
+"Stem Cell Research",11774,10011
+"Professional Health Care Education",10505,10011
+"Allopathic Medicine Education",11778,10011
+"Non-Western & Complementary Health Education",11776,10011
+"Hobbies & Leisure",10015,0
+"Ancestry & Genealogy",10133,10015
+"Antiques & Collectibles",10135,10015
+"Antique & Art Refinishing & Restoration",11526,10015
+"Antique & Collectible Auctions",12008,10015
+"Antique & Collectible Stamps",13820,10015
+"Antique Appraisals",12007,10015
+"Antique Books & Manuscripts",10738,10015
+"Antique Ceramics & Pottery",10725,10015
+"Antique Clocks & Watches",10702,10015
+"Antique Clocks",11998,10015
+"Antique Watches",11999,10015
+"Antique Coins & Collectible Money",10730,10015
+"Antique Glassware & Art Glass",10739,10015
+"Antique Lamps & Lighting",10727,10015
+"Antique Maps & Geographical Artifacts",10708,10015
+"Antique Rugs & Carpets",10716,10015
+"Asian Antiques",10719,10015
+"Collectible Autographs",10734,10015
+"Collectible Bric-A-Brac",10722,10015
+"Collectible Hardware & Tools",10724,10015
+"Collectible Metal Ware",10712,10015
+"Antique Silver",12000,10015
+"Collectible Pins",10718,10015
+"Collectible Postcards",10733,10015
+"Collectible Telephones, Typewriters & Electronics",10714,10015
+"Collectible Textiles & Linen",10706,10015
+"Collectible Toys & Games",10720,10015
+"European Antiques",10705,10015
+"Fantasy & Magical Collectibles",10736,10015
+"Figurines",10699,10015
+"Flea Markets & Swap Meets",13698,10015
+"Folk Art & Ethnographic Antiques",10703,10015
+"Game Room Collectibles",10704,10015
+"Garden Antiques",10715,10015
+"Holiday & Seasonal Collectibles",10728,10015
+"Memorabilia",10701,10015
+"Movie & TV Show Memorabilia",11995,10015
+"Music Art & Memorabilia",11997,10015
+"Sports Memorabilia",11996,10015
+"Militaria",10717,10015
+"Rocks, Minerals & Fossils",10713,10015
+"Swords, Knives & Daggers",13825,10015
+"Trading Cards",10729,10015
+"Adventure Trading Cards",12004,10015
+"Automotive Trading Cards",12005,10015
+"Sports Trading Cards",12003,10015
+"Vintage & Antique Buttons",10711,10015
+"Vintage & Antique Transportation",10737,10015
+"Classic Cars",12009,10015
+"Vintage Advertising & Media",10707,10015
+"Arts & Crafts",10131,10015
+"Beading & Beadwork",11983,10015
+"Charms & Beads",10900,10015
+"Ceramic & Glass Equipment & Supplies",11984,10015
+"Fiber Craft",11987,10015
+"Fabric",13018,10015
+"Knitting",13017,10015
+"Yarns",11306,10015
+"Sewing Machines",13373,10015
+"Threads",11302,10015
+"Scrapbooking",11986,10015
+"Astronomy",13569,10015
+"Name A Star",13796,10015
+"Birding",10134,10015
+"Wild Bird Supplies",11994,10015
+"Camping & Outdoor Recreation",10113,10015
+"Backpacking & Camping Food",11889,10015
+"Binoculars",11312,10015
+"Camp Cooking Equipment",11888,10015
+"Climbing",10615,10015
+"Carabiners",11892,10015
+"Climbing Ropes & Cords",11891,10015
+"Flashlights & Lanterns",10612,10015
+"Hiking",10616,10015
+"Hiking Boots",11894,10015
+"Multi-tools & Pocket Knives",13428,10015
+"Outdoor Sleeping Gear",11890,10015
+"Portable Beds",12976,10015
+"Sleeping Bags",12978,10015
+"Sleeping Mats & Pads",12977,10015
+"Portable Ice Chests & Picnic Coolers",10614,10015
+"Tents",11887,10015
+"Water Containers, Bottles & Hydration Packs",13752,10015
+"Hydration Packs & Personal Water Reservoirs",13754,10015
+"Reusable Water Bottles",13753,10015
+"Cigar & Tobacco Collecting",10138,10015
+"Lighters",13757,10015
+"Cooking",10128,10015
+"Cooking Media & Publications",11559,10015
+"Cuisines",10889,10015
+"Asian Cuisine",13792,10015
+"Chinese Cuisine",12226,10015
+"Japanese Cuisine",12227,10015
+"French Cuisine",13790,10015
+"Indian Cuisine",12230,10015
+"Latin American Cuisine",13805,10015
+"Mexican Cuisine",12225,10015
+"Mediterranean Cuisine",13791,10015
+"Italian Cuisine",12229,10015
+"Spanish Cuisine",13788,10015
+"Raw Foods & Raw Foodism",13735,10015
+"Vegetarian Cuisine",13652,10015
+"Vegetarian & Vegan Foods",11638,10015
+"Recipes",10679,10015
+"Dessert Recipes",13456,10015
+"Diabetic & Low Sugar Recipes",13011,10015
+"Meat & Seafood Recipes",11958,10015
+"Chicken & Poultry Recipes",13009,10015
+"Vegetarian Recipes",13455,10015
+"Weight Loss & Reduced Calorie Diet Recipes",11957,10015
+"Gambling",10137,10015
+"Bingo",13766,10015
+"Gambling Equipment & Supplies",12013,10015
+"Horse & Dog Racing",12015,10015
+"Lotteries",12014,10015
+"Pachinko & Slot Machines",13764,10015
+"Poker & Casino Games",13767,10015
+"Poker",13765,10015
+"Sports Betting",12017,10015
+"Gardening",13658,10015
+"Garden Fountains & Water Features",12776,10015
+"Garden Ornaments & Statuary",11542,10015
+"Garden Structures",12777,10015
+"Garden Sheds",13249,10015
+"Greenhouses & Conservatories",13248,10015
+"Gardening Books & Publications",11544,10015
+"Trees, Plants & Shrubs",13374,10015
+"Yard & Garden Accessories",11545,10015
+"Pets & Animals",10130,10015
+"Animal Adoption & Rescue",11982,10015
+"Dog Walking",13015,10015
+"Pet & Animal Training",11981,10015
+"Pet Breeding",11980,10015
+"Pet Food & Supplies",10683,10015
+"Flea & Tick Control Products",11965,10015
+"Pet Carriers",11968,10015
+"Pet Dishes & Feeders",11961,10015
+"Pet Food & Treats",11963,10015
+"Pet Habitats, Perches & Beds",11966,10015
+"Pet Leashes & Collars",11967,10015
+"Pet Litter & Supplies",11962,10015
+"Pet Medications",11964,10015
+"Pet Toys",11960,10015
+"Pet Grooming",11977,10015
+"Pet Sitting, Pet Boarding & Pet Day Care",11978,10015
+"Pets By Breed",10684,10015
+"Birds",11970,10015
+"Cats",11973,10015
+"Dogs",11969,10015
+"Large Dogs",13013,10015
+"Small Dogs",13014,10015
+"Exotic Pets",11972,10015
+"Fish & Aquaria",11974,10015
+"Horses",11975,10015
+"Rabbits & Rodents",11971,10015
+"Reptiles & Amphibians",11976,10015
+"Veterinary",11979,10015
+"Photo & Video",10132,10015
+"Digital Cameras",10691,10015
+"SLR Cameras",11989,10015
+"Film Cameras",10694,10015
+"Photo & Video Accessories",10693,10015
+"Camera Bags",11991,10015
+"Camera Batteries",11993,10015
+"Video Camera & Camcorder Batteries",11992,10015
+"Photo & Video Publications",10689,10015
+"Photo Printing",13802,10015
+"Photographic & Digital Arts",13596,10015
+"Photography & Videography Classes",12011,10015
+"Video Cameras & Camcorders",10692,10015
+"Prizes & Competitions",13405,10015
+"Contests, Pageants & Merit Prizes",13681,10015
+"Beauty Pageants",13682,10015
+"Cooking & Recipe Contests",13685,10015
+"Photo Contests",13683,10015
+"Sweepstakes, Product Promotions & Giveaways",13680,10015
+"Recreational Activity Education",10136,10015
+"Recreational Activity Lessons & Classes",10740,10015
+"Fiber Craft Classes",12010,10015
+"Scale Models & Model Building",10129,10015
+"Toys & Games",10125,10015
+"Games",10672,10015
+"Arcade & Coin-Op Games",11949,10015
+"Board Games",11948,10015
+"Card Games",11943,10015
+"Collectible Card Games",12998,10015
+"Children's Games & Activities",13794,10015
+"Game Cheats & Hints",11952,10015
+"Online Games & Puzzles",11942,10015
+"Free-To-Play Games",13694,10015
+"Massive Multiplayer Online Games",12997,10015
+"Party Games",13798,10015
+"Puzzles & Brainteasers",11944,10015
+"Roleplaying Games",11945,10015
+"Strategy Games",11946,10015
+"Table Games",11947,10015
+"Pool & Billiards",12999,10015
+"Video Games, Consoles & Accessories",11950,10015
+"Computer & Video Games",13377,10015
+"Adventure Games",13584,10015
+"Casual Games",13585,10015
+"Driving & Racing Games",13586,10015
+"Family & Children's Games",13834,10015
+"Fighting Games",13587,10015
+"Music & Dance Games",13588,10015
+"Shooter Games",13589,10015
+"Simulation Games",13590,10015
+"Sports Games",13591,10015
+"Power Leveling & Gold Farming",13000,10015
+"Video Game Consoles",13376,10015
+"Handheld Game Consoles",13382,10015
+"Nintendo",13383,10015
+"Sony PlayStation",13384,10015
+"Xbox",13385,10015
+"Video Game Downloads",13003,10015
+"Video Game Mods & Console Repair",13457,10015
+"Video Game Retailers",13004,10015
+"Video Game Reviews & Ratings",13592,10015
+"Video Game Subscriptions",13593,10015
+"Toys",10671,10015
+"Action Figures",11941,10015
+"Baby Toys",11934,10015
+"Baby Activity Gyms",12991,10015
+"Baby Blocks",12993,10015
+"Baby Rattles",12994,10015
+"Developmental Toys",12992,10015
+"Teethers",12989,10015
+"Tub Toys",12990,10015
+"Building Toys",11929,10015
+"Children's Dolls, Dress-Up Toys & Costumes",11937,10015
+"Doll Dress-Up & Girl Games",13488,10015
+"Dolls & Doll Accessories",11931,10015
+"Die Cast & Play Vehicles",13812,10015
+"Educational Toys",11940,10015
+"Music Toys",11938,10015
+"Outdoor Toys",11933,10015
+"Kiddie Pools",12988,10015
+"Plush Toys & Stuffed Animals",11932,10015
+"Radio Controlled Toys & Accessories",11939,10015
+"Ride-On Toys",11936,10015
+"Kid's Bikes & Trikes",12996,10015
+"Ride-On Toy Vehicles",12995,10015
+"Sports Toys",11930,10015
+"Toy Recalls",11953,10015
+"Wine & Beer Collecting & Brewing",10126,10015
+"Home Brewing & Wine Making",10675,10015
+"Wine Collecting",10674,10015
+"Wine Auctions",13007,10015
+"Wine Clubs",13008,10015
+"Home & Garden",10009,0
+"Bathroom",10415,10009
+"Bath Mats & Rugs",11579,10009
+"Bathroom Accessories",11580,10009
+"Bathroom Towels",11575,10009
+"Medicine Cabinets",13363,10009
+"Shower Curtains & Accessories",11578,10009
+"Toilet Accessories",11576,10009
+"Towel Bars & Hooks",11577,10009
+"Bedding & Linens",11589,10009
+"Blankets & Bedspreads",12825,10009
+"Duvet Covers & Duvets",12823,10009
+"Pillows",12824,10009
+"Quilts",13447,10009
+"Sheets & Pillowcases",12826,10009
+"Doorbells & Door Knockers",13650,10009
+"Home & Garden Media & Publications",10414,10009
+"Home Appliances",10412,10009
+"Floor Cleaners & Accessories",11565,10009
+"Hard-Floor Cleaners & Accessories",12796,10009
+"Vacuum Cleaners & Accessories",12797,10009
+"Home Appliance Service & Repair",11527,10009
+"Laundry Room Appliances",11564,10009
+"Clothes Irons & Garment Steamers",12794,10009
+"Washers & Dryers",12795,10009
+"Major Kitchen Appliances",11567,10009
+"Dishwashers",12804,10009
+"Kitchen Hoods & Vents",12807,10009
+"Microwaves",12806,10009
+"Ranges, Cooktops & Ovens",12808,10009
+"Refrigerators & Freezers",12805,10009
+"Kegerators & Beer Coolers",13254,10009
+"Home Decor & Interior Decorating",10405,10009
+"Art Glass",11536,10009
+"Candles & Incense",11533,10009
+"Ceramics, Porcelain & Vases",11529,10009
+"Clocks",11531,10009
+"Decorative Fountains",11530,10009
+"Decorative Throws & Pillows",11535,10009
+"Flower Pots & Planters",11532,10009
+"Mirrors",11534,10009
+"Picture Frames",13673,10009
+"Residential Ceiling Fans",10409,10009
+"Wall Paper",11528,10009
+"Window Treatments",10416,10009
+"Blinds, Shades & Shutters",11582,10009
+"Curtain Rods & Hardware",11581,10009
+"Curtains",11583,10009
+"Home Furniture",10413,10009
+"Antique Furniture",11573,10009
+"Bathroom Furniture",11570,10009
+"Bedroom Furniture",11571,10009
+"Beds & Headboards",12812,10009
+"Mattresses",13260,10009
+"Waterbeds & Accessories",13261,10009
+"Clothing & Shoe Storage",12813,10009
+"Dressers",13263,10009
+"Shoe Racks & Storage",12782,10009
+"Wardrobes & Armoires",13262,10009
+"Furniture Refinishing, Repair & Reupholstery",10402,10009
+"Home Office Furniture",11572,10009
+"Kitchen & Dining Room Furniture",11568,10009
+"Folding Tables & Chairs",13407,10009
+"Kitchen & Dining Room Chairs",12810,10009
+"Kitchen & Dining Room Tables",12809,10009
+"Living Room Furniture",11574,10009
+"Coffee Tables & End Tables",12819,10009
+"Entertainment & Media Centers",12817,10009
+"Sofas & Chairs",12818,10009
+"Rocking Chairs",13256,10009
+"Playroom & Children's Furniture",11569,10009
+"Home Heating & Cooling",10418,10009
+"Desk Fans & Stand Fans",11585,10009
+"Fireplaces, Wood Stoves & Pellet Stoves",13708,10009
+"Thermostats",11586,10009
+"Home Improvement & Maintenance",10404,10009
+"Home Laundry",10417,10009
+"Ironing Boards & Ironing Centers",11584,10009
+"Home Safety & Security",10411,10009
+"Fire Extinguishers",11563,10009
+"In-Home Hazard Detectors",11562,10009
+"Carbon Monoxide Detectors",12793,10009
+"Smoke Detectors",12792,10009
+"Lockboxes & Hide-A-Keys",11561,10009
+"Home Storage & Organization",10408,10009
+"Closet Organizing Components & Systems",11547,10009
+"Clothes Storage Boxes",12780,10009
+"Laundry Storage & Organization",11550,10009
+"Wine Racks & Storage Systems",11549,10009
+"Wine Coolers & Refrigerators",12783,10009
+"Kitchen & Bathroom Cabinets",11282,10009
+"Kitchen & Dining",10410,10009
+"Bakeware",11557,10009
+"Canning & Preserving",11551,10009
+"Cookie Jars & Bread Boxes",13387,10009
+"Cookware & Cookware Sets",11556,10009
+"Ceramic Baking Dishes",12786,10009
+"Grills & Griddles",12784,10009
+"Pots & Pans",12785,10009
+"Cast Iron Pans",13679,10009
+"Non-Stick Pans",13678,10009
+"Soup & Stock Pots",13252,10009
+"Cutlery & Cutting Accessories",11560,10009
+"Cutting Boards",12791,10009
+"Kitchen Knives",12790,10009
+"Kitchen Accessories",13370,10009
+"Cooking Aprons",11553,10009
+"Oven Mitts & Trivets",12789,10009
+"Kitchen Linens",11558,10009
+"Dishtowels & Dish Cloths",12788,10009
+"Tablecloths & Napkins",12787,10009
+"Kitchen Storage",13386,10009
+"Pot Racks",11548,10009
+"Kitchen Utensils & Gadgets",11555,10009
+"Plates & Serving Dishes",11552,10009
+"Silverware",11554,10009
+"Small Kitchen Appliances",11566,10009
+"Blenders",13641,10009
+"Bread Machines",12801,10009
+"Coffee & Espresso Makers",12803,10009
+"Food Processors",12799,10009
+"Mixers",12802,10009
+"Rice Cookers",13829,10009
+"Toasters & Toaster Ovens",12798,10009
+"Waffle Irons",12800,10009
+"Lights & Lighting",10419,10009
+"Lamps & Lamp Shades",11587,10009
+"Lamp Shades",12821,10009
+"Lamps",12820,10009
+"Floor Lamps",13264,10009
+"Light Bulbs",11588,10009
+"Energy Efficient Light Bulbs",12822,10009
+"Night Lights",13139,10009
+"Residential Cleaning",10399,10009
+"House Cleaning Services",11523,10009
+"Rug & Carpet Cleaning",11524,10009
+"Upholstery Cleaning",11522,10009
+"Window Covering Cleaning",11525,10009
+"Watch & Clock Repair",10400,10009
+"Water Filters",10407,10009
+"Yard, Garden & Patio",10406,10009
+"Fencing",11537,10009
+"Mailboxes",13408,10009
+"Outdoor Cooking Equipment & Accessories",11541,10009
+"BBQs & Grills",12775,10009
+"Outdoor Playsets & Swingsets",11539,10009
+"Pest & Weed Control",13250,10009
+"Retaining Walls",11546,10009
+"Swimming Pools & Spas",11538,10009
+"Yard & Garden Equipment & Supplies",11543,10009
+"Lawn Mowers & Grass Cutting Equipment",12588,10009
+"Leaf Blowers & Lawn Vacuums",12778,10009
+"Yard & Patio Furniture & Accessories",11540,10009
+"Picnic Tables & Benches",12774,10009
+"Internet & Telecom",10007,0
+"Cable Services",13420,10007
+"Cable TV",12766,10007
+"Calling Cards",11509,10007
+"Internet",13418,10007
+"Blogging Resources & Services",11494,10007
+"Blogging Layouts & Templates",13821,10007
+"RSS Feeds & Aggregators",12757,10007
+"Directories & Listings",11495,10007
+"Phone & Address Directories",13449,10007
+"Domain Names & Domain Name Registration",13768,10007
+"Email & Messaging",13094,10007
+"Contact Management",13598,10007
+"File Sharing & Hosting",11502,10007
+"Music Sharing",10594,10007
+"Peer-to-Peer File Sharing",12759,10007
+"Single Host File Sharing",12760,10007
+"Forum & Chat Services",11499,10007
+"Internet Service Plans",11491,10007
+"Cable Internet",12756,10007
+"DSL & Fiber Optic Internet Service Plans",12755,10007
+"Mobile Broadband",13769,10007
+"Satellite Internet",12754,10007
+"Network Security",13088,10007
+"Hacking & Cracking",13830,10007
+"Online Auctioning Services",11503,10007
+"Online Maps",11500,10007
+"Online Photo & Video Sharing",11492,10007
+"Search Engines",11498,10007
+"People Search",13710,10007
+"Social Networks & Online Communities",11496,10007
+"Mobile Social Networks",13859,10007
+"Online Swap Communities",13800,10007
+"Virtual Worlds",13577,10007
+"Web Design & Development",11493,10007
+"Web Hosting",11504,10007
+"Web Portals",13725,10007
+"Satellite Services",13421,10007
+"Satellite TV",12767,10007
+"Teleconferencing",11507,10007
+"Telegrams",13662,10007
+"Telephony",10878,10007
+"Answering Machines",12169,10007
+"Landline Phones & Accessories",12171,10007
+"Landline Phone Accessories",12129,10007
+"Mobile Phones & Accessories",13381,10007
+"Mobile Apps & Add-Ons",13378,10007
+"Mobile Phone Games",13380,10007
+"Ringtones & Ringtone Makers",13379,10007
+"Mobile Phone Accessories",12133,10007
+"Headsets",13032,10007
+"Phone & SIM Cards",13031,10007
+"Mobile Phones",12161,10007
+"Camera Phones",13055,10007
+"Smart Phones",13054,10007
+"Phone Plans",13419,10007
+"Landline Phone Plans",11510,10007
+"Long Distance Calling Plans",12762,10007
+"Mobile Phone Plans",11511,10007
+"Mobile Phone Service Add-Ons",12765,10007
+"Text Messaging",13759,10007
+"Monthly Mobile Phone Service Plans",12764,10007
+"Pre-Paid Mobile Phone Service Plans",12763,10007
+"Phone Rental Services",11505,10007
+"Telephone Maintenance",12155,10007
+"Telephony Equipment Donation",11508,10007
+"Voicemail Services & Calling Features",13415,10007
+"VOIP",11506,10007
+"VOIP Telephones",12168,10007
+"Jobs & Education",10016,0
+"Alumni & Classmate Resources",10140,10016
+"Education & Training",10141,10016
+"Academic Conferences & Publications",13828,10016
+"CPR Training & Certification",10760,10016
+"Colleges, Universities & Post-Secondary Education",10763,10016
+"Graduate Programs",13513,10016
+"Law Schools",12058,10016
+"MBA Programs",12059,10016
+"MFA Programs",12057,10016
+"Medical Schools",11777,10016
+"Undergraduate Programs",13514,10016
+"Community & Continuing Education",10766,10016
+"Language Education",10757,10016
+"Foreign Language Certifications",13020,10016
+"Online Education & Degree Programs",10752,10016
+"Pre-School & Nursery School Programs",10753,10016
+"Primary & Secondary Schooling (K-12)",11029,10016
+"Homeschooling",12337,10016
+"Public Speaking Resources",13849,10016
+"Special Education",13438,10016
+"Standardized & Admissions Tests",10754,10016
+"GED Preparation",12039,10016
+"GMAT Preparation",12041,10016
+"GRE Preparation",12040,10016
+"LSAT Preparation",12042,10016
+"SAT & College Boards Preparation",12038,10016
+"Study Abroad Programs",10762,10016
+"Teaching & Classroom Resources",10767,10016
+"Lesson Plans",12063,10016
+"School & Classroom Equipment",12064,10016
+"Textbooks",11871,10016
+"Training & Certification",10758,10016
+"Fitness Instruction Training",12049,10016
+"Real Estate Licensing",12046,10016
+"TEFL Training",12047,10016
+"Teacher Training & Certification",12048,10016
+"Tutoring Services",10761,10016
+"Vocational Training & Trade Schools",10759,10016
+"Acting Schools & Programs",12056,10016
+"Arts Education",12050,10016
+"Bartending Schools & Programs",12055,10016
+"Computer Education",12198,10016
+"Cosmetology & Beauty Professional Education",13783,10016
+"Film Schools & Programs",12051,10016
+"Nursing Education",12053,10016
+"Truck Driving Schools & Programs",12054,10016
+"Writing Courses & Resources",10755,10016
+"Business & Technical Writing Courses & Resources",12044,10016
+"Creative Writing Courses & Resources",12043,10016
+"Jobs & Careers",10139,10016
+"Career Assessments",10744,10016
+"Career Counseling & Coaching",10747,10016
+"Business Etiquette",13696,10016
+"Job Interview Coaching Services",12037,10016
+"Personal & Career Development",12036,10016
+"Career Events",10745,10016
+"Job Listings",10746,10016
+"Clerical & Administrative Jobs",12033,10016
+"Education Jobs",13772,10016
+"Engineering Jobs",12032,10016
+"Finance Jobs",12020,10016
+"Freelance & Contract Jobs",12026,10016
+"Government & Public Sector Jobs",13773,10016
+"Headhunters & Independent Recruiters",12025,10016
+"Health & Medical Jobs",12035,10016
+"Human Resources Jobs",12024,10016
+"IT & Technical Jobs",12029,10016
+"International Jobs",12021,10016
+"Legal Jobs",12034,10016
+"Media Jobs",12031,10016
+"Post-Docs & Post-Doctoral Research",13774,10016
+"Recent College Graduate Jobs",12022,10016
+"Retail Jobs",12028,10016
+"Sales & Marketing Jobs",12030,10016
+"Social Service & Social Work Jobs",12027,10016
+"Temporary Jobs",12023,10016
+"Professional & Trade Associations",10749,10016
+"Professional Networking Resources",10748,10016
+"Resume Writing",10743,10016
+"Resume & Cover Letter Samples & Templates",12018,10016
+"Law & Government",10018,0
+"Census Services",13661,10018
+"Emergency Services",10158,10018
+"Emergency Alert Services",10810,10018
+"Emergency Medical Services",10813,10018
+"Emergency Training Services",10816,10018
+"Fire Fighting Services",10815,10018
+"Forestry Fire Fighting Services",12107,10018
+"Poison Control",10817,10018
+"Roadside Assistance & Emergency Road Services",10811,10018
+"Auto Towing",12104,10018
+"Search & Rescue Services",10814,10018
+"Government",13414,10018
+"Government Consulting & Contracting",13343,10018
+"Government Ministries",13508,10018
+"Royalty",13444,10018
+"Law Enforcement & Protective Services",10162,10018
+"Airport Security",10849,10018
+"Police",10851,10018
+"Private Investigation",10165,10018
+"Traffic Safety",10850,10018
+"Legal",10163,10018
+"Accident & Personal Injury Law",10866,10018
+"Attorneys & Law Firms",13686,10018
+"Bail Bonds",10864,10018
+"Bankruptcy Law",10869,10018
+"Business & Corporate Law",10862,10018
+"Class Action Law",10852,10018
+"Court Reporting",10858,10018
+"Criminal Law",13736,10018
+"Federal Crime Law",10861,10018
+"Drug Crime Law",12126,10018
+"White Collar Crime Law",12125,10018
+"Family Law",10868,10018
+"Child Custody",12128,10018
+"Divorce Law",12127,10018
+"Finance Law",10860,10018
+"Immigration Law",10857,10018
+"Green Card Lottery",12124,10018
+"Work Permits & Work Visas",12123,10018
+"Intellectual Property",10871,10018
+"Labor & Employment Law",10856,10018
+"Disability Rights",12122,10018
+"Discrimination Law",12121,10018
+"Sexual Harrassment",12120,10018
+"Lawsuit Funding",10867,10018
+"Legal Aid",10859,10018
+"Legal Forms & Kits",10161,10018
+"Business Formation & Incorporation Documents",10842,10018
+"Confidentiality Forms",10848,10018
+"Deeds",10838,10018
+"Employment Agreement Contracts",10834,10018
+"Employment Offer Letters",10846,10018
+"Franchise Contracts",10841,10018
+"Health Directives",10840,10018
+"Name Changes",10835,10018
+"Notary Bonds",10845,10018
+"Patent Forms",10831,10018
+"Power of Attorney Forms",10844,10018
+"Prenuptial Agreements",10833,10018
+"Promissory Notes",10836,10018
+"Real Estate Rental & Leasing Forms",10830,10018
+"Leases & Lease Amendments",12116,10018
+"Commercial Lease Contracts",13025,10018
+"Lease Amendments",13026,10018
+"Residential Lease Forms",13027,10018
+"Rental Applications",12115,10018
+"Release Agreement Forms",10839,10018
+"Sales Agreements",10837,10018
+"Wills & Living Trusts",10847,10018
+"Legal Insurance",10865,10018
+"Lemon Laws",13644,10018
+"Malpractice Suits & Law",10855,10018
+"Military Legal Services",10863,10018
+"Real Estate Law",10853,10018
+"Vehicle Codes & Driving Laws",13646,10018
+"Auto Accidents & Tickets",10870,10018
+"DUI",10854,10018
+"Vehicle Inspections",10157,10018
+"Vehicle Registration",10199,10018
+"Military",10159,10018
+"Air Force",10821,10018
+"Army",10818,10018
+"Coast Guard",10819,10018
+"Marines",10822,10018
+"Military Education & Training",13345,10018
+"Military Support Services",13350,10018
+"National Guard",10823,10018
+"Navy",10820,10018
+"Politics",10156,10018
+"Campaigns & Elections",10808,10018
+"Conservative Politics",10805,10018
+"Liberal Politics",10809,10018
+"Lobbying Services",10806,10018
+"Political Activism",10807,10018
+"Public Services",10160,10018
+"Animal Control",10825,10018
+"Public Broadcasting",10826,10018
+"Public Health",13403,10018
+"Food Safety & Inspection",13756,10018
+"Public Housing",10827,10018
+"Public Notaries",10828,10018
+"Public Utilities",10829,10018
+"Gas Utilities",13512,10018
+"Power & Electricity Services",12114,10018
+"Water Services",12111,10018
+"News, Media & Publications",10108,0
+"Apparel Media & Publications",10586,10108
+"Apparel Trade Publications",11876,10108
+"Fashion & Style Publications",11875,10108
+"Books & Literature",10112,10108
+"Audio Books",13801,10108
+"Book Retailers",10609,10108
+"Book Reviews",10608,10108
+"Children's Books",13445,10108
+"E-Books",10611,10108
+"Poetry",13660,10108
+"Celebrities & Entertainment News",10584,10108
+"Health Media & Publications",10576,10108
+"Local News, Media & Publications",13700,10108
+"Magazines & Magazine Subscriptions",11866,10108
+"Men's Interests Media & Publications",10573,10108
+"Men's Interests Media & Publications - Mature",11868,10108
+"Newspapers",13647,10108
+"Online Media",13691,10108
+"Flash-Based Entertainment",13785,10108
+"Online Image Galleries",13692,10108
+"Podcasts",10568,10108
+"Webcasts",10569,10108
+"Political News & Media",13648,10108
+"Publishing",11867,10108
+"E-Book Publishing",12972,10108
+"Self-Publishing",12973,10108
+"Reference Materials & Resources",10756,10108
+"Dictionaries",13429,10108
+"Encyclopedias",13430,10108
+"Geographic Reference",13600,10108
+"Maps",13601,10108
+"Public Records",13716,10108
+"Quotations",13861,10108
+"Translation",13432,10108
+"Teen Media & Publications",13777,10108
+"Vehicle Media & Publications",10023,10108
+"Weather",13426,10108
+"Women's Interests Media & Publications",10581,10108
+"World News & Media",13451,10108
+"Occasions & Gifts",10006,0
+"Cards & Greetings",10364,10006
+"E-Cards",11448,10006
+"Photo Cards",11443,10006
+"Stationery & Stationery Sets",10361,10006
+"Personalized Stationery",11436,10006
+"Thank You Cards",11437,10006
+"Flower Arrangements",10362,10006
+"Gifts",10365,10006
+"Engraving & Jewelry Engraving",13468,10006
+"Gift Baskets",11461,10006
+"Gift Cards",12966,10006
+"Movie Gift Cards & Gift Certificates",13306,10006
+"Restaurant Gift Cards & Gift Certificates",13305,10006
+"Gift Delivery",10373,10006
+"Flower Delivery Services",11486,10006
+"Gift Registries",10370,10006
+"Baby Shower Registry Services",11479,10006
+"Gift Wrap & Ribbons",10367,10006
+"Gift Wrapping Services",10376,10006
+"Ribbons & Bows",11465,10006
+"Wrapping Paper",11464,10006
+"Gourmet Food Gifts",11458,10006
+"Fruit Gifts",12748,10006
+"Gourmet Gift Baskets",12747,10006
+"Holidays & Seasonal Events",13509,10006
+"Carnival & Mardi Gras",13786,10006
+"Christmas",13738,10006
+"Easter",13739,10006
+"Halloween & October 31st",13740,10006
+"Holiday & Seasonal Decorations",10363,10006
+"Holiday Ornaments & Lights",11441,10006
+"Holiday Trees & Plants",11440,10006
+"Holiday Wreaths",12737,10006
+"Holiday-Themed Housewares",11442,10006
+"Jewish Holidays",13741,10006
+"Mother's Day & Father's Day",13507,10006
+"New Year's",13787,10006
+"Thanksgiving",13742,10006
+"Valentine's Day",13510,10006
+"Parties & Party Supplies",10368,10006
+"Paper Plates, Napkins & Disposable Cutlery",11468,10006
+"Party Decorations",11466,10006
+"Party Favors",11467,10006
+"Party Invitations",11469,10006
+"Singing Telegrams",10372,10006
+"Special Occasions",13493,10006
+"Anniversaries",13501,10006
+"Baby Showers & New Baby",13503,10006
+"Birthdays & Name Days",13502,10006
+"Funerals & Bereavement",10366,10006
+"Pet Loss & Sympathy",13793,10006
+"Get Well",13506,10006
+"Graduation",13504,10006
+"Religious Occasions",13505,10006
+"Wedding & Special Occasion Photo & Video",11483,10006
+"Weddings",10369,10006
+"Wedding & Party Planning",11480,10006
+"Wedding Albums & Scrapbooks",11471,10006
+"Wedding Beauty Services",11482,10006
+"Wedding Cards",11478,10006
+"Wedding Decorations",11470,10006
+"Wedding Favors",11473,10006
+"Wedding Flowers",11476,10006
+"Wedding Bouquets",12751,10006
+"Wedding Boutonnieres & Corsages",12753,10006
+"Wedding Centerpieces",12752,10006
+"Wedding Gifts",11474,10006
+"Wedding Guestbooks",11477,10006
+"Wedding Invitations",11475,10006
+"Wedding Programs",11472,10006
+"Wedding Registries",11481,10006
+"Wedding Supply & Equipment Rentals",11484,10006
+"Real Estate",10003,0
+"Commercial & Investment Real Estate",10043,10003
+"Escrow & Real Estate Titling",10041,10003
+"Escrow Services",10260,10003
+"Real Estate Titling & Land Registry",10259,10003
+"Property Title Searches",11040,10003
+"Title Insurance",11039,10003
+"House Plans & Floor Plans",10037,10003
+"Housing Market & Real Estate Prices",13784,10003
+"Private Communities",10036,10003
+"Golf Communities",10255,10003
+"Shared Interest Living Communities",10254,10003
+"Property Development",10039,10003
+"Commercial Property Development",10257,10003
+"New Homes & Custom Homes",10258,10003
+"Property Inspections & Appraisals",10034,10003
+"Home Appraisals",10248,10003
+"Land Surveying",10247,10003
+"Property Management",10033,10003
+"Real Estate Agents & Brokerages",10040,10003
+"Real Estate Auctions",13649,10003
+"Real Estate Listings",10042,10003
+"Bank-Owned & Foreclosed Listings",13690,10003
+"Commercial Real Estate Listings",10264,10003
+"Condo & Co-op Listings",13688,10003
+"For Sale By Owner Listings",10267,10003
+"Government Assistance Home Listing Services",10265,10003
+"Land & Acreage Listings",10266,10003
+"Mobile & Manufactured Home Listings",13689,10003
+"Rent To Own Real Estate Listings",10262,10003
+"Rental Listings",10032,10003
+"Apartment Rentals",13687,10003
+"Furnished & Short-Term Rental Listings",10243,10003
+"Roommates & Flat Sharing",10244,10003
+"Senior Living Listings",10261,10003
+"Relocation & Household Moving",10035,10003
+"Consumer Vehicle Shipping Services",10253,10003
+"Moving Supplies",10251,10003
+"Moving Truck & Van Rental",10250,10003
+"Storage Rental Services",10252,10003
+"Temporary Housing Services",10249,10003
+"Vacation Properties & Second Homes",10038,10003
+"Timeshares",10256,10003
+"Retailers & General Merchandise",13575,0
+"Coupons & Rebates",13441,13575
+"Informal Selling & Exchanging",13810,13575
+"Garage, Estate & Yard Sales",13811,13575
+"Rental Services",13842,13575
+"Shopping Portals & Search Engines",13860,13575
+"Wholesalers & Liquidators",13719,13575
+"Sports & Fitness",10014,0
+"Boating & Water Recreation",10117,10014
+"Boat & Watercraft Parts & Accessories",10627,10014
+"Boat & Watercraft Safety Accessories",11905,10014
+"Boat Gauges, Clocks & Instruments",12981,10014
+"Boat Propellers",11906,10014
+"Boat Seats",11903,10014
+"Marine Engines & Parts",11904,10014
+"Fishing",10628,10014
+"Fishing Tackle",11907,10014
+"Fishing Bait, Lures & Ties",12980,10014
+"Fishing Rods & Poles",12979,10014
+"Scuba & Diving",10629,10014
+"Surfing & Windsurfing Gear",10626,10014
+"Water Skiing Equipment & Gear",10630,10014
+"Fitness",10123,10014
+"Fitness Classes & Instruction",10666,10014
+"Fitness Equipment & Accessories",10667,10014
+"Exercise Mats",11925,10014
+"Fitness & Weight Training Machines",11928,10014
+"Eliptical Machines",12983,10014
+"Home Gyms & Weight Training Machines",12986,10014
+"Stair Machines",12987,10014
+"Stationary Bikes",12984,10014
+"Treadmills",12985,10014
+"Fitness Balls",11926,10014
+"Weight Training Accessories",11927,10014
+"Gyms & Gym Memberships",10668,10014
+"Personal Training",10669,10014
+"Yoga & Pilates",13486,10014
+"Sporting Goods",10121,10014
+"Airsoft Equipment",10648,10014
+"American Football Equipment",10661,10014
+"Archery Equipment",10656,10014
+"Bow Hunting",11921,10014
+"Backyard Games Equipment",10643,10014
+"Baseball Equipment",10644,10014
+"Basketball Equipment",10637,10014
+"Bicycles & Accessories",10645,10014
+"Bicycles",11915,10014
+"Bike Helmets",11916,10014
+"Bowling Equipment",10647,10014
+"Combat Sports Equipment",13632,10014
+"Boxing Gloves & Gear",10650,10014
+"Martial Arts Equipment",10654,10014
+"Wrestling Equipment",10662,10014
+"Cricket Equipment",10635,10014
+"Equestrian Equipment & Tack",10664,10014
+"Extreme Sports Equipment",13571,10014
+"Golf Equipment",10653,10014
+"Golf Balls",11919,10014
+"Golf Clubs",11918,10014
+"Golf Tees",11920,10014
+"Gymnastics Equipment",10660,10014
+"Hockey & Roller Hockey Equipment",10665,10014
+"Ice Hockey Skates",11923,10014
+"Roller Hockey Skates",11924,10014
+"Hunting & Shooting Equipment",10641,10014
+"Ice Skating Equipment",10633,10014
+"Ice Skates",11908,10014
+"Figure Skates",12982,10014
+"Lacrosse Equipment",10646,10014
+"Paintball Equipment",10640,10014
+"Roller Skating & Rollerblading Equipment",10636,10014
+"Inline Skates",11914,10014
+"Rugby Equipment",10649,10014
+"Running & Walking Equipment",10657,10014
+"Skateboarding Equipment",10659,10014
+"Skateboards & Skateboard Components",11922,10014
+"Soccer Equipment",10658,10014
+"Sports Uniforms",10638,10014
+"Squash & Racquetball Equipment",10642,10014
+"Swimming & Aquatic Sports Equipment",10652,10014
+"Table Tennis Equipment",10639,10014
+"Tennis Equipment",10651,10014
+"Track & Field Equipment",10655,10014
+"Volleyball Equipment",10663,10014
+"Winter Sports Equipment",10634,10014
+"Skiing Equipment",13485,10014
+"Ski & Snowboard Helmets",11912,10014
+"Ski Lift Tickets",11911,10014
+"Skis",11913,10014
+"Snow Sleds",11909,10014
+"Snowboarding Equipment",11910,10014
+"Sports",13605,10014
+"Sports & Fitness Apparel",10115,10014
+"Cycling Apparel",10623,10014
+"Cycling Footwear",11900,10014
+"Gymnastics Apparel",10624,10014
+"Ice Skating Apparel",10622,10014
+"Running Apparel",10621,10014
+"Winter Sports Apparel",10618,10014
+"Sports Equipment Rental Services",10120,10014
+"Boat & Marine Vehicle Rental Services",10632,10014
+"Ski & Winter Sports Equipment Rental Services",10631,10014
+"Sports Fan Gear & Apparel",10116,10014
+"Sports Team Hats & Caps",11902,10014
+"Sports Team Jerseys",11901,10014
+"Sports Instruction & Coaching",10122,10014
+"Dance Classes & Lessons",13483,10014
+"Gymnastics Lessons & Classes",13482,10014
+"Horseback Riding Lessons",13367,10014
+"Swim Lessons & Aquatic Fitness Instruction",13366,10014
+"Sports News & Media",10114,10014
+"Fitness Media & Publications",10617,10014
+"Sports Programs & Camps",10119,10014
+"American Football",13606,10014
+"Baseball",13610,10014
+"Basketball",13609,10014
+"Bowling",13628,10014
+"Cheerleading",13839,10014
+"College Sports",13621,10014
+"Combat Sports",13633,10014
+"Boxing",13634,10014
+"Martial Arts",13631,10014
+"Martial Arts Instruction",13365,10014
+"Wrestling",13635,10014
+"Cricket",13607,10014
+"Cycling",13615,10014
+"Equestrian Sports",13664,10014
+"Extreme Sports",13623,10014
+"Golf",13627,10014
+"Gymnastics",13629,10014
+"Hockey",13611,10014
+"Hunting & Shooting",13612,10014
+"Motor Sports",13624,10014
+"Rodeo",13833,10014
+"Rugby",13613,10014
+"Running & Walking",13616,10014
+"Skate Sports",13617,10014
+"Soccer",13608,10014
+"Surfing & Windsurfing",13618,10014
+"Swimming & Aquatic Sports",13619,10014
+"Tennis",13626,10014
+"Volleyball",13630,10014
+"Winter Sports",13620,10014
+"Ice Skating",13614,10014
+"Skiing",13639,10014
+"Snowboarding",13640,10014
+"World Sports Events",13625,10014
+"Olympics",13781,10014
+"Travel & Tourism",10017,0
+"Accommodations",10142,10017
+"Accommodation Packages",10775,10017
+"Bed & Breakfasts",10772,10017
+"Camping, Caravan & RV Accommodations",10771,10017
+"Campsites & Campgrounds",12070,10017
+"Caravan & RV Rentals",12071,10017
+"Hostel Accommodations",10768,10017
+"Hotels, Motels & Resorts",10769,10017
+"Extended Stay Hotels & Motels",12068,10017
+"Hotels",12067,10017
+"Hotel Packages",13022,10017
+"Motels",12065,10017
+"Resorts",12066,10017
+"Resort Packages",13021,10017
+"House Swaps & Home Exchanges",13806,10017
+"Last Minute Accommodation Deals",10774,10017
+"Ski Accommodations",10773,10017
+"Ski Condos, Cabins & Townhome Rentals",12072,10017
+"Ski Lodges & Resorts",12073,10017
+"Vacation Rentals",10770,10017
+"Villa Rentals",12069,10017
+"Air Travel",10144,10017
+"Air Charter & Charter Jet Services",10779,10017
+"Airline Tickets, Fares & Flights",10778,10017
+"First & Business Class Airfares & Flights",12079,10017
+"Cruises & Cruise Services",10153,10017
+"Activity & Theme-Based Cruises",10802,10017
+"Barge & River Cruises",12096,10017
+"Last Minute Cruises",10800,10017
+"Last Minute Travel",10147,10017
+"Last Minute Airfares & Flights",10790,10017
+"Luggage & Travel Accessories",10143,10017
+"Luggage",10776,10017
+"Carry-On Bags",12075,10017
+"Make-Up Bags",12078,10017
+"Rolling Luggage",12074,10017
+"Suitcases",12077,10017
+"Travel Accessories",10777,10017
+"Luggage Services",10152,10017
+"Luxury Travel",13594,10017
+"Specialty Travel",10150,10017
+"Adventure Travel",10793,10017
+"Agritourism",13847,10017
+"Couples Travel & Honeymoons",12093,10017
+"Ecotourism",10794,10017
+"Family Vacations & Travel",10795,10017
+"GLBT Travel",12095,10017
+"Senior Citizen Travel",12092,10017
+"Singles Travel",12091,10017
+"Tour Operators",10148,10017
+"Charter Bus Services",10791,10017
+"Sightseeing Tours",10792,10017
+"Tourist Attractions & Destinations",10145,10017
+"Beaches & Islands",13582,10017
+"Historical Sites & Buildings",13857,10017
+"Lakes & Rivers",13858,10017
+"Libraries",13862,10017
+"Museums",13497,10017
+"Regional Parks & Gardens",12081,10017
+"Theme Parks",13496,10017
+"Winter Travel Destinations",12098,10017
+"Zoos & Aquariums",12080,10017
+"Transportation & Excursions",10146,10017
+"Airport Transportation Services",10785,10017
+"Airport Parking Services",12087,10017
+"Airport Rail Service",12086,10017
+"Airport Shuttles & Car Services",12085,10017
+"Boat & Yacht Charter",10787,10017
+"Bus & Rail Services",10783,10017
+"Bus Services",12083,10017
+"Rail Services",12084,10017
+"Rail Passes",13023,10017
+"Car Rental Services",10782,10017
+"Carpooling & Ridesharing",13831,10017
+"Ferries",10786,10017
+"Limousine Services",10789,10017
+"Parking Services",13410,10017
+"Taxi Services",10784,10017
+"Trip Planners & Route Finders",10788,10017
+"Travel Booking Services",10151,10017
+"Travel Documents",10843,10017
+"Passports & Passport Services",12117,10017
+"Travel Consent Forms",12119,10017
+"Travel Visas & Visa Services",12118,10017
+"Travel Media & Publications",10578,10017
+"City & Local Guides",10149,10017
+"Road Maps",11872,10017
+"Travel Books & Guides",11874,10017
+"Vacation Packages",10154,10017
+"Vehicles",10001,0
+"Boats & Watercraft",10027,10001
+"Fishing Boats",10211,10001
+"Kayaks",10216,10001
+"Personal Watercraft",10212,10001
+"Rafts",10214,10001
+"Row Boats & Canoes",10215,10001
+"Sailboats",10213,10001
+"Speedboats & Motorboats",10217,10001
+"Yachts",10210,10001
+"Driving Instruction & Driver Education",10191,10001
+"Motor Vehicles",10024,10001
+"Campers & RVs",10183,10001
+"Motorhomes",10951,10001
+"Pop-Up Campers",10950,10001
+"Travel Trailers",10949,10001
+"Cars & Trucks",10185,10001
+"4WD",10956,10001
+"Concept & Future Cars",10961,10001
+"Convertibles",10958,10001
+"Coupes",10953,10001
+"Crossovers",10959,10001
+"Hatchbacks",10955,10001
+"Hybrid & Alternative Vehicles",10963,10001
+"Luxury Cars",13573,10001
+"Microcars & City Cars",13856,10001
+"Pick-Up Trucks",10962,10001
+"SUVs",10957,10001
+"Sedans",10954,10001
+"Sports Cars",10952,10001
+"Station Wagons",10964,10001
+"Vans & Minivans",10960,10001
+"Commercial Vehicles",10186,10001
+"Cargo Trucks & Trailers",13697,10001
+"Motorcycles",10182,10001
+"Off-Road Vehicles",10181,10001
+"ATVs",10945,10001
+"Dirt Bikes",10946,10001
+"Dune Buggies",10948,10001
+"Go Karts",10947,10001
+"Snowmobiles",10944,10001
+"Scooters & Mopeds",10187,10001
+"Used Motor Vehicles",13714,10001
+"Vehicle Trailers",10184,10001
+"Personal Airplanes & Aircraft",10022,10001
+"Flying Instruction",10189,10001
+"Personal Aircraft Repair & Maintenance",10200,10001
+"Vehicle Auctions",10190,10001
+"Vehicle Dealers",13655,10001
+"Boat & Yacht Sales & Brokers",13657,10001
+"Car Dealers",13656,10001
+"Vehicle Donation & Removal",10198,10001
+"Vehicle Emissions",10195,10001
+"Vehicle History Reports",10978,10001
+"Vehicle Parts & Accessories",10026,10001
+"Car Parts & Accessories",10209,10001
+"Car Covers",11000,10001
+"Car Emergency Kits & Supplies",10997,10001
+"Car Mats",10995,10001
+"Car Modification Parts",10993,10001
+"Appearance Modifying Parts",12269,10001
+"Performance Modifying Parts",12268,10001
+"Car Sun Shields",10998,10001
+"Remote Keyless Entry Systems & Car Starters",10996,10001
+"Replacement Car Parts",10994,10001
+"Automotive Electronic Components",12272,10001
+"Car Batteries",13131,10001
+"Spark Plugs",13130,10001
+"Car Brakes",12275,10001
+"Car Engines & Engine Parts",12271,10001
+"Car Filters",12273,10001
+"Car Lamps & Lights",12270,10001
+"Windshield Wiper Blades",12274,10001
+"Motorcycle Parts & Accessories",10204,10001
+"Motorcycle Gloves & Gear",10983,10001
+"Motorcycle Helmets",10982,10001
+"Off-Road Vehicle Parts & Accessories",10202,10001
+"Personal Airplane & Aircraft Parts & Accessories",10201,10001
+"Scooter & Moped Parts & Accessories",10208,10001
+"Truck Parts & Accessories",10203,10001
+"Vehicle Cleansers & Care Supplies",10205,10001
+"Vehicle Racks",10207,10001
+"Vehicle Tires & Tire Parts",10206,10001
+"Car & Truck Tires",10985,10001
+"Car & Truck Wheels",10986,10001
+"Motorcycle Tires & Tire Parts",10984,10001
+"Personal Airplane & Aircraft Tires",10991,10001
+"Scooter & Moped Tires",10988,10001
+"Snow Chains",10992,10001
+"Snow Tires",10990,10001
+"Vehicle Repair & Maintenance",10193,10001
+"Brake Repair",10967,10001
+"Collision & Auto Body Repair",10973,10001
+"Oil Changes",10969,10001
+"Transmissions & Transmission Repair",10972,10001
+"Tune-Ups",10971,10001
+"Vehicle Painting",10981,10001
+"Vehicle Washing & Detailing",10979,10001
+"Windshield Repair",10968,10001
+"Vehicle Specs, Reviews & Comparisons",10196,10001
+"Vehicle Towing",10194,10001
+"Boat Towing",10974,10001
+"Vehicle Warranties & Protection Plans",10188,10001
+"Vehicle Window Tinting",10980,10001
