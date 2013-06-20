@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import cn.dehui.task.browser.search.util.Status;
 
 public class StatisticGoogleController extends GoogleController {
 

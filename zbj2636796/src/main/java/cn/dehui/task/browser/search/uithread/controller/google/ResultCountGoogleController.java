@@ -1,16 +1,18 @@
-package cn.dehui.task.browser.search.uithread.controller.google2;
+package cn.dehui.task.browser.search.uithread.controller.google;
 
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import cn.dehui.task.browser.search.uithread.controller.ControllerManager;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import cn.dehui.task.browser.search.uithread.controller.manager.ControllerManager;
+import cn.dehui.task.browser.search.util.Status;
 
-public class ResultCountGoogleController2 extends GoogleController2 {
+public class ResultCountGoogleController extends GoogleController {
 
-    private static final String lastPageJs    = "var tr=document.getElementById('pnnext').parentNode.parentNode; tr.children[tr.children.length-2].children[0].click();";
+    private static final String lastPageJs       = "var tr=document.getElementById('pnnext').parentNode.parentNode; tr.children[tr.children.length-2].children[0].click();";
 
-    private static final String resultStatsJs = "return document.getElementById('resultStats').innerHTML;";
+    private static final String getLastPageUrlJs = "var tr=document.getElementById('pnnext').parentNode.parentNode; return tr.children[tr.children.length-2].children[0].href;";
 
-    public ResultCountGoogleController2(ControllerManager controllerManager) {
+    private static final String resultStatsJs    = "return document.getElementById('resultStats').innerHTML;";
+
+    public ResultCountGoogleController(ControllerManager controllerManager) {
         super(controllerManager);
     }
 
@@ -21,7 +23,7 @@ public class ResultCountGoogleController2 extends GoogleController2 {
         switch (status) {
             case KEYWORD_SEARCHING:
                 if (!meetEnd()) {
-                    webBrowser.executeJavascript(lastPageJs);
+                    lastPage();
                     return;
                 }
 
@@ -65,6 +67,19 @@ public class ResultCountGoogleController2 extends GoogleController2 {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void lastPage() {
+        //        webBrowser.executeJavascript(lastPageJs);
+
+        JWebBrowser webBrowser = getWebBrowser();
+        String url = (String) webBrowser.executeJavascriptWithResult(getLastPageUrlJs);
+        if (url != null) {
+            webBrowser.navigate(url);
+        } else {
+            nextPage();
+            //            webBrowser.executeJavascript(lastPageJs);
         }
     }
 

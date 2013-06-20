@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.search.uithread.controller;
+package cn.dehui.task.browser.search.uithread.controller.manager;
 
 import java.awt.BorderLayout;
 import java.io.BufferedWriter;
@@ -17,61 +17,60 @@ import javax.swing.SwingUtilities;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
-import cn.dehui.task.browser.search.uithread.controller.google2.GoogleController2;
-import cn.dehui.task.browser.search.uithread.controller.google2.ResultCountGoogleController2;
-import cn.dehui.task.browser.search.uithread.controller.google2.StatisticGoogleController2;
-import cn.dehui.task.browser.search.uithread.controller.google2.UrlGoogleController2;
-import cn.dehui.task.browser.search.uithread.controller.util.Callback;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
-import cn.dehui.task.browser.search.uithread.controller.util.Utils;
-import cn.dehui.task.browser.search.uithread.ui.GoogleSearchFrame2;
+import cn.dehui.task.browser.search.uithread.controller.SearchContext;
+import cn.dehui.task.browser.search.uithread.ui.SearchFrame;
+import cn.dehui.task.browser.search.util.Callback;
+import cn.dehui.task.browser.search.util.Status;
+import cn.dehui.task.browser.search.util.Utils;
 
-public class ControllerManager {
-    protected static final String        KEYWORD_URL_FILE_TPL     = "关键词的前%d位网址汇总.%d.csv";
+public abstract class ControllerManager {
+    protected static final String  KEYWORD_URL_FILE_TPL     = "关键词的前%d位网址汇总.%d.csv";
 
-    protected static final String        SITE_COUNT_FILE_TPL      = "网址统计结果汇总.%d.csv";
+    protected static final String  SITE_COUNT_FILE_TPL      = "网址统计结果汇总.%d.csv";
 
-    protected static final String        URL_ENCODING             = "utf8";
+    protected static final String  URL_ENCODING             = "utf8";
 
-    private List<String>                 keywordList;
+    protected List<String>         keywordList;
 
-    private File                         outputFolder;
+    private File                   outputFolder;
 
-    private int                          waitTime;
+    protected int                  waitTime;
 
-    private int                          numberOfResultPerUrl;
+    protected int                  numberOfResultPerUrl;
 
-    private JWebBrowser                  webBrowser;
+    protected JWebBrowser          webBrowser;
 
-    private StatisticGoogleController2   statisticGoogleController;
+    protected int                  keywordIndexForStatistic = 0;
 
-    private UrlGoogleController2         urlController;
+    protected int                  keywordIndexForUrl       = 0;
 
-    private ResultCountGoogleController2 resultCountGoogleController;
+    protected int                  keywordIndexForUrlQuote  = 0;
 
-    private int                          keywordIndexForStatistic = 0;
+    protected int                  keywordIndexForSiteCount = 0;
 
-    private int                          keywordIndexForUrl       = 0;
+    protected BufferedWriter       bwForUrl;
 
-    private int                          keywordIndexForUrlQuote  = 0;
+    protected BufferedWriter       bwForUrlQuote;
 
-    private int                          keywordIndexForSiteCount = 0;
+    protected BufferedWriter       bwForSiteCount;
 
-    private BufferedWriter               bwForUrl;
+    private JPanel                 contentPane;
 
-    private BufferedWriter               bwForUrlQuote;
+    private long                   lastBeatHeartTime        = 0;
 
-    private BufferedWriter               bwForSiteCount;
+    private TimerTask              timerTask;
 
-    private JPanel                       contentPane;
+    private Timer                  timer;
 
-    private long                         lastBeatHeartTime        = 0;
+    protected IResearchController  runningController;
 
-    private TimerTask                    timerTask;
+    private int                    timeout                  = 30000;
 
-    private Timer                        timer;
+    private int                    cookieMod                = 10;
 
-    private GoogleController2            runningController;
+    protected IStatisticController statisticController;
+
+    protected IUrlController       urlController;
 
     public ControllerManager(JPanel contentPane) {
         webBrowser = createBrowser();
@@ -80,21 +79,20 @@ public class ControllerManager {
 
         contentPane.add(webBrowser, BorderLayout.CENTER);
 
-        statisticGoogleController = new StatisticGoogleController2(this);
-
-        urlController = new UrlGoogleController2(this);
-
-        resultCountGoogleController = new ResultCountGoogleController2(this);
-
         scheduleTimer();
+
+        initControllers();
+
     }
+
+    protected abstract void initControllers();
 
     private void scheduleTimer() {
         timer = new Timer(true);
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                if (runningController == null || System.currentTimeMillis() - lastBeatHeartTime < 30000) {
+                if (runningController == null || System.currentTimeMillis() - lastBeatHeartTime < timeout) {
                     return;
                 }
 
@@ -102,17 +100,7 @@ public class ControllerManager {
                     SwingUtilities.invokeAndWait(new Runnable() {
                         @Override
                         public void run() {
-                            if (!webBrowser.getResourceLocation().startsWith("http://www.google.com/sorry/")) {
-
-                                if (runningController.getLastSearchUrl() != null
-                                        && runningController.getLastSearchUrl().startsWith(
-                                                "http://www.google.com/sorry/")) {
-                                    //                                    webBrowser.reloadPage();
-                                    webBrowser.navigate(webBrowser.getResourceLocation());
-                                } else {
-                                    runningController.research();
-                                }
-                            }
+                            handleTimeout();
                         }
                     });
                 } catch (Exception e) {
@@ -123,7 +111,9 @@ public class ControllerManager {
         timer.schedule(timerTask, 1000, 5000);
     }
 
-    private void outputUrl(SearchContext sc, int maxUrlPerKeyword, boolean withQuote) {
+    protected abstract void handleTimeout();
+
+    protected void outputUrl(SearchContext sc, int maxUrlPerKeyword, boolean withQuote) {
         BufferedWriter bw = withQuote ? bwForUrlQuote : bwForUrl;
         try {
             String keyword = sc.keyword;
@@ -144,7 +134,7 @@ public class ControllerManager {
         }
     }
 
-    private void outputSiteCount(SearchContext sc) {
+    protected void outputSiteCount(SearchContext sc) {
         try {
             String keyword = sc.keyword;
             String keywordToWrite = keyword.charAt(0) == '\"' && keyword.charAt(keyword.length() - 1) == '\"' ? keyword
@@ -174,9 +164,9 @@ public class ControllerManager {
         urlController.setMaxUrlPerKeyword(maxUrlPerKeyword);
         urlController.setStatus(Status.UNSTARRED);
         urlController.setSearchContext(sc);
-        urlController.setAction(new Callback() {
+        urlController.setAction(new Callback<Void>() {
             @Override
-            public void execute() {
+            public Void execute() {
                 SearchContext searchContext = urlController.getSearchContext();
                 outputUrl(searchContext, maxUrlPerKeyword, withQuote);
 
@@ -193,11 +183,7 @@ public class ControllerManager {
                     searchContext = new SearchContext(withQuote ? "\"" + keyword + "\"" : keyword);
                     urlController.setSearchContext(searchContext);
 
-                    if (keywordIndex % 10 == 0) {
-                        renewWebBrowser();
-                        Utils.clearSessionCookies();
-                        //                        urlController.setWebBrowser(webBrowser);
-                    }
+                    refreshBrowserAndCookie(keywordIndex);
 
                     SwingUtilities.invokeLater(urlController);
                     System.out.printf("Searching keyword: (%d) %s. ", keywordIndex, keyword);
@@ -209,8 +195,10 @@ public class ControllerManager {
                     }
                     System.out.println("URL获取完成");
                     stopFetchUrl();
-                    button.setText(withQuote ? GoogleSearchFrame2.GET_URL_WITH_QUOTE : GoogleSearchFrame2.GET_URL);
+                    button.setText(withQuote ? SearchFrame.GET_URL_WITH_QUOTE : SearchFrame.GET_URL);
                 }
+
+                return null;
             }
         });
         SwingUtilities.invokeLater(urlController);
@@ -218,8 +206,21 @@ public class ControllerManager {
         System.out.printf("Searching keyword: (%d) %s. ", keywordIndex, keyword);
     }
 
+    public void startFetchUrlWithQuote(int maxUrlPerKeyword, JButton button) {
+        fetchUrl(maxUrlPerKeyword, button, true);
+    }
+
+    protected void refreshBrowserAndCookie(int keywordIndex) {
+        if (keywordIndex % 10 == 0) {
+            renewWebBrowser();
+        }
+
+        if (keywordIndex % cookieMod == 0) {
+            Utils.clearSessionCookies();
+        }
+    }
+
     public void renewWebBrowser() {
-        //        Utils.clearSessionCookies();
         System.out.println("renewing browser...");
 
         webBrowser.stopLoading();
@@ -228,8 +229,8 @@ public class ControllerManager {
             webBrowser.removeWebBrowserListener(l);
         }
 
-        webBrowser.disposeNativePeer();
         contentPane.remove(webBrowser);
+        webBrowser.disposeNativePeer();
 
         webBrowser = null;
 
@@ -245,7 +246,7 @@ public class ControllerManager {
         runningController.setWebBrowser(webBrowser);
     }
 
-    private void initBufferedWriterIfNeeded(final int maxUrlPerKeyword, boolean withQuote) {
+    protected void initBufferedWriterIfNeeded(final int maxUrlPerKeyword, boolean withQuote) {
         int keywordIndex = withQuote ? keywordIndexForUrlQuote : keywordIndexForUrl;
         BufferedWriter bw = withQuote ? bwForUrlQuote : bwForUrl;
         if (keywordIndex == 0) {
@@ -278,19 +279,19 @@ public class ControllerManager {
     }
 
     public void stopFetchUrl() {
-        urlController.stop();
+        stop();
+    }
+
+    private void stop() {
+        runningController.stop();
         runningController = null;
     }
 
-    public void startFetchUrlWithQuote(int maxUrlPerKeyword, JButton button) {
-        fetchUrl(maxUrlPerKeyword, button, true);
-    }
-
     public void stopFetchUrlWithQuote() {
-        stopFetchUrl();
+        stop();
     }
 
-    private void initBufferedWriterForSiteCount() {
+    protected void initBufferedWriterForSiteCount() {
         if (keywordIndexForSiteCount == 0) {
             if (bwForSiteCount != null) {
                 try {
@@ -310,57 +311,10 @@ public class ControllerManager {
         }
     }
 
-    public void startCountResult(final JButton button) {
-        Utils.clearSessionCookies();
-        initBufferedWriterForSiteCount();
-
-        String url = keywordList.get(keywordIndexForSiteCount);
-        SearchContext sc = new SearchContext("\"" + Utils.removeHeadFootForUrl(url) + "\"");
-
-        resultCountGoogleController.setWebBrowser(webBrowser);
-        resultCountGoogleController.setStatus(Status.UNSTARRED);
-        resultCountGoogleController.setSearchContext(sc);
-        resultCountGoogleController.setAction(new Callback() {
-            @Override
-            public void execute() {
-                SearchContext searchContext = resultCountGoogleController.getSearchContext();
-                outputSiteCount(searchContext);
-
-                keywordIndexForSiteCount++;
-
-                if (keywordIndexForSiteCount < keywordList.size()) {
-                    resultCountGoogleController.setStatus(Status.UNSTARRED);
-                    String url = keywordList.get(keywordIndexForSiteCount);
-                    searchContext = new SearchContext("\"" + Utils.removeHeadFootForUrl(url) + "\"");
-                    resultCountGoogleController.setSearchContext(searchContext);
-
-                    if (keywordIndexForSiteCount % 10 == 0) {
-                        renewWebBrowser();
-                        //                        resultCountGoogleController.setWebBrowser(webBrowser);
-                    }
-
-                    SwingUtilities.invokeLater(resultCountGoogleController);
-                    System.out.printf("Searching URL: (%d) %s. ", keywordIndexForSiteCount, searchContext.keyword);
-                } else {
-                    try {
-                        bwForSiteCount.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Site获取完成");
-                    stopCountResult();
-                    button.setText(GoogleSearchFrame2.SITE_COUNT);
-                }
-            }
-        });
-        SwingUtilities.invokeLater(resultCountGoogleController);
-        runningController = resultCountGoogleController;
-        System.out.printf("Searching URL: (%d) %s. ", keywordIndexForSiteCount, sc.keyword);
-    }
+    public abstract void startCountResult(final JButton button);
 
     public void stopCountResult() {
-        resultCountGoogleController.stop();
-        runningController = null;
+        stop();
     }
 
     public void startStatisticKeyword(int maxUrlPerKeyword, final JButton button) {
@@ -368,49 +322,48 @@ public class ControllerManager {
 
         final SearchContext sc = new SearchContext(keywordList.get(keywordIndexForStatistic));
 
-        statisticGoogleController.setWebBrowser(webBrowser);
-        statisticGoogleController.setMaxUrlPerKeyword(maxUrlPerKeyword);
-        statisticGoogleController.setStatus(Status.UNSTARRED);
-        statisticGoogleController.setSearchContext(sc);
-        statisticGoogleController.setAction(new Callback() {
+        statisticController.setWebBrowser(webBrowser);
+        statisticController.setMaxUrlPerKeyword(maxUrlPerKeyword);
+        statisticController.setStatus(Status.UNSTARRED);
+        statisticController.setSearchContext(sc);
+        statisticController.setAction(new Callback<Void>() {
             @Override
-            public void execute() {
-                SearchContext searchContext = statisticGoogleController.getSearchContext();
+            public Void execute() {
+                SearchContext searchContext = statisticController.getSearchContext();
                 outputStatistic(searchContext);
 
                 keywordIndexForStatistic++;
 
                 if (keywordIndexForStatistic < keywordList.size()) {
-                    statisticGoogleController.setStatus(Status.UNSTARRED);
+                    statisticController.setStatus(Status.UNSTARRED);
                     searchContext = new SearchContext(keywordList.get(keywordIndexForStatistic));
-                    statisticGoogleController.setSearchContext(searchContext);
+                    statisticController.setSearchContext(searchContext);
 
-                    renewWebBrowser();
-                    Utils.clearSessionCookies();
+                    refreshBrowserAndCookie(keywordIndexForStatistic);
 
-                    //                    statisticGoogleController.setWebBrowser(webBrowser);
-
-                    SwingUtilities.invokeLater(statisticGoogleController);
+                    SwingUtilities.invokeLater(statisticController);
                     System.out.printf("Searching keyword: (%d) %s. ", keywordIndexForStatistic,
                             keywordList.get(keywordIndexForStatistic));
                 } else {
                     System.out.println("统计完成");
                     stopStatisticKeyword();
-                    button.setText(GoogleSearchFrame2.STATISTIC);
+                    button.setText(SearchFrame.STATISTIC);
                 }
+
+                return null;
             }
 
         });
-        SwingUtilities.invokeLater(statisticGoogleController);
-        runningController = statisticGoogleController;
+        SwingUtilities.invokeLater(statisticController);
+        runningController = statisticController;
 
-        statisticGoogleController.setMaxResultPerUrl(numberOfResultPerUrl);
-        statisticGoogleController.setWaitTime(waitTime);
+        statisticController.setMaxResultPerUrl(numberOfResultPerUrl);
+        statisticController.setWaitTime(waitTime);
         System.out.printf("Searching keyword: (%d) %s. ", keywordIndexForStatistic,
                 keywordList.get(keywordIndexForStatistic));
     }
 
-    private void outputStatistic(SearchContext searchContext) {
+    protected void outputStatistic(SearchContext searchContext) {
         System.out.printf("Outputing statistic: (%d) %s. \r\n", keywordIndexForStatistic,
                 keywordList.get(keywordIndexForStatistic));
         String format = "\"%s\",\"%d\"\r\n";
@@ -434,8 +387,7 @@ public class ControllerManager {
     }
 
     public void stopStatisticKeyword() {
-        statisticGoogleController.stop();
-        runningController = null;
+        stop();
     }
 
     private JWebBrowser createBrowser() {
@@ -476,5 +428,13 @@ public class ControllerManager {
 
     public void setLastBeatHeartTime(long lastBeatHeartTime) {
         this.lastBeatHeartTime = lastBeatHeartTime;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+
+    public void setCookieMod(int cookieMod) {
+        this.cookieMod = cookieMod;
     }
 }

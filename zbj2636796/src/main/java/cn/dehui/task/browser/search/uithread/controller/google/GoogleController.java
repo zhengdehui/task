@@ -1,12 +1,9 @@
 package cn.dehui.task.browser.search.uithread.controller.google;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.SwingUtilities;
 
@@ -24,82 +21,162 @@ import org.htmlparser.util.ParserException;
 import org.htmlparser.visitors.NodeVisitor;
 
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
-import cn.dehui.task.browser.search.uithread.controller.util.Callback;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
+import cn.dehui.task.browser.search.uithread.controller.Controller;
+import cn.dehui.task.browser.search.uithread.controller.SearchContext;
+import cn.dehui.task.browser.search.uithread.controller.manager.ControllerManager;
+import cn.dehui.task.browser.search.util.Callback;
+import cn.dehui.task.browser.search.util.Status;
+import cn.dehui.task.browser.search.util.Utils;
 
-public abstract class GoogleController implements Runnable {
+public abstract class GoogleController extends Controller {
 
-    protected static final String GOOGLE_URL          = "www.google.com/";
+    protected static final String GOOGLE_URL                  = "http://www.google.com/";
 
-    protected static final String GOOGLE_HK_URL       = "www.google.com.hk/";
+    protected static final String GOOGLE_HK_URL               = "http://www.google.com.hk/";
 
-    protected static final int    URL_TO_SEARCH_COUNT = 10;
+    protected static final int    PROGRESS                    = 95;
 
-    protected static final int    PROGRESS            = 95;
+    protected static final String URL_ENCODING                = "utf8";
 
-    protected static final String URL_ENCODING        = "utf8";
+    private static final String   clickSearchBtnJs            = "document.getElementsByTagName('form')[0].submit();";
 
-    //    protected static String       getResultUrlsByVSPIBJs = "var urls=new Array();"
-    //                                                                 + "var vspibs=document.getElementsByClassName('vspib');"
-    //                                                                 + "for(var i=0;i<vspibs.length;i++){"
-    //                                                                 + "if(vspibs[i].parentNode.parentNode.tagName.toLowerCase()=='li'){url=vspibs[i].parentNode.children[1].children[0].href;urls.push(url);}"
-    //                                                                 + "}" + "return urls;";
+    private static final String   inputKeywordInMainPageJsTpl = "var is=document.getElementsByTagName('input');for(var i=0;i<is.length;i++){if(is[i].type=='text'){is[i].value='%s';}}";
 
-    protected static String       nextPageJs          = "document.getElementById('pnnext').click();";
+    private static final String   searchResultOuterHtmlJs     = "return document.getElementById('search').outerHTML;";
 
-    protected JWebBrowser         webBrowser;
+    private static final String   nextBtnInnerHtmlJs          = "return document.getElementById('pnnext').innerHTML;";
 
-    protected Status              status              = Status.UNSTARRED;
+    private static final String   clickGoogleDotComLinkJs     = "document.getElementById('fehl').click()";
 
-    protected String              keyword;
+    private static final String   googleDotComLinkExistJs     = "return document.getElementById('fehl')!=null";
 
-    protected List<String>        urlList             = new ArrayList<String>();
+    protected static final String nextPageJs                  = "document.getElementById('pnnext').click();";
 
-    protected Callback            callback;
+    private static final String   getNextPageUrlJs            = "return document.getElementById('pnnext').href;";
 
-    protected WebBrowserAdapter   webBrowserAdapter;
+    protected Status              status                      = Status.UNSTARRED;
 
-    private TimerTask             timerTask;
+    protected SearchContext       searchContext;
 
-    private Timer                 timer;
+    protected Callback<Void>      callback;
 
-    private boolean               isScheduled         = false;
+    protected long                timestamp;
 
-    private String                lastLocation        = null;
+    private String                lastSearchUrl;
 
-    private long                  lastChangeTime      = -1;
+    //    private BufferedWriter        bw;
 
-    public GoogleController(final JWebBrowser webBrowser) {
-        this.webBrowser = webBrowser;
+    public GoogleController(ControllerManager controllerManager) {
+        super(controllerManager);
 
-        webBrowserAdapter = getWebBrowserAdapter();
+        //        try {
+        //            bw = new BufferedWriter(new FileWriter("debug.log"));
+        //        } catch (Exception e) {
+        //            e.printStackTrace();
+        //        }
     }
 
-    protected abstract WebBrowserAdapter getWebBrowserAdapter();
+    @Override
+    protected boolean isWantedLocation(String newResourceLocation) {
+        return newResourceLocation != null
+                && (GOOGLE_URL.equals(newResourceLocation)
+                        || newResourceLocation.startsWith(GOOGLE_URL + "sorry/?continue=") || newResourceLocation
+                            .startsWith(GOOGLE_URL + "search?"));
+    }
 
-    protected void updateLocation(String location) {
-        if (lastLocation != null) {
-            if (!lastLocation.equals(location)) {
-                lastChangeTime = System.currentTimeMillis();
+    @Override
+    protected void handle(WebBrowserNavigationEvent e) throws InterruptedException, InvocationTargetException {
+        SwingUtilities.invokeAndWait(new Runnable() {
+            @Override
+            public void run() {
+                String location = getWebBrowser().getResourceLocation();
+
+                // detect duplicate entry
+                if (!location.equals(GOOGLE_URL)) {
+                    if (location.equals(lastSearchUrl)) {
+                        System.err.println("old location: " + lastSearchUrl);
+                        System.err.println("new location: " + location);
+                        return;
+                    }
+
+                    if (location.startsWith(GOOGLE_URL + "search?") && lastSearchUrl != null
+                            && lastSearchUrl.startsWith(GOOGLE_URL + "search?") && isOldStart(location, lastSearchUrl)) {
+                        System.err.println("old location: " + lastSearchUrl);
+                        System.err.println("new location: " + location);
+                        return;
+                    }
+                }
+                lastSearchUrl = location;
+                //                            try {
+                //                                bw.write(progress + " - " + location + "\r\n");
+                //                                bw.flush();
+                //                            } catch (IOException e) {
+                //                                e.printStackTrace();
+                //                            }
+                if (location.equals(GOOGLE_URL)) {
+                    handleEnterGoogleSite(getWebBrowser());
+                } else if (location.startsWith(GOOGLE_URL + "sorry/?continue=")) {
+                    alert();
+                } else if (location.startsWith(GOOGLE_URL + "search?")) {
+                    sleep(1000);
+                    try {
+                        handleSearchResult(getWebBrowser());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        research();
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean isOldStart(String location, String lastSearchUrl) {
+        String locationStart = getStart(location);
+        String lastSearchUrlStart = getStart(lastSearchUrl);
+        int newStart = Integer.parseInt(locationStart);
+        return newStart > 0 && newStart <= Integer.parseInt(lastSearchUrlStart);
+    }
+
+    private String getStart(String location) {
+        int index = location.indexOf("?");
+
+        String paramStr = location.substring(index + 1);
+
+        String[] params = paramStr.split("&");
+        for (String param : params) {
+            if (param.startsWith("start=")) {
+                return param.substring("start=".length());
             }
         }
-        lastLocation = location;
+        return "0";
+    }
+
+    protected abstract void handleSearchResult(final JWebBrowser webBrowser);
+
+    protected void handleEnterGoogleSite(final JWebBrowser webBrowser) {
+        //        System.out.println("handleEnterGoogleSite");
+        webBrowser.stopLoading();
+        Object hasFehl = webBrowser.executeJavascriptWithResult(googleDotComLinkExistJs);
+        if (Boolean.parseBoolean(hasFehl.toString())) {
+            webBrowser.executeJavascript(clickGoogleDotComLinkJs);
+
+            //            String addr = (String) webBrowser
+            //                    .executeJavascriptWithResult("return document.getElementById('fehl').href;");
+            //            System.out.println(addr);
+            //            webBrowser.navigate(addr);
+            return;
+        }
+
+        if (status == Status.UNSTARRED) {
+            status = Status.KEYWORD_SEARCHING;
+            //            System.out.println("start searching...");
+            searchKeywordInMainPage(searchContext.keyword);
+        }
     }
 
     protected boolean meetEnd() {
-        String js = "return document.getElementById('pnnext').innerHTML;";
-        Object o = webBrowser.executeJavascriptWithResult(js);
-        return o == null;
-    }
-
-    public void initControl() {
-        WebBrowserListener[] listeners = webBrowser.getWebBrowserListeners();
-        for (WebBrowserListener l : listeners) {
-            webBrowser.removeWebBrowserListener(l);
-        }
-        webBrowser.addWebBrowserListener(webBrowserAdapter);
+        return getWebBrowser().executeJavascriptWithResult(nextBtnInnerHtmlJs) == null;
     }
 
     protected void alert() {
@@ -107,26 +184,15 @@ public abstract class GoogleController implements Runnable {
         try {
             Process p = Runtime.getRuntime().exec("alert.bat");
             int exitValue = p.waitFor();
-            System.out.println("exitValue: " + exitValue);
+            //            System.out.println("exitValue: " + exitValue);
         } catch (Exception e1) {
             e1.printStackTrace();
         }
     }
 
-    protected String getRealUrl(String url) throws UnsupportedEncodingException {
-        String[] urlParts = url.split("&");
-        for (String part : urlParts) {
-            int index = part.indexOf("url=");
-            if (index != -1) {
-                return URLDecoder.decode(part.substring(index + 4), URL_ENCODING);
-            }
-        }
-        return "";
-    }
-
     protected List<String> collectUrls() {
-        String js = "return document.getElementById('search').outerHTML;";
-        String divString = (String) webBrowser.executeJavascriptWithResult(js);
+        //        long timestamp = System.currentTimeMillis();
+        String divString = (String) getWebBrowser().executeJavascriptWithResult(searchResultOuterHtmlJs);
 
         if (divString == null) {
             return new ArrayList<String>();
@@ -148,104 +214,99 @@ public abstract class GoogleController implements Runnable {
                 liList.elementAt(j).accept(v);
             }
 
+            // get redirect urls
+            for (int i = 0; i < v.urlList.size(); i++) {
+                String url = v.urlList.get(i);
+                if (!url.startsWith("http")) {
+                    try {
+                        url = Utils.getRealUrl(url);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+                v.urlList.set(i, url);
+            }
+
+            //            System.out.println("collectUrls used time: " + (System.currentTimeMillis() - timestamp));
             return v.urlList;
 
         } catch (ParserException e) {
             e.printStackTrace();
-
             return new ArrayList<String>();
         }
 
     }
 
     protected void searchKeywordInMainPage(String keyword) {
-        webBrowser
-                .executeJavascript("var is=document.getElementsByTagName('input');for(var i=0;i<is.length;i++){if(is[i].type=='text'){is[i].value='"
-                        + keyword + "';}}");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        webBrowser.executeJavascript("document.getElementsByTagName('form')[0].submit();");
+        getWebBrowser().executeJavascript(String.format(inputKeywordInMainPageJsTpl, keyword.replaceAll("'", "\\\\'")));
+        sleep(500);
+        getWebBrowser().executeJavascript(clickSearchBtnJs);
     }
 
     protected String getLocation() {
-        return webBrowser.getResourceLocation().replaceAll("http[s]?://", "");
+        String location = getWebBrowser().getResourceLocation();
+        return location == null ? null : location.replaceAll("http[s]?://", "http://");
+    }
+
+    protected void nextPage() {
+        JWebBrowser webBrowser = getWebBrowser();
+        String nextPageUrl = (String) webBrowser.executeJavascriptWithResult(getNextPageUrlJs);
+        if (nextPageUrl != null) {
+            webBrowser.navigate(nextPageUrl);
+        } else {
+            webBrowser.executeJavascript(nextPageJs);
+        }
     }
 
     @Override
     public void run() {
-        urlList.clear();
+        super.run();
+        timestamp = System.currentTimeMillis();
         webBrowser.stopLoading();
-        clearSessionCookies();
-        webBrowser.navigate("http://" + GOOGLE_HK_URL);
-
-        if (!isScheduled) {
-            timer = new Timer(true);
-            timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    if (lastChangeTime > 0 && System.currentTimeMillis() - lastChangeTime > 60000
-                            && lastLocation != null && !lastLocation.startsWith("http://www.google.com/sorry/")) {
-                        restartPage();
-                    }
-                }
-            };
-            timer.schedule(timerTask, 1000, 5000);
-            isScheduled = true;
-        }
+        webBrowser.navigate(GOOGLE_URL);
     }
 
-    protected void restartPage() {
-        System.out.println("researching keyword: " + keyword);
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                stop();
-                initControl();
-                setStatus(Status.UNSTARRED);
-                lastChangeTime = System.currentTimeMillis();
-                GoogleController.this.run();
-            }
-        });
-    }
-
+    @Override
     public void stop() {
-        if (isScheduled) {
-            timerTask.cancel();
-            timer.cancel();
-            isScheduled = false;
-        }
-        WebBrowserListener[] listeners = webBrowser.getWebBrowserListeners();
-        for (WebBrowserListener l : listeners) {
-            webBrowser.removeWebBrowserListener(l);
-        }
+        status = Status.STOPPED;
         webBrowser.stopLoading();
+        //        WebBrowserListener[] listeners = webBrowser.getWebBrowserListeners();
+        //        for (WebBrowserListener l : listeners) {
+        //            webBrowser.removeWebBrowserListener(l);
+        //        }
+    }
+
+    public void setAction(Callback<Void> callback) {
+        this.callback = callback;
+    }
+
+    public void setSearchContext(SearchContext searchContext) {
+        this.searchContext = searchContext;
+    }
+
+    public SearchContext getSearchContext() {
+        return searchContext;
     }
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
-    public void setAction(Callback callback) {
-        this.callback = callback;
-    }
-
     static class ExtractUrlVistor extends NodeVisitor {
 
-        static final int MEET_DIV = 1;
+        private static final String H3       = "h3";
 
-        static final int MEET_H3  = 2;
+        private static final String CLASS    = "class";
 
-        List<String>     urlList  = new ArrayList<String>();
+        private static final String RC       = "rc";
 
-        int              status   = 0;
+        static final int            MEET_DIV = 1;
+
+        static final int            MEET_H3  = 2;
+
+        List<String>                urlList  = new ArrayList<String>();
+
+        int                         status   = 0;
 
         /**
          * Called for each <code>Tag</code> visited.
@@ -253,9 +314,9 @@ public abstract class GoogleController implements Runnable {
          */
         @Override
         public void visitTag(Tag tag) {
-            if (tag instanceof Div && "rc".equals(tag.getAttribute("class"))) {
+            if (tag instanceof Div && RC.equals(tag.getAttribute(CLASS))) {
                 status = MEET_DIV;
-            } else if (status == MEET_DIV && tag.getTagName().toLowerCase().equals("h3")) {
+            } else if (status == MEET_DIV && tag.getTagName().toLowerCase().equals(H3)) {
                 status = MEET_H3;
             } else if (status == MEET_H3 && tag instanceof LinkTag) {
                 urlList.add(((LinkTag) tag).extractLink());
@@ -264,25 +325,19 @@ public abstract class GoogleController implements Runnable {
         }
     }
 
-    public static void clearSessionCookies() {
-        Process p;
-        try {
-            p = Runtime.getRuntime().exec(
-                    new String[] { "cmd", "/c", "RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 10" });
-            int exitValue = p.waitFor();
-            System.out.print("clearSessionCookies " + (exitValue == 0 ? "succeed. " : "fail. "));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void research() {
+        stop();
+
+        System.out.printf("Re-searching keyword: %s.", searchContext.keyword);
+        //        Utils.clearSessionCookies();
+        searchContext.clear();
+        setStatus(Status.UNSTARRED);
+        run();
     }
 
-    public static void main(String[] args) {
-        clearSessionCookies();
-    }
-
-    public void setWebBrowser(JWebBrowser webBrowser) {
-        this.webBrowser = webBrowser;
+    @Override
+    public String getLastSearchUrl() {
+        return lastSearchUrl;
     }
 }

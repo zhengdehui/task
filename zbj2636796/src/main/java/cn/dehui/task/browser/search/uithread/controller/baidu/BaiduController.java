@@ -1,15 +1,12 @@
 package cn.dehui.task.browser.search.uithread.controller.baidu;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.SwingUtilities;
 
@@ -26,12 +23,14 @@ import org.htmlparser.util.ParserException;
 import org.htmlparser.visitors.NodeVisitor;
 
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
-import cn.dehui.task.browser.search.uithread.controller.util.Callback;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
+import cn.dehui.task.browser.search.uithread.controller.Controller;
+import cn.dehui.task.browser.search.uithread.controller.SearchContext;
+import cn.dehui.task.browser.search.uithread.controller.manager.ControllerManager;
+import cn.dehui.task.browser.search.util.Callback;
+import cn.dehui.task.browser.search.util.Status;
 
-public abstract class BaiduController implements Runnable {
+public abstract class BaiduController extends Controller {
 
     protected static final String BAIDU_URL           = "http://www.baidu.com/";
 
@@ -41,71 +40,26 @@ public abstract class BaiduController implements Runnable {
 
     protected static final int    URL_TO_SEARCH_COUNT = 10;
 
-    protected static final int    PROGRESS            = 95;
-
     protected static String       nextPageJs          = "var as=document.getElementsByTagName('a');for(var i=as.length-1;i>=0;i--){if(as[i].innerHTML=='下一页&gt;'){as[i].click();break;}}";
-
-    protected JWebBrowser         webBrowser;
 
     protected Status              status              = Status.UNSTARRED;
 
-    protected String              keyword;
+    private String                lastSearchUrl       = null;
 
-    protected List<Object>        urlList             = new ArrayList<Object>();
+    protected long                timestamp;
 
-    protected Callback            callback;
+    protected SearchContext       searchContext;
 
-    protected WebBrowserAdapter   webBrowserAdapter;
+    protected Callback<Void>      callback;
 
-    private TimerTask             timerTask;
-
-    private Timer                 timer;
-
-    private boolean               isScheduled         = false;
-
-    private String                lastLocation        = null;
-
-    private long                  lastChangeTime      = -1;
-
-    public BaiduController(final JWebBrowser webBrowser) {
-        this.webBrowser = webBrowser;
-
-        webBrowserAdapter = getWebBrowserAdapter();
-    }
-
-    protected abstract WebBrowserAdapter getWebBrowserAdapter();
-
-    protected void updateLocation(String location) {
-        if (lastLocation != null) {
-            if (!lastLocation.equals(location)) {
-                lastChangeTime = System.currentTimeMillis();
-            }
-        }
-        lastLocation = location;
+    public BaiduController(ControllerManager controllerManager) {
+        super(controllerManager);
     }
 
     protected boolean meetEnd() {
         String js = "var as=document.getElementsByTagName('a');for(var i=as.length-1;i>=0;i--){if(as[i].innerHTML=='下一页&gt;') return false;}return true;";
         Object o = webBrowser.executeJavascriptWithResult(js);
         return Boolean.parseBoolean(o.toString());
-    }
-
-    public void initControl() {
-        WebBrowserListener[] listeners = webBrowser.getWebBrowserListeners();
-        for (WebBrowserListener l : listeners) {
-            webBrowser.removeWebBrowserListener(l);
-        }
-        webBrowser.addWebBrowserListener(webBrowserAdapter);
-    }
-
-    protected void alert() {
-        try {
-            Process p = Runtime.getRuntime().exec("alert.bat");
-            int exitValue = p.waitFor();
-            System.out.println("exitValue: " + exitValue);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
     }
 
     protected String getRealUrl(String url) {
@@ -117,8 +71,8 @@ public abstract class BaiduController implements Runnable {
                 decode = URLDecoder.decode(redirectUrl, UTF8);
             }
             return decode;
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            //            e.printStackTrace();
             return redirectUrl;
         }
     }
@@ -186,62 +140,21 @@ public abstract class BaiduController implements Runnable {
 
     protected void searchKeywordInMainPage(String keyword) {
         webBrowser.executeJavascript("document.getElementById('kw').value='" + keyword + "';");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(500);
         webBrowser.executeJavascript("document.getElementById('su').click();");
     }
 
     @Override
     public void run() {
-        urlList.clear();
+        super.run();
+        timestamp = System.currentTimeMillis();
         webBrowser.stopLoading();
-        JWebBrowser.clearSessionCookies();
         webBrowser.navigate(BAIDU_URL);
-
-        if (!isScheduled) {
-            timer = new Timer(true);
-            timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    if (lastChangeTime > 0 && System.currentTimeMillis() - lastChangeTime > 60000
-                            && lastLocation != null && !lastLocation.startsWith("http://www.google.com/sorry/")) {
-                        restartPage();
-                    }
-                }
-            };
-            timer.schedule(timerTask, 1000, 5000);
-            isScheduled = true;
-        }
     }
 
-    protected void restartPage() {
-        System.out.println("researching keyword: " + keyword);
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                stop();
-                initControl();
-                setStatus(Status.UNSTARRED);
-                lastChangeTime = System.currentTimeMillis();
-                BaiduController.this.run();
-            }
-        });
-    }
-
+    @Override
     public void stop() {
-        if (isScheduled) {
-            timerTask.cancel();
-            timer.cancel();
-            isScheduled = false;
-        }
-        WebBrowserListener[] listeners = webBrowser.getWebBrowserListeners();
-        for (WebBrowserListener l : listeners) {
-            webBrowser.removeWebBrowserListener(l);
-        }
+        status = Status.STOPPED;
         webBrowser.stopLoading();
     }
 
@@ -249,15 +162,11 @@ public abstract class BaiduController implements Runnable {
         this.status = status;
     }
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
     public void setAction(Callback callback) {
         this.callback = callback;
     }
 
-    static class ExtractUrlVistor extends NodeVisitor {
+    class ExtractUrlVistor extends NodeVisitor {
 
         static final int MEET_TD = 1;
 
@@ -278,36 +187,12 @@ public abstract class BaiduController implements Runnable {
             } else if (status == MEET_TD && tag.getTagName().toLowerCase().equals("h3")) {
                 status = MEET_H3;
             } else if (status == MEET_H3 && tag instanceof LinkTag) {
-                urlList.add(((LinkTag) tag).extractLink());
+                String link = ((LinkTag) tag).extractLink();
+                //                System.out.println(link);
+                urlList.add(getRealUrl(link));
                 status = 0;
             }
         }
-    }
-
-    public static void main(String[] args) throws MalformedURLException, IOException {
-        String url = "http://www.baidu.com/link?url=omIIGJqjJ4zBBpC8yDF8xDh8vibiBlVaISoEbodOOdWuOktqRnIheRxwLzPg9meyPl8CUZLYszxmB896Lf4f3FLgCIUVoyAdm_CdpZEyfdKbAs3UTT5iX9Sm";
-        HttpURLConnection con = (HttpURLConnection) (new URL(url).openConnection());
-        con.setInstanceFollowRedirects(false);
-        con.connect();
-        int responseCode = con.getResponseCode();
-        System.out.println(responseCode);
-        String location = con.getHeaderField("Location");
-        System.out.println(location);
-
-        con.getInputStream().close();
-        con.disconnect();
-
-        System.out.println(URLDecoder.decode(location, "GB2312"));
-        System.out.println(isMessyCode(URLDecoder.decode(location, "GB2312")));
-        System.out.println(URLDecoder.decode(location, "utf8"));
-        System.out.println(isMessyCode(URLDecoder.decode(location, "utf8")));
-
-        System.out.println(URLDecoder.decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "GB2312"));
-        System.out.println(isMessyCode(URLDecoder
-                .decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "GB2312")));
-        System.out.println(URLDecoder.decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "utf8"));
-        System.out
-                .println(isMessyCode(URLDecoder.decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "utf8")));
     }
 
     /**
@@ -329,5 +214,106 @@ public abstract class BaiduController implements Runnable {
             }
         }
         return false;
+    }
+
+    @Override
+    public void research() {
+        stop();
+        System.out.printf("Re-searching keyword: %s.", searchContext.keyword);
+        searchContext.clear();
+        setStatus(Status.UNSTARRED);
+        run();
+    }
+
+    @Override
+    public String getLastSearchUrl() {
+        return lastSearchUrl;
+    }
+
+    @Override
+    protected void handle(WebBrowserNavigationEvent e) throws Exception {
+        SwingUtilities.invokeAndWait(new Runnable() {
+            @Override
+            public void run() {
+                String location = getWebBrowser().getResourceLocation();
+
+                // detect duplicate entry
+                if (!location.equals(BAIDU_URL)) {
+                    if (location.equals(lastSearchUrl)) {
+                        System.err.println("old location: " + lastSearchUrl);
+                        System.err.println("new location: " + location);
+                        return;
+                    }
+
+                    //                    if (location.startsWith(GOOGLE_URL + "search?") && lastSearchUrl != null
+                    //                            && lastSearchUrl.startsWith(GOOGLE_URL + "search?") && isOldStart(location, lastSearchUrl)) {
+                    //                        System.err.println("old location: " + lastSearchUrl);
+                    //                        System.err.println("new location: " + location);
+                    //                        return;
+                    //                    }
+                }
+                lastSearchUrl = location;
+                if (location.equals(BAIDU_URL)) {
+                    enterMainPage();
+                } else if (location.startsWith("http://www.baidu.com/s")) {
+                    sleep(1000);
+                    webBrowser.stopLoading();
+                    try {
+                        handleSearchResult(getWebBrowser());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        research();
+                    }
+                }
+            }
+        });
+    }
+
+    protected void enterMainPage() {
+        if (status == Status.UNSTARRED) {
+            status = Status.KEYWORD_SEARCHING;
+            searchKeywordInMainPage(searchContext.keyword);
+        }
+    }
+
+    protected abstract void handleSearchResult(final JWebBrowser webBrowser);
+
+    @Override
+    protected boolean isWantedLocation(String newResourceLocation) {
+        return true;
+    }
+
+    public void setSearchContext(SearchContext searchContext) {
+        this.searchContext = searchContext;
+    }
+
+    public SearchContext getSearchContext() {
+        return searchContext;
+    }
+
+    public static void main(String[] args) throws MalformedURLException, IOException {
+        String url = "http://www.baidu.com/link?url=PJRuW5N7IO_XNFkAsWPoMno5z2bwn1rHrQkJSoR9D0lU9KF-t-UKhw_p_rvNwdVJviJTnH9PcbkrYoEpMg2pzzzaAPCv-6VrkWABkvqSME7";
+        HttpURLConnection con = (HttpURLConnection) (new URL(url).openConnection());
+        con.setInstanceFollowRedirects(false);
+        con.connect();
+        int responseCode = con.getResponseCode();
+        System.out.println(responseCode);
+        String location = con.getHeaderField("Location");
+        System.out.println(location);
+
+        con.getInputStream().close();
+        con.disconnect();
+
+        //        System.out.println(URLDecoder.decode(location, "GB2312"));
+        //        System.out.println(isMessyCode(URLDecoder.decode(location, "GB2312")));
+        System.out.println(URLDecoder.decode(location, "utf8"));
+        System.out.println(isMessyCode(URLDecoder.decode(location, "utf8")));
+
+        System.out.println(URLDecoder.decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "GB2312"));
+        System.out.println(isMessyCode(URLDecoder
+                .decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "GB2312")));
+        System.out.println(URLDecoder.decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "utf8"));
+        System.out
+                .println(isMessyCode(URLDecoder.decode("http://www.xici.net/t_%BB%E9%C7%EC%B2%DF%BB%AE.htm", "utf8")));
     }
 }

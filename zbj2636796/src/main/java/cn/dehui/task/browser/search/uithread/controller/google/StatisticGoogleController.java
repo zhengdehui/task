@@ -1,63 +1,37 @@
 package cn.dehui.task.browser.search.uithread.controller.google;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import javax.swing.SwingUtilities;
-
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
-import cn.dehui.task.browser.search.uithread.controller.util.Status;
+import cn.dehui.task.browser.search.uithread.controller.manager.ControllerManager;
+import cn.dehui.task.browser.search.uithread.controller.manager.IStatisticController;
+import cn.dehui.task.browser.search.util.Status;
+import cn.dehui.task.browser.search.util.Utils;
 
-public class StatisticGoogleController extends GoogleController {
+public class StatisticGoogleController extends UrlGoogleController implements IStatisticController {
 
-    private Map<String, Integer> statisticMap;
+    /**
+     * 记录统计到哪个URl
+     */
+    private int    urlIndex              = 0;
 
-    private int                  urlIndex              = 0;
+    /**
+     * 记录当前的url已经统计了多少条记录，内部用来辅助统计的变量
+     */
+    private int    currentUrlResultCount = 0;
 
-    private int                  currentUrlResultCount = 0;
+    private int    maxResultPerUrl;
 
-    private Random               random                = new Random();
+    private Random random                = new Random();
 
-    private int                  maxUrlResultCount;
+    private int    waitTime;
 
-    private int                  waitTime;
+    private long   timestamp             = 0;
 
-    private File                 outputFolder;
-
-    public StatisticGoogleController(final JWebBrowser webBrowser) {
-        super(webBrowser);
-    }
-
-    private void printToFile() {
-        String format = "\"%s\",\"%d\"\r\n";
-        BufferedWriter bw = null;
-        try {
-            bw = new BufferedWriter(new FileWriter(new File(outputFolder, keyword + ".csv")));
-            for (Map.Entry<String, Integer> entry : statisticMap.entrySet()) {
-                bw.write(String.format(format, entry.getKey(), entry.getValue()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (bw != null) {
-                try {
-                    bw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public StatisticGoogleController(ControllerManager controllerManager) {
+        super(controllerManager);
     }
 
     @Override
@@ -76,192 +50,108 @@ public class StatisticGoogleController extends GoogleController {
         super.run();
     }
 
-    @Override
-    protected void restartPage() {
-        System.out.println("restart searching keyword: " + keyword);
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                stop();
-                initControl();
-                setStatus(Status.UNSTARRED);
-                StatisticGoogleController.this.run();
-            }
-        });
+    private void renewBrowser() {
+        // renew browser
+        controllerManager.renewWebBrowser();
+        getWebBrowser().navigate(GOOGLE_URL);
     }
 
     @Override
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-        statisticMap = new HashMap<String, Integer>();
+    protected void handleEnterGoogleSite(final JWebBrowser webBrowser) {
+        if (status == Status.URL_SEARCHING) {
+            timestamp = System.currentTimeMillis();
+            searchUrlInResultPage();
+            return;
+        }
+
+        super.handleEnterGoogleSite(webBrowser);
     }
 
     private void searchUrlInResultPage() {
-        if (urlIndex >= urlList.size()) {
-            // output
-            System.out.print("outputing...");
-            printToFile();
-            System.out.println("finished");
-
+        if (urlIndex >= searchContext.urlList.size()) {
             callback.execute();
             return;
         }
 
-        String url = urlList.get(urlIndex).toString();
-        try {
-            if (!url.startsWith("http")) {
-                url = getRealUrl(url);
-            }
-            url = URLDecoder.decode(url, URL_ENCODING);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        String url = searchContext.urlList.get(urlIndex);
+
+        url = Utils.removeHeadFootForUrl(Utils.decodeUrl(url));
         System.out.printf("start url: (%d) %s \r\n", urlIndex, url);
 
-        try {
-            Thread.sleep(1000 + random.nextInt(Math.abs(waitTime - 1000)));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String javascript = "var inputs=document.getElementsByTagName('input');"
-                + "for(var i=0;i<inputs.length;i++){if(inputs[i].type=='text'&&inputs[i].name=='q'){inputs[i].value='\""
-                + url + "\"';break;}}" + "document.getElementsByTagName('button')[0].click();";
-        //        String javascript = "document.getElementsByName('q')[0].value='" + url + "';"
-        //                + "document.getElementsByName('btnG')[0].click();";
-        webBrowser.executeJavascript(javascript);
+        sleep(1000 + (Math.abs(waitTime - 1000) == 0 ? 0 : random.nextInt(Math.abs(waitTime - 1000))));
+
+        searchKeywordInMainPage(url);
+
+        //        String javascript = "var inputs=document.getElementsByTagName('input');"
+        //                + "for(var i=0;i<inputs.length;i++){if(inputs[i].type=='text'&&inputs[i].name=='q'){inputs[i].value='\"%s\"';break;}}";
+        //        webBrowser.executeJavascript(String.format(javascript, url));
+        //        sleep(500);
+        //        webBrowser.executeJavascript("document.getElementsByTagName('form')[0].submit();");
     }
 
-    public void setMaxUrlResultCount(int maxUrlResultCount) {
-        this.maxUrlResultCount = maxUrlResultCount;
+    @Override
+    public void setMaxResultPerUrl(int maxResultPerUrl) {
+        this.maxResultPerUrl = maxResultPerUrl;
     }
 
+    @Override
     public void setWaitTime(int waitTime) {
         this.waitTime = waitTime;
     }
 
-    public void setOutputPath(File outputFolder) {
-        this.outputFolder = outputFolder;
-    }
-
     @Override
-    protected WebBrowserAdapter getWebBrowserAdapter() {
-        return new WebBrowserAdapter() {
-            @Override
-            public void loadingProgressChanged(WebBrowserEvent e) {
-                super.loadingProgressChanged(e);
-
-                if (webBrowser.getLoadingProgress() > PROGRESS) {
-                    SwingUtilities.invokeLater(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            int progress = webBrowser.getLoadingProgress();
-                            String location = getLocation();
-                            updateLocation(location);
-                            //                            System.out.println("--> " + location);
-
-                            if (progress > PROGRESS && location.equals(GOOGLE_URL)) {
-                                webBrowser.stopLoading();
-                                Object hasFehl = webBrowser
-                                        .executeJavascriptWithResult("return document.getElementById('fehl')!=null");
-                                if (Boolean.parseBoolean(hasFehl.toString())) {
-                                    webBrowser.executeJavascript("document.getElementById('fehl').click()");
-                                    return;
-                                }
-
-                                if (status == Status.UNSTARRED) {
-                                    status = Status.KEYWORD_SEARCHING;
-                                    searchKeywordInMainPage(keyword);
-                                }
-                            } else if (progress > PROGRESS && location.startsWith(GOOGLE_HK_URL)) {
-                                webBrowser.stopLoading();
-                                //                                webBrowser.navigate(GOOGLE_URL);
-                                webBrowser.executeJavascript("document.getElementById('fehl').click()");
-
-                            } else if (progress == 100 && location.startsWith("www.google.com/sorry/?continue=")) {
-                                //                                webBrowser.stopLoading();
-                                alert();
-                            } else if (progress == 100
-                                    && (location.startsWith("www.google.com/search") || location
-                                            .startsWith("www.google.com/webhp"))) {
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException ex) {
-                                    ex.printStackTrace();
-                                }
-                                webBrowser.stopLoading();
-                                try {
-                                    switch (status) {
-                                        case KEYWORD_SEARCHING:
-                                            List<String> urls = collectUrls();
-                                            urlList.addAll(urls);
-                                            if (urlList.size() < URL_TO_SEARCH_COUNT && !meetEnd() && !urls.isEmpty()) {
-                                                webBrowser.executeJavascript(nextPageJs);
-                                            } else {
-                                                status = Status.URL_SEARCHING;
-                                                searchUrlInResultPage();
-                                                currentUrlResultCount = 0;
-                                            }
-                                            break;
-                                        case URL_SEARCHING:
-                                            //1. get all results, calc into <keyword, Map<domain, count>>, inc currentUrlResultCount
-                                            List<String> resultUrls = collectUrls();
-
-                                            for (String url : resultUrls) {
-                                                if (!url.startsWith("http")) {
-                                                    try {
-                                                        url = getRealUrl(url);
-                                                    } catch (UnsupportedEncodingException e1) {
-                                                        e1.printStackTrace();
-                                                    }
-                                                }
-
-                                                String[] parts = url.split("/", 4);
-                                                if (parts.length < 3) {
-                                                    System.out.println(url);
-                                                }
-
-                                                String domain = parts[2];
-
-                                                int currentCount = statisticMap.containsKey(domain) ? statisticMap
-                                                        .get(domain) : 0;
-                                                statisticMap.put(domain, currentCount + 1);
-                                            }
-                                            currentUrlResultCount += resultUrls.size();
-
-                                            if (currentUrlResultCount > maxUrlResultCount || meetEnd()
-                                                    || resultUrls.isEmpty()) {
-                                                urlIndex++;
-                                                //                                                System.out.println("urlIndex: " + urlIndex);
-                                                if (urlIndex < URL_TO_SEARCH_COUNT) {
-                                                    currentUrlResultCount = 0;
-                                                    searchUrlInResultPage();
-                                                } else {
-                                                    // output
-                                                    System.out.println("outputing...");
-                                                    printToFile();
-                                                    System.out.println("finished");
-
-                                                    callback.execute();
-                                                }
-                                            } else {
-                                                webBrowser.executeJavascript(nextPageJs);
-                                            }
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                    //                                    webBrowser.reloadPage();
-                                    restartPage();
-                                }
-                            }
-                        }
-                    });
+    protected void handleSearchResult(final JWebBrowser webBrowser) {
+        switch (status) {
+            case KEYWORD_SEARCHING:
+                List<String> urls = collectUrls();
+                searchContext.urlList.addAll(urls);
+                if (searchContext.urlList.size() < maxUrlPerKeyword && !meetEnd() && !urls.isEmpty()) {
+                    //                    webBrowser.executeJavascript(nextPageJs);
+                    nextPage();
+                } else {
+                    status = Status.URL_SEARCHING;
+                    renewBrowser();
+                    currentUrlResultCount = 0;
                 }
-            }
-        };
+                break;
+            case URL_SEARCHING:
+                //1. get all results, calc into <keyword, Map<domain, count>>, inc currentUrlResultCount
+                List<String> resultUrls = collectUrls();
+
+                for (String url : resultUrls) {
+
+                    // URL should be like this: http://www.aaa.com/bbb
+                    String[] parts = url.split("/", 4);
+                    if (parts.length < 3) {
+                        System.out.println(url);
+                    }
+
+                    // 只统计域名
+                    String domain = parts[2];
+
+                    int currentCount = searchContext.statisticMap.containsKey(domain) ? searchContext.statisticMap
+                            .get(domain) : 0;
+                    searchContext.statisticMap.put(domain, currentCount + 1);
+                }
+                currentUrlResultCount += resultUrls.size();
+
+                if (currentUrlResultCount > maxResultPerUrl || meetEnd() || resultUrls.isEmpty()) {
+                    urlIndex++;
+                    if (urlIndex < maxUrlPerKeyword) {
+                        currentUrlResultCount = 0;
+                        System.out.println("Used time: " + (System.currentTimeMillis() - timestamp));
+                        renewBrowser();
+                    } else {
+                        System.out.printf("Used time: %d ms\r\n", System.currentTimeMillis() - timestamp);
+                        callback.execute();
+                    }
+                } else {
+                    //                    getWebBrowser().executeJavascript(nextPageJs);
+                    nextPage();
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

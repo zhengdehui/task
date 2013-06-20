@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.search.uithread.controller.util;
+package cn.dehui.task.browser.search.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -24,8 +24,8 @@ public class Utils {
     public static String decodeUrl(String url) {
         try {
             return URLDecoder.decode(url, URL_ENCODING);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            //            e.printStackTrace();
             return url;
         }
     }
