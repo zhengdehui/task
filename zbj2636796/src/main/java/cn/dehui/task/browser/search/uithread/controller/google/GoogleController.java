@@ -1,10 +1,22 @@
 package cn.dehui.task.browser.search.uithread.controller.google;
 
+import java.awt.AWTException;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.htmlparser.NodeFilter;
@@ -26,10 +38,15 @@ import cn.dehui.task.browser.search.uithread.controller.Controller;
 import cn.dehui.task.browser.search.uithread.controller.SearchContext;
 import cn.dehui.task.browser.search.uithread.controller.manager.ControllerManager;
 import cn.dehui.task.browser.search.util.Callback;
+import cn.dehui.task.browser.search.util.DMDLLV2.FastVerCode;
 import cn.dehui.task.browser.search.util.Status;
 import cn.dehui.task.browser.search.util.Utils;
 
 public abstract class GoogleController extends Controller {
+
+    private static String         captchaPassword;
+
+    private static String         captchaUserName;
 
     protected static final String GOOGLE_URL                  = "http://www.google.com/";
 
@@ -39,9 +56,15 @@ public abstract class GoogleController extends Controller {
 
     protected static final String URL_ENCODING                = "utf8";
 
-    private static final String   clickSearchBtnJs            = "document.getElementsByTagName('form')[0].submit();";
+    private static final String   submitFormJs                = "document.getElementsByTagName('form')[0].submit();";
 
     private static final String   inputKeywordInMainPageJsTpl = "var is=document.getElementsByTagName('input');for(var i=0;i<is.length;i++){if(is[i].type=='text'){is[i].value='%s';}}";
+
+    private static final String   inputCaptchaJsTpl           = "document.getElementById('captcha').value='%s';";
+
+    private static final String   clickSubmitBtnJs            = "document.getElementsByName('submit')[0].click()";
+
+    private static final String   isRedirectPageJs            = "return document.body.innerHTML.indexOf('Redirecting')==0;";
 
     private static final String   searchResultOuterHtmlJs     = "return document.getElementById('search').outerHTML;";
 
@@ -65,6 +88,28 @@ public abstract class GoogleController extends Controller {
 
     private String                lastSearchUrl;
 
+    private static Robot          robot;
+
+    private String                workerName                  = null;
+
+    static {
+        try {
+            robot = new Robot();
+
+            Properties properties = new Properties();
+            properties.load(new FileInputStream("config.ini"));
+
+            captchaUserName = properties.getProperty("captcha.username", "baby2321");
+            captchaPassword = properties.getProperty("captcha.password", "1234567abc");
+        } catch (AWTException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     //    private BufferedWriter        bw;
 
     public GoogleController(ControllerManager controllerManager) {
@@ -80,9 +125,8 @@ public abstract class GoogleController extends Controller {
     @Override
     protected boolean isWantedLocation(String newResourceLocation) {
         return newResourceLocation != null
-                && (GOOGLE_URL.equals(newResourceLocation)
-                        || newResourceLocation.startsWith(GOOGLE_URL + "sorry/?continue=") || newResourceLocation
-                            .startsWith(GOOGLE_URL + "search?"));
+                && (GOOGLE_URL.equals(newResourceLocation) || newResourceLocation.startsWith(GOOGLE_URL + "sorry/") || newResourceLocation
+                        .startsWith(GOOGLE_URL + "search?"));
     }
 
     @Override
@@ -115,10 +159,20 @@ public abstract class GoogleController extends Controller {
                 //                                e.printStackTrace();
                 //                            }
                 if (location.equals(GOOGLE_URL)) {
+                    workerName = null;
                     handleEnterGoogleSite(getWebBrowser());
-                } else if (location.startsWith(GOOGLE_URL + "sorry/?continue=")) {
-                    alert();
+                } else if (location.startsWith(GOOGLE_URL + "sorry/")) {
+                    if ((Boolean) getWebBrowser().executeJavascriptWithResult(isRedirectPageJs)) {
+                        return;
+                    }
+
+                    if (workerName != null) {
+                        System.out.println("report captcha error: " + workerName);
+                        FastVerCode.INSTANCE.ReportError(captchaUserName, workerName);
+                    }
+                    handleCaptcha();
                 } else if (location.startsWith(GOOGLE_URL + "search?")) {
+                    workerName = null;
                     sleep(1000);
                     try {
                         handleSearchResult(getWebBrowser());
@@ -179,15 +233,63 @@ public abstract class GoogleController extends Controller {
         return getWebBrowser().executeJavascriptWithResult(nextBtnInnerHtmlJs) == null;
     }
 
-    protected void alert() {
-        //        webBrowser.executeJavascript("alert('请输入验证码')");
+    protected void handleCaptcha() {
+
+        Point browserLocation = webBrowser.getNativeComponent().getLocationOnScreen();
+        Rectangle rect = new Rectangle((int) (browserLocation.getX()) + 30, (int) (browserLocation.getY()) + 113, 202,
+                72);
+        BufferedImage img = robot.createScreenCapture(rect);
+        //        System.out.println("img done");
         try {
-            Process p = Runtime.getRuntime().exec("alert.bat");
-            int exitValue = p.waitFor();
-            //            System.out.println("exitValue: " + exitValue);
-        } catch (Exception e1) {
-            e1.printStackTrace();
+            //            File captchaFile = new File("google_search_captcha.png");
+            //            ImageIO.write(img, "png", captchaFile);
+
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            ImageIO.write(img, "jpg", buf);
+            byte[] data = buf.toByteArray();
+
+            String[] parts = null;
+            do {
+                System.out.println("Getting captcha...");
+                String result = FastVerCode.INSTANCE.RecByte(data, data.length, captchaUserName, captchaPassword);
+
+                if (result == null) {
+                    continue;
+                }
+
+                if ("No Money!".equals(result)) {
+                    JOptionPane.showMessageDialog(webBrowser, "后台没点数了", "后台没点数了", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else if ("No Reg!".equals(result)) {
+                    JOptionPane.showMessageDialog(webBrowser, "验证码账号没注册", "验证码账号没注册", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                parts = result.split("\\|!\\|", 2);
+            } while (parts == null || parts.length < 2);
+            String captcha = parts[0];
+            workerName = parts[1];
+            System.out.printf("captcha: %s, worker: %s\r\n", captcha, workerName);
+
+            submitCaptcha(captcha);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        //        webBrowser.executeJavascript("alert('请输入验证码')");
+        //        try {
+        //            Process p = Runtime.getRuntime().exec("alert.bat");
+        //            int exitValue = p.waitFor();
+        //            //            System.out.println("exitValue: " + exitValue);
+        //        } catch (Exception e1) {
+        //            e1.printStackTrace();
+        //        }
+    }
+
+    private void submitCaptcha(String captcha) {
+        getWebBrowser().executeJavascript(String.format(inputCaptchaJsTpl, captcha));
+        sleep(100);
+        getWebBrowser().executeJavascript(clickSubmitBtnJs);
     }
 
     protected List<String> collectUrls() {
@@ -240,7 +342,7 @@ public abstract class GoogleController extends Controller {
     protected void searchKeywordInMainPage(String keyword) {
         getWebBrowser().executeJavascript(String.format(inputKeywordInMainPageJsTpl, keyword.replaceAll("'", "\\\\'")));
         sleep(500);
-        getWebBrowser().executeJavascript(clickSearchBtnJs);
+        getWebBrowser().executeJavascript(submitFormJs);
     }
 
     protected String getLocation() {
@@ -339,5 +441,13 @@ public abstract class GoogleController extends Controller {
     @Override
     public String getLastSearchUrl() {
         return lastSearchUrl;
+    }
+
+    public static void main(String[] args) {
+        String s = "kiests|!|87325570&dmhd25";
+        String[] parts = s.split("\\|!\\|");
+        for (String ss : parts) {
+            System.out.println(ss);
+        }
     }
 }
