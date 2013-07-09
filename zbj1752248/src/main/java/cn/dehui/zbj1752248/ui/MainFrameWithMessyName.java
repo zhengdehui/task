@@ -38,7 +38,7 @@ import cn.dehui.zbj1752248.FiveOneBiEmailChecker;
 
 import net.miginfocom.swing.MigLayout;
 
-public class MainFrame2 extends JFrame {
+public class MainFrameWithMessyName extends JFrame {
 
     private static final long serialVersionUID = 4635519170682763241L;
 
@@ -75,7 +75,7 @@ public class MainFrame2 extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MainFrame2 frame = new MainFrame2();
+                    MainFrameWithMessyName frame = new MainFrameWithMessyName();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -89,7 +89,7 @@ public class MainFrame2 extends JFrame {
      * @throws IOException
      * @throws NumberFormatException
      */
-    public MainFrame2() throws NumberFormatException, IOException {
+    public MainFrameWithMessyName() throws NumberFormatException, IOException {
 
         initFilePath = System.getProperty("user.home") + "/checker.ini";
         File initFile = new File(initFilePath);
@@ -128,7 +128,7 @@ public class MainFrame2 extends JFrame {
                 } catch (IOException ex) {
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(MainFrame2.this, "数字有错");
+                    JOptionPane.showMessageDialog(MainFrameWithMessyName.this, "数字有错");
 
                 } finally {
                     if (bw != null) {
@@ -258,7 +258,7 @@ public class MainFrame2 extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    statusLabel.setIcon(new ImageIcon(MainFrame2.class.getResource("/cn/dehui/zbj1752248/loading.gif")));
+                    statusLabel.setIcon(new ImageIcon(MainFrameWithMessyName.class.getResource("/cn/dehui/zbj1752248/loading.gif")));
                     statusLabel.setText("运行中...");
 
                     new Thread() {
@@ -277,7 +277,7 @@ public class MainFrame2 extends JFrame {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(MainFrame2.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MainFrameWithMessyName.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -291,7 +291,7 @@ public class MainFrame2 extends JFrame {
                 fc.setCurrentDirectory(new File("."));
                 fc.setDialogTitle("打开Email文件");
 
-                if (fc.showOpenDialog(MainFrame2.this) == JFileChooser.APPROVE_OPTION) {
+                if (fc.showOpenDialog(MainFrameWithMessyName.this) == JFileChooser.APPROVE_OPTION) {
                     inputFile = fc.getSelectedFile();
                     inputFilePathLabel.setText(inputFile.getAbsolutePath());
                 }
@@ -310,7 +310,7 @@ public class MainFrame2 extends JFrame {
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 fc.setAcceptAllFileFilterUsed(false);
 
-                if (fc.showOpenDialog(MainFrame2.this) == JFileChooser.APPROVE_OPTION) {
+                if (fc.showOpenDialog(MainFrameWithMessyName.this) == JFileChooser.APPROVE_OPTION) {
                     outputFolder = fc.getSelectedFile();
                     outputFolderPathLabel.setText(outputFolder.getAbsolutePath());
                 }

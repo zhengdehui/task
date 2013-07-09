@@ -31,9 +31,9 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import cn.dehui.zbj1752248.EmailChecker;
-import cn.dehui.zbj1752248.FanhuanEmailChecker2;
+import cn.dehui.zbj1752248.MizheEmailChecker;
 
-public class FanhuanMainFrame extends JFrame {
+public class MizheFrame extends JFrame {
 
     private static final long serialVersionUID = 4635519170682763241L;
 
@@ -43,7 +43,7 @@ public class FanhuanMainFrame extends JFrame {
 
     private File              outputFolder;
 
-    private JCheckBox         fanhuanCheckBox;
+    private JCheckBox         chckbxMmmm;
 
     private JButton           runButton;
 
@@ -62,7 +62,7 @@ public class FanhuanMainFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    FanhuanMainFrame frame = new FanhuanMainFrame();
+                    MizheFrame frame = new MizheFrame();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -76,17 +76,17 @@ public class FanhuanMainFrame extends JFrame {
      * @throws IOException
      * @throws NumberFormatException
      */
-    public FanhuanMainFrame() throws NumberFormatException, IOException {
+    public MizheFrame() throws NumberFormatException, IOException {
 
-        initFilePath = System.getProperty("user.home") + "/" + FanhuanEmailChecker2.class.getSimpleName() + ".ini";
+        initFilePath = System.getProperty("user.home") + "/" + MizheEmailChecker.class.getSimpleName() + ".ini";
         File initFile = new File(initFilePath);
         if (initFile.exists()) {
             BufferedReader br = new BufferedReader(new FileReader(initFile));
-            FanhuanEmailChecker2.sleepTime = Integer.parseInt(br.readLine());
+            MizheEmailChecker.sleepTime = Integer.parseInt(br.readLine());
             br.close();
         }
 
-        setTitle("FFFF Email Checker");
+        setTitle("MMMM Email Checker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(300, 100, 500, 400);
 
@@ -96,7 +96,7 @@ public class FanhuanMainFrame extends JFrame {
         JToolBar toolBar = new JToolBar();
         menuBar.add(toolBar);
 
-        alipaySleepTextField = new JTextField(FanhuanEmailChecker2.sleepTime + "");
+        alipaySleepTextField = new JTextField(MizheEmailChecker.sleepTime + "");
         alipaySleepTextField.setHorizontalAlignment(SwingConstants.LEFT);
         toolBar.add(alipaySleepTextField);
         alipaySleepTextField.setColumns(10);
@@ -107,7 +107,7 @@ public class FanhuanMainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 BufferedWriter bw = null;
                 try {
-                    FanhuanEmailChecker2.sleepTime = Integer.parseInt(alipaySleepTextField.getText());
+                    MizheEmailChecker.sleepTime = Integer.parseInt(alipaySleepTextField.getText());
                     File initFile = new File(initFilePath);
                     bw = new BufferedWriter(new FileWriter(initFile));
                     bw.write(alipaySleepTextField.getText());
@@ -115,7 +115,7 @@ public class FanhuanMainFrame extends JFrame {
                 } catch (IOException ex) {
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(FanhuanMainFrame.this, "数字有错");
+                    JOptionPane.showMessageDialog(MizheFrame.this, "数字有错");
 
                 } finally {
                     if (bw != null) {
@@ -134,7 +134,7 @@ public class FanhuanMainFrame extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
-        fanhuanCheckBox = new JCheckBox("ffff");
+        chckbxMmmm = new JCheckBox("mmmm");
 
         final JLabel egouTimeLabel = new JLabel("");
 
@@ -190,8 +190,8 @@ public class FanhuanMainFrame extends JFrame {
                     CountDownLatch startSignal = new CountDownLatch(1);
                     int doneCount = 0;
                     List<EmailChecker> checkerList = new ArrayList<EmailChecker>();
-                    if (fanhuanCheckBox.isSelected()) {
-                        checkerList.add(new FanhuanEmailChecker2(emailList, outputFolderPath, startSignal, null,
+                    if (chckbxMmmm.isSelected()) {
+                        checkerList.add(new MizheEmailChecker(emailList, outputFolderPath, startSignal, null,
                                 fanhuanTimeLabel, fanhuanProgressBar));
                         doneCount++;
                     }
@@ -205,7 +205,7 @@ public class FanhuanMainFrame extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    statusLabel.setIcon(new ImageIcon(FanhuanMainFrame.class
+                    statusLabel.setIcon(new ImageIcon(MizheFrame.class
                             .getResource("/cn/dehui/zbj1752248/loading.gif")));
                     statusLabel.setText("运行中...");
 
@@ -225,7 +225,7 @@ public class FanhuanMainFrame extends JFrame {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(FanhuanMainFrame.this, e.getMessage(), "Error",
+                    JOptionPane.showMessageDialog(MizheFrame.this, e.getMessage(), "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -240,7 +240,7 @@ public class FanhuanMainFrame extends JFrame {
                 fc.setCurrentDirectory(new File("."));
                 fc.setDialogTitle("打开Email文件");
 
-                if (fc.showOpenDialog(FanhuanMainFrame.this) == JFileChooser.APPROVE_OPTION) {
+                if (fc.showOpenDialog(MizheFrame.this) == JFileChooser.APPROVE_OPTION) {
                     inputFile = fc.getSelectedFile();
                     inputFilePathLabel.setText(inputFile.getAbsolutePath());
                 }
@@ -259,7 +259,7 @@ public class FanhuanMainFrame extends JFrame {
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 fc.setAcceptAllFileFilterUsed(false);
 
-                if (fc.showOpenDialog(FanhuanMainFrame.this) == JFileChooser.APPROVE_OPTION) {
+                if (fc.showOpenDialog(MizheFrame.this) == JFileChooser.APPROVE_OPTION) {
                     outputFolder = fc.getSelectedFile();
                     outputFolderPathLabel.setText(outputFolder.getAbsolutePath());
                 }
@@ -267,7 +267,7 @@ public class FanhuanMainFrame extends JFrame {
         });
         contentPane.setLayout(new MigLayout("", "[][80px][grow]",
                 "[30px][30px][30px][30px][30px][30px][30px][30px][30px][grow]"));
-        contentPane.add(fanhuanCheckBox, "cell 0 4,grow");
+        contentPane.add(chckbxMmmm, "cell 0 4,grow");
 
         contentPane.add(fanhuanProgressBar, "cell 2 4,grow");
         contentPane.add(openFileButton, "cell 0 0,grow");
@@ -288,6 +288,6 @@ public class FanhuanMainFrame extends JFrame {
         this.openFileButton.setEnabled(enabled);
         this.selectFolderButton.setEnabled(enabled);
         this.runButton.setEnabled(enabled);
-        this.fanhuanCheckBox.setEnabled(enabled);
+        this.chckbxMmmm.setEnabled(enabled);
     }
 }

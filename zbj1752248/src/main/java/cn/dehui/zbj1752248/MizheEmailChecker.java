@@ -111,4 +111,11 @@ public class MizheEmailChecker extends EmailChecker {
     protected long getPauseTime() {
         return sleepTime;
     }
+
+    public static void main(String[] args) throws Exception {
+        EmailChecker checker = new MizheEmailChecker(null, null, null, null);
+
+        System.out.println(checker.check("76778165@qq.com"));
+        System.out.println(checker.check("123314025@qq.com"));
+    }
 }

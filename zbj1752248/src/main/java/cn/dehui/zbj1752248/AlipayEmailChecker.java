@@ -5,16 +5,11 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.StringEntity;
 
 public class AlipayEmailChecker extends EmailChecker {
@@ -29,8 +24,6 @@ public class AlipayEmailChecker extends EmailChecker {
     public AlipayEmailChecker(List<String> emailList, String outputFolder, CountDownLatch startSignal,
             CountDownLatch doneSignal, JLabel label, JProgressBar bar) {
         super(emailList, outputFolder, startSignal, doneSignal, label, bar);
-
-        addHttpsSupport();
     }
 
     public AlipayEmailChecker(List<String> emailList, String outputFolder, CountDownLatch startSignal,
@@ -41,23 +34,6 @@ public class AlipayEmailChecker extends EmailChecker {
     public AlipayEmailChecker(List<String> emailList, String outputFolder, CountDownLatch startSignal,
             CountDownLatch doneSignal) {
         this(emailList, outputFolder, startSignal, doneSignal, null, null);
-    }
-
-    private void addHttpsSupport() {
-        try {
-            TrustManager easyTrustManager = createAllTrustManager();
-
-            SSLContext sslcontext = SSLContext.getInstance("TLS");
-            sslcontext.init(null, new TrustManager[] { easyTrustManager }, null);
-            SSLSocketFactory sf = new SSLSocketFactory(sslcontext);
-            sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-            Scheme sch = new Scheme("https", sf, 443);
-
-            client.getConnectionManager().getSchemeRegistry().register(sch);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -96,21 +72,4 @@ public class AlipayEmailChecker extends EmailChecker {
         return sleepTime;
     }
 
-    private TrustManager createAllTrustManager() {
-        TrustManager easyTrustManager = new X509TrustManager() {
-
-            public void checkClientTrusted(java.security.cert.X509Certificate[] x509Certificates, String s)
-                    throws java.security.cert.CertificateException {
-            }
-
-            public void checkServerTrusted(java.security.cert.X509Certificate[] x509Certificates, String s)
-                    throws java.security.cert.CertificateException {
-            }
-
-            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                return null;
-            }
-        };
-        return easyTrustManager;
-    }
 }
