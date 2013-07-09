@@ -20,7 +20,7 @@ import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 
 public class MainFrame extends JFrame {
@@ -90,14 +90,6 @@ public class MainFrame extends JFrame {
         webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
 
             @Override
-            public void loadingProgressChanged(WebBrowserEvent e) {
-                super.loadingProgressChanged(e);
-                if (webBrowser.getLoadingProgress() == 100) {
-
-                }
-            }
-
-            @Override
             public void locationChanged(WebBrowserNavigationEvent e) {
                 super.locationChanged(e);
                 int count = 0;
@@ -115,7 +107,6 @@ public class MainFrame extends JFrame {
     }
 
     private void handle(WebBrowserNavigationEvent e) {
-        //        String location = webBrowser.getResourceLocation();
         String location = e.getNewResourceLocation();
         //        System.out.println("Location: " + location);
 
@@ -128,13 +119,6 @@ public class MainFrame extends JFrame {
             if (urls != null) {
                 return;
             }
-
-            //                        String js = "var urls = new Array();"
-            //                                + "var as = document.getElementById('ContainerFrame').contentWindow.document.getElementsByTagName('a');"
-            //                                + "for(var i = 0; i < as.length; i++){"
-            //                                + "if(as[i].innerHTML == '修改'){"
-            //                                + "var url = as[i].href.substring(as[i].href.indexOf(\"'\") + 1, as[i].href.length - 1);"
-            //                                + "urls.push(url);}}" + "return urls;";
 
             urls = (Object[]) webBrowser.executeJavascriptWithResult(GET_URLS_JS);
 
@@ -154,17 +138,6 @@ public class MainFrame extends JFrame {
             sleep(interval);
             webBrowser.executeJavascript(SUBMIT_JS);
             System.out.println("发布: " + location);
-
-            //                System.out.println("into submit...");
-            //
-            //                Object buttonTitle = webBrowser.executeJavascriptWithResult(GET_BUTTON_TEXT_JS);
-            //                System.out.println("buttonTitle: " + buttonTitle);
-            //                if (buttonTitle != null) {
-            //                    webBrowser.stopLoading();
-            //                    toSubmit = false;
-            //                    sleep(interval);
-            //                    webBrowser.executeJavascript(SUBMIT_JS);
-            //                }
         } else if (location.startsWith("http://v.58.com/v2/zppostreceive")) {
             if (!on) {
                 webBrowser.stopLoading();
@@ -174,20 +147,39 @@ public class MainFrame extends JFrame {
             sleep(1000);
             if (urlIndex == urls.length) {
                 urlIndex = 0;
+                renewWebBrowser();
+                urls = null;
+                webBrowser.navigate("http://vip.58.com/app/position/");
+                return;
             }
             String url = (String) urls[urlIndex++];
             webBrowser.navigate(url);
             System.out.println("修改: " + url);
-
-            //                System.out.println("into confirm...");
-            //                webBrowser.stopLoading();
-            //                sleep(1000);
-            //                if (urlIndex == urls.length) {
-            //                    urlIndex = 0;
-            //                }
-            //                toSubmit = true;
-            //                webBrowser.navigate((String) urls[urlIndex++]);
         }
+    }
+
+    private void renewWebBrowser() {
+        System.out.println("renewing browser...");
+        webBrowser.stopLoading();
+
+        WebBrowserListener[] listeners = webBrowser.getWebBrowserListeners();
+        for (WebBrowserListener l : listeners) {
+            webBrowser.removeWebBrowserListener(l);
+        }
+
+        webBrowser.disposeNativePeer();
+        tabbedPane.remove(webBrowser);
+
+        webBrowser = null;
+
+        if (NativeInterface.isOpen()) {
+            NativeInterface.close();
+        }
+        NativeInterface.open();
+
+        JWebBrowser newBrowser = createBrowser();
+        webBrowser = newBrowser;
+        tabbedPane.add("job.58", newBrowser);
     }
 
     protected static void sleep(int millis) {
