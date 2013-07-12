@@ -248,16 +248,15 @@ public abstract class EmailChecker extends Thread {
 
     private HttpParams createHttpParams() {
         HttpParams params = new BasicHttpParams();
-        HttpProtocolParams.setUserAgent(params, "Mozilla/5.0 (Windows NT 6.2; rv:22.0) Gecko/20100101 Firefox/22.0");
+        HttpProtocolParams.setUserAgent(params, getUserAgent());
         HttpConnectionParams.setConnectionTimeout(params, 5000);
         HttpConnectionParams.setSoTimeout(params, 10000);
         HttpClientParams.setCookiePolicy(params, CookiePolicy.BROWSER_COMPATIBILITY);
         return params;
     }
 
-    protected void setFireFoxHeaders(AbstractHttpMessage abstractHttpMessage) {
-        abstractHttpMessage
-                .setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.2; rv:22.0) Gecko/20100101 Firefox/22.0");
+    protected void setHeaders(AbstractHttpMessage abstractHttpMessage) {
+        abstractHttpMessage.setHeader("User-Agent", getUserAgent());
         abstractHttpMessage.setHeader("Accept", "*/*");
         abstractHttpMessage.setHeader("Accept-Language", "zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3");
         abstractHttpMessage.setHeader("Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7");
@@ -265,6 +264,10 @@ public abstract class EmailChecker extends Thread {
         abstractHttpMessage.setHeader("Keep-Alive", "300");
         abstractHttpMessage.setHeader("Connection", "keep-alive");
         abstractHttpMessage.setHeader("Cache-Control", "no-cache");
+    }
+
+    protected String getUserAgent() {
+        return "Mozilla/5.0 (Windows NT 6.2; rv:22.0) Gecko/20100101 Firefox/22.0";
     }
 
     public void setDoneSignal(CountDownLatch doneSignal) {

@@ -14,6 +14,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 public class FanhuanEmailChecker extends EmailChecker {
 
@@ -39,18 +40,27 @@ public class FanhuanEmailChecker extends EmailChecker {
     public boolean check(String email) throws Exception {
         String url = CHECK_URL_TEMPLATE + getEmailParamStr(email);
         HttpGet httpGet = new HttpGet(url);
-        setFireFoxHeaders(httpGet);
-        HttpResponse response = client.execute(httpGet);
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != 200) {
-            throw new Exception(String.format("Fanhuan Status Code: %d, email: %s", statusCode, email));
-        }
+        setHeaders(httpGet);
+        httpGet.setHeader("Referer", "http://passport.fanhuan.com/reg/");
+        httpGet.setHeader("X-Requested-With", "XMLHttpRequest");
+        HttpResponse response = null;
+        try {
+            response = client.execute(httpGet);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                throw new Exception(String.format("Fanhuan Status Code: %d, email: %s", statusCode, email));
+            }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        String line = br.readLine();
-        br.close();
-        //        return !Boolean.parseBoolean(line);
-        return line.contains("\"Succeed\":false");
+            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            String line = br.readLine();
+            br.close();
+            //        return !Boolean.parseBoolean(line);
+            return line.contains("\"Succeed\":false");
+        } finally {
+            if (response != null && response.getEntity() != null) {
+                EntityUtils.consumeQuietly(response.getEntity());
+            }
+        }
     }
 
     private String getEmailParamStr(String email) {
@@ -72,7 +82,7 @@ public class FanhuanEmailChecker extends EmailChecker {
     }
 
     public static final void main(String[] args) throws Exception {
-        EmailChecker checker = new FanhuanEmailChecker2(null, null, null, null);
+        EmailChecker checker = new FanhuanEmailChecker(null, null, null, null);
 
         System.out.println(checker.check("123314025@qq.com"));
         System.out.println(checker.check("dhzheng3@gmail.com"));

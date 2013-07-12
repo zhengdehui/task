@@ -14,6 +14,7 @@ import javax.swing.JProgressBar;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.util.EntityUtils;
 
 public class FiveOneBiEmailChecker extends EmailChecker {
 
@@ -42,17 +43,24 @@ public class FiveOneBiEmailChecker extends EmailChecker {
     public boolean check(String email) throws Exception {
         String url = String.format(CHECK_URL_TEMPLATE, email, dateFormat.format(new Date()));
         HttpGet httpGet = new HttpGet(url);
-        setFireFoxHeaders(httpGet);
-        HttpResponse response = client.execute(httpGet);
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != 200) {
-            throw new Exception(String.format("51Bi Status Code: %d, email: %s", statusCode, email));
-        }
+        setHeaders(httpGet);
+        HttpResponse response = null;
+        try {
+            response = client.execute(httpGet);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                throw new Exception(String.format("51Bi Status Code: %d, email: %s", statusCode, email));
+            }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        String line = br.readLine();
-        br.close();
-        return !"exist".equals(line);
+            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            String line = br.readLine();
+            br.close();
+            return !"exist".equals(line);
+        } finally {
+            if (response != null && response.getEntity() != null) {
+                EntityUtils.consumeQuietly(response.getEntity());
+            }
+        }
     }
 
     @Override

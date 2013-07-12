@@ -17,6 +17,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 public class FanliEmailChecker extends EmailChecker {
 
@@ -43,24 +44,31 @@ public class FanliEmailChecker extends EmailChecker {
     public boolean check(String email) throws Exception {
         String url = CHECK_URL_TEMPLATE + getEmailParamStr(email) + "&" + new Date().getTime();
         HttpPost httpPost = new HttpPost(url);
-        setFireFoxHeaders(httpPost);
-        HttpResponse response = client.execute(httpPost);
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != 200) {
-            throw new Exception(String.format("51Fanli Status Code: %d, email: %s", statusCode, email));
-        }
+        setHeaders(httpPost);
+        HttpResponse response = null;
+        try {
+            response = client.execute(httpPost);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                throw new Exception(String.format("51Fanli Status Code: %d, email: %s", statusCode, email));
+            }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
-        String json = br.readLine();
-        br.close();
+            String json = br.readLine();
+            br.close();
 
-        Matcher matcher = pattern.matcher(json);
-        if (matcher.find()) {
-            String status = matcher.group(1);
-            return "10003".equals(status) || "10007".equals(status);
-        } else {
-            return false;
+            Matcher matcher = pattern.matcher(json);
+            if (matcher.find()) {
+                String status = matcher.group(1);
+                return "10003".equals(status) || "10007".equals(status);
+            } else {
+                return false;
+            }
+        } finally {
+            if (response != null && response.getEntity() != null) {
+                EntityUtils.consumeQuietly(response.getEntity());
+            }
         }
     }
 

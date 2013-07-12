@@ -10,6 +10,7 @@ import javax.swing.JProgressBar;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.util.EntityUtils;
 
 public class EgouEmailChecker extends EmailChecker {
 
@@ -39,17 +40,24 @@ public class EgouEmailChecker extends EmailChecker {
     public boolean check(String email) throws Exception {
         String url = String.format(CHECK_URL_TEMPLATE, email);
         HttpPost httpPost = new HttpPost(url);
-        setFireFoxHeaders(httpPost);
-        HttpResponse response = client.execute(httpPost);
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != 200) {
-            throw new Exception(String.format("Egou Status Code: %d, email: %s", statusCode, email));
-        }
+        setHeaders(httpPost);
+        HttpResponse response = null;
+        try {
+            response = client.execute(httpPost);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                throw new Exception(String.format("Egou Status Code: %d, email: %s", statusCode, email));
+            }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        String line = br.readLine();
-        br.close();
-        return Boolean.parseBoolean(line);
+            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            String line = br.readLine();
+            br.close();
+            return Boolean.parseBoolean(line);
+        } finally {
+            if (response != null && response.getEntity() != null) {
+                EntityUtils.consumeQuietly(response.getEntity());
+            }
+        }
     }
 
     @Override

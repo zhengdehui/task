@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -60,6 +59,7 @@ public class MizheFrame extends JFrame {
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     MizheFrame frame = new MizheFrame();
@@ -104,6 +104,7 @@ public class MizheFrame extends JFrame {
 
         JButton saveAlipaySleepBtn = new JButton("保存");
         saveAlipaySleepBtn.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 BufferedWriter bw = null;
                 try {
@@ -153,6 +154,7 @@ public class MizheFrame extends JFrame {
 
         runButton = new JButton("运行");
         runButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 if (inputFile == null || outputFolder == null) {
                     return;
@@ -205,8 +207,8 @@ public class MizheFrame extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    statusLabel.setIcon(new ImageIcon(MizheFrame.class
-                            .getResource("/cn/dehui/zbj1752248/loading.gif")));
+                    //                    statusLabel.setIcon(new ImageIcon(MizheFrame.class.getClassLoader().getResource(
+                    //                            "/cn/dehui/zbj1752248/loading.gif")));
                     statusLabel.setText("运行中...");
 
                     new Thread() {
@@ -225,8 +227,7 @@ public class MizheFrame extends JFrame {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(MizheFrame.this, e.getMessage(), "Error",
-                            JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MizheFrame.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -235,6 +236,7 @@ public class MizheFrame extends JFrame {
         openFileButton = new JButton("打开Email文件");
         openFileButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
                 fc.setCurrentDirectory(new File("."));
@@ -251,6 +253,7 @@ public class MizheFrame extends JFrame {
         selectFolderButton = new JButton("选择输出目录");
         selectFolderButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
 

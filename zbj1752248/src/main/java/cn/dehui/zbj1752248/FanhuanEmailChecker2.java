@@ -14,6 +14,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 public class FanhuanEmailChecker2 extends EmailChecker {
 
@@ -41,21 +42,28 @@ public class FanhuanEmailChecker2 extends EmailChecker {
     public boolean check(String email) throws Exception {
         String url = CHECK_URL_TEMPLATE + getEmailParamStr(email);
         HttpGet httpGet = new HttpGet(url);
-        setFireFoxHeaders(httpGet);
+        setHeaders(httpGet);
         httpGet.setHeader("Referer", "http://passport.fanhuan.com/reg/");
-        HttpResponse response = client.execute(httpGet);
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != 200) {
-            throw new Exception(String.format("Fanhuan Status Code: %d, email: %s", statusCode, email));
+        HttpResponse response = null;
+        try {
+            response = client.execute(httpGet);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                throw new Exception(String.format("Fanhuan Status Code: %d, email: %s", statusCode, email));
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            // {"Error":null,"Result":{"Succeed":true,"Remark":"123314025@qq.com"}}
+            // ({"Error":{"Code":204,,"Msg":"您输入的邮箱已存在！"},"Result":null})
+            String line = br.readLine();
+            br.close();
+
+            return !line.contains("\"Keyword\":\"existed_email\"");
+        } finally {
+            if (response != null && response.getEntity() != null) {
+                EntityUtils.consumeQuietly(response.getEntity());
+            }
         }
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        // {"Error":null,"Result":{"Succeed":true,"Remark":"123314025@qq.com"}}
-        // ({"Error":{"Code":204,,"Msg":"您输入的邮箱已存在！"},"Result":null})
-        String line = br.readLine();
-        br.close();
-
-        return !line.contains("\"Keyword\":\"existed_email\"");
     }
 
     private String getEmailParamStr(String email) {
@@ -79,5 +87,12 @@ public class FanhuanEmailChecker2 extends EmailChecker {
     @Override
     protected long getPauseTime() {
         return sleepTime;
+    }
+
+    public static final void main(String[] args) throws Exception {
+        EmailChecker checker = new FanhuanEmailChecker2(null, null, null, null);
+
+        System.out.println(checker.check("123314025@qq.com"));
+        System.out.println(checker.check("dhzheng3@gmail.com"));
     }
 }
