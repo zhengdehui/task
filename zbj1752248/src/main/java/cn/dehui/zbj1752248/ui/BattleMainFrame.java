@@ -61,6 +61,7 @@ public class BattleMainFrame extends JFrame {
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -106,6 +107,7 @@ public class BattleMainFrame extends JFrame {
 
         JButton saveAlipaySleepBtn = new JButton("保存");
         saveAlipaySleepBtn.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 BufferedWriter bw = null;
                 try {
@@ -155,6 +157,7 @@ public class BattleMainFrame extends JFrame {
 
         runButton = new JButton("运行");
         runButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 if (inputFile == null || outputFolder == null) {
                     return;
@@ -207,8 +210,7 @@ public class BattleMainFrame extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    statusLabel.setIcon(new ImageIcon(BattleMainFrame.class
-                            .getResource("/cn/dehui/zbj1752248/loading.gif")));
+                    statusLabel.setIcon(new ImageIcon(ClassLoader.getSystemResource("loading.gif")));
                     statusLabel.setText("运行中...");
 
                     new Thread() {
@@ -237,6 +239,7 @@ public class BattleMainFrame extends JFrame {
         openFileButton = new JButton("打开Email文件");
         openFileButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
                 fc.setCurrentDirectory(new File("."));
@@ -253,6 +256,7 @@ public class BattleMainFrame extends JFrame {
         selectFolderButton = new JButton("选择输出目录");
         selectFolderButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
 

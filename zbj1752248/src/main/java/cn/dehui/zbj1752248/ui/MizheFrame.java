@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -50,7 +51,7 @@ public class MizheFrame extends JFrame {
 
     private JButton           selectFolderButton;
 
-    private JTextField        alipaySleepTextField;
+    private JTextField        sleepTextField;
 
     private String            initFilePath;
 
@@ -96,11 +97,11 @@ public class MizheFrame extends JFrame {
         JToolBar toolBar = new JToolBar();
         menuBar.add(toolBar);
 
-        alipaySleepTextField = new JTextField(MizheEmailChecker.sleepTime + "");
-        alipaySleepTextField.setHorizontalAlignment(SwingConstants.LEFT);
-        toolBar.add(alipaySleepTextField);
-        alipaySleepTextField.setColumns(10);
-        alipaySleepTextField.setMaximumSize(new Dimension(60, 30));
+        sleepTextField = new JTextField(MizheEmailChecker.sleepTime + "");
+        sleepTextField.setHorizontalAlignment(SwingConstants.LEFT);
+        toolBar.add(sleepTextField);
+        sleepTextField.setColumns(10);
+        sleepTextField.setMaximumSize(new Dimension(60, 30));
 
         JButton saveAlipaySleepBtn = new JButton("保存");
         saveAlipaySleepBtn.addActionListener(new ActionListener() {
@@ -108,10 +109,10 @@ public class MizheFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 BufferedWriter bw = null;
                 try {
-                    MizheEmailChecker.sleepTime = Integer.parseInt(alipaySleepTextField.getText());
+                    MizheEmailChecker.sleepTime = Integer.parseInt(sleepTextField.getText());
                     File initFile = new File(initFilePath);
                     bw = new BufferedWriter(new FileWriter(initFile));
-                    bw.write(alipaySleepTextField.getText());
+                    bw.write(sleepTextField.getText());
                     bw.flush();
                 } catch (IOException ex) {
 
@@ -207,8 +208,7 @@ public class MizheFrame extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    //                    statusLabel.setIcon(new ImageIcon(MizheFrame.class.getClassLoader().getResource(
-                    //                            "/cn/dehui/zbj1752248/loading.gif")));
+                    statusLabel.setIcon(new ImageIcon(ClassLoader.getSystemResource("loading.gif")));
                     statusLabel.setText("运行中...");
 
                     new Thread() {

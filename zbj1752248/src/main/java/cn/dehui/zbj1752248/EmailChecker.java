@@ -52,7 +52,7 @@ public abstract class EmailChecker extends Thread {
 
     private BufferedWriter errorEmailWriter;
 
-    private int            retryTimes    = 10;
+    protected int          retryTimes    = 10;
 
     private int            retryInterval = 100;
 

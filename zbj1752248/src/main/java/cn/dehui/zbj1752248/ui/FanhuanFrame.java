@@ -31,7 +31,7 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import cn.dehui.zbj1752248.EmailChecker;
-import cn.dehui.zbj1752248.FanhuanEmailChecker2;
+import cn.dehui.zbj1752248.FanhuanEmailChecker;
 
 public class FanhuanFrame extends JFrame {
 
@@ -60,6 +60,7 @@ public class FanhuanFrame extends JFrame {
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     FanhuanFrame frame = new FanhuanFrame();
@@ -78,11 +79,11 @@ public class FanhuanFrame extends JFrame {
      */
     public FanhuanFrame() throws NumberFormatException, IOException {
 
-        initFilePath = System.getProperty("user.home") + "/" + FanhuanEmailChecker2.class.getSimpleName() + ".ini";
+        initFilePath = System.getProperty("user.home") + "/" + FanhuanEmailChecker.class.getSimpleName() + ".ini";
         File initFile = new File(initFilePath);
         if (initFile.exists()) {
             BufferedReader br = new BufferedReader(new FileReader(initFile));
-            FanhuanEmailChecker2.sleepTime = Integer.parseInt(br.readLine());
+            FanhuanEmailChecker.sleepTime = Integer.parseInt(br.readLine());
             br.close();
         }
 
@@ -96,7 +97,7 @@ public class FanhuanFrame extends JFrame {
         JToolBar toolBar = new JToolBar();
         menuBar.add(toolBar);
 
-        alipaySleepTextField = new JTextField(FanhuanEmailChecker2.sleepTime + "");
+        alipaySleepTextField = new JTextField(FanhuanEmailChecker.sleepTime + "");
         alipaySleepTextField.setHorizontalAlignment(SwingConstants.LEFT);
         toolBar.add(alipaySleepTextField);
         alipaySleepTextField.setColumns(10);
@@ -104,10 +105,11 @@ public class FanhuanFrame extends JFrame {
 
         JButton saveAlipaySleepBtn = new JButton("保存");
         saveAlipaySleepBtn.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 BufferedWriter bw = null;
                 try {
-                    FanhuanEmailChecker2.sleepTime = Integer.parseInt(alipaySleepTextField.getText());
+                    FanhuanEmailChecker.sleepTime = Integer.parseInt(alipaySleepTextField.getText());
                     File initFile = new File(initFilePath);
                     bw = new BufferedWriter(new FileWriter(initFile));
                     bw.write(alipaySleepTextField.getText());
@@ -153,6 +155,7 @@ public class FanhuanFrame extends JFrame {
 
         runButton = new JButton("运行");
         runButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 if (inputFile == null || outputFolder == null) {
                     return;
@@ -191,7 +194,7 @@ public class FanhuanFrame extends JFrame {
                     int doneCount = 0;
                     List<EmailChecker> checkerList = new ArrayList<EmailChecker>();
                     if (fanhuanCheckBox.isSelected()) {
-                        checkerList.add(new FanhuanEmailChecker2(emailList, outputFolderPath, startSignal, null,
+                        checkerList.add(new FanhuanEmailChecker(emailList, outputFolderPath, startSignal, null,
                                 fanhuanTimeLabel, fanhuanProgressBar));
                         doneCount++;
                     }
@@ -205,8 +208,7 @@ public class FanhuanFrame extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    statusLabel.setIcon(new ImageIcon(FanhuanFrame.class
-                            .getResource("/cn/dehui/zbj1752248/loading.gif")));
+                    statusLabel.setIcon(new ImageIcon(ClassLoader.getSystemResource("loading.gif")));
                     statusLabel.setText("运行中...");
 
                     new Thread() {
@@ -225,8 +227,7 @@ public class FanhuanFrame extends JFrame {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(FanhuanFrame.this, e.getMessage(), "Error",
-                            JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(FanhuanFrame.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -235,6 +236,7 @@ public class FanhuanFrame extends JFrame {
         openFileButton = new JButton("打开Email文件");
         openFileButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
                 fc.setCurrentDirectory(new File("."));
@@ -251,6 +253,7 @@ public class FanhuanFrame extends JFrame {
         selectFolderButton = new JButton("选择输出目录");
         selectFolderButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
 

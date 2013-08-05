@@ -29,14 +29,13 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import net.miginfocom.swing.MigLayout;
 import cn.dehui.zbj1752248.AlipayEmailChecker;
 import cn.dehui.zbj1752248.EgouEmailChecker;
 import cn.dehui.zbj1752248.EmailChecker;
 import cn.dehui.zbj1752248.FanhuanEmailChecker;
 import cn.dehui.zbj1752248.FanliEmailChecker;
 import cn.dehui.zbj1752248.FiveOneBiEmailChecker;
-
-import net.miginfocom.swing.MigLayout;
 
 public class MainFrameWithMessyName extends JFrame {
 
@@ -73,6 +72,7 @@ public class MainFrameWithMessyName extends JFrame {
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     MainFrameWithMessyName frame = new MainFrameWithMessyName();
@@ -117,6 +117,7 @@ public class MainFrameWithMessyName extends JFrame {
 
         JButton saveAlipaySleepBtn = new JButton("保存");
         saveAlipaySleepBtn.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 BufferedWriter bw = null;
                 try {
@@ -186,6 +187,7 @@ public class MainFrameWithMessyName extends JFrame {
 
         runButton = new JButton("运行");
         runButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 if (inputFile == null || outputFolder == null) {
                     return;
@@ -258,7 +260,7 @@ public class MainFrameWithMessyName extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    statusLabel.setIcon(new ImageIcon(MainFrameWithMessyName.class.getResource("/cn/dehui/zbj1752248/loading.gif")));
+                    statusLabel.setIcon(new ImageIcon(ClassLoader.getSystemResource("loading.gif")));
                     statusLabel.setText("运行中...");
 
                     new Thread() {
@@ -277,7 +279,8 @@ public class MainFrameWithMessyName extends JFrame {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(MainFrameWithMessyName.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MainFrameWithMessyName.this, e.getMessage(), "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -286,6 +289,7 @@ public class MainFrameWithMessyName extends JFrame {
         openFileButton = new JButton("打开Email文件");
         openFileButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
                 fc.setCurrentDirectory(new File("."));
@@ -302,6 +306,7 @@ public class MainFrameWithMessyName extends JFrame {
         selectFolderButton = new JButton("选择输出目录");
         selectFolderButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
 

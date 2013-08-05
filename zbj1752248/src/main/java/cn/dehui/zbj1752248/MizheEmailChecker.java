@@ -29,6 +29,11 @@ import org.htmlparser.tags.ParagraphTag;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 
+/**
+ * 验证email接口对qq邮箱无效，用登陆方法验证（居然可以绕过验证吗-_-）超过20次封IP
+ * @author dehui
+ */
+@Deprecated
 public class MizheEmailChecker extends EmailChecker {
 
     private static final String UTF8         = "utf8";

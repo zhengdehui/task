@@ -1,7 +1,5 @@
 package cn.dehui.zbj1752248;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -18,7 +16,9 @@ import org.apache.http.util.EntityUtils;
 
 public class FanhuanEmailChecker extends EmailChecker {
 
-    //    private static final String CHECK_URL_TEMPLATE = "http://www.fanhuan.com/ajax/registered?";
+    public static int           sleepTime          = System.getProperty("fanhuan.sleep") == null ? 100 : Integer
+                                                           .parseInt(System.getProperty("fanhuan.sleep"));
+
     private static final String CHECK_URL_TEMPLATE = "http://passport.fanhuan.com/ajax/existedIdentifier?";
 
     public FanhuanEmailChecker(List<String> emailList, String outputFolder, CountDownLatch startSignal,
@@ -51,10 +51,7 @@ public class FanhuanEmailChecker extends EmailChecker {
                 throw new Exception(String.format("Fanhuan Status Code: %d, email: %s", statusCode, email));
             }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            String line = br.readLine();
-            br.close();
-            //        return !Boolean.parseBoolean(line);
+            String line = EntityUtils.toString(response.getEntity(), "utf8");
             return line.contains("\"Succeed\":false");
         } finally {
             if (response != null && response.getEntity() != null) {
@@ -78,7 +75,7 @@ public class FanhuanEmailChecker extends EmailChecker {
 
     @Override
     protected long getPauseTime() {
-        return 100;
+        return sleepTime;
     }
 
     public static final void main(String[] args) throws Exception {

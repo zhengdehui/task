@@ -58,6 +58,7 @@ public class MainFrame extends JFrame {
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     MainFrame frame = new MainFrame();
@@ -101,6 +102,7 @@ public class MainFrame extends JFrame {
 
         runButton = new JButton("运行");
         runButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 if (inputFile == null) {
                     return;
@@ -167,7 +169,7 @@ public class MainFrame extends JFrame {
                     startSignal.countDown();
 
                     setEnabledAll(false);
-                    statusLabel.setIcon(new ImageIcon(MainFrame.class.getResource("/cn/dehui/zbj1752248/loading.gif")));
+                    statusLabel.setIcon(new ImageIcon(ClassLoader.getSystemResource("loading.gif")));
                     statusLabel.setText("运行中...");
 
                     new Thread() {
@@ -195,6 +197,7 @@ public class MainFrame extends JFrame {
         openFileButton = new JButton("打开Email文件");
         openFileButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
                 fc.setCurrentDirectory(new File("."));
@@ -211,6 +214,7 @@ public class MainFrame extends JFrame {
         selectFolderButton = new JButton("选择输出目录");
         selectFolderButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
 

@@ -1,7 +1,5 @@
 package cn.dehui.zbj1752248;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +14,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
 
+/**
+ * 超过60次封IP
+ * @author dehui
+ */
+@Deprecated
 public class FiveOneBiEmailChecker extends EmailChecker {
 
     private static final String CHECK_URL_TEMPLATE = "http://www.51bi.com/checkMail.ok?email=%s&ts=%s";
@@ -44,6 +47,8 @@ public class FiveOneBiEmailChecker extends EmailChecker {
         String url = String.format(CHECK_URL_TEMPLATE, email, dateFormat.format(new Date()));
         HttpGet httpGet = new HttpGet(url);
         setHeaders(httpGet);
+        httpGet.setHeader("Referer",
+                "http://www.51bi.com/space/biuser/register.jsp?currentUrl=http%3A%2F%2Fwww.51bi.com%2F");
         HttpResponse response = null;
         try {
             response = client.execute(httpGet);
@@ -52,9 +57,8 @@ public class FiveOneBiEmailChecker extends EmailChecker {
                 throw new Exception(String.format("51Bi Status Code: %d, email: %s", statusCode, email));
             }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            String line = br.readLine();
-            br.close();
+            String line = EntityUtils.toString(response.getEntity(), "utf8");
+            System.out.println(line);
             return !"exist".equals(line);
         } finally {
             if (response != null && response.getEntity() != null) {
@@ -70,6 +74,13 @@ public class FiveOneBiEmailChecker extends EmailChecker {
 
     @Override
     protected long getPauseTime() {
-        return 100;
+        return 1000;
+    }
+
+    public static final void main(String[] args) throws Exception {
+        EmailChecker checker = new FiveOneBiEmailChecker(null, null, null, null);
+
+        System.out.println(checker.check("123314025@qq.com"));
+        System.out.println(checker.check("dhzheng3@gmail.com"));
     }
 }
