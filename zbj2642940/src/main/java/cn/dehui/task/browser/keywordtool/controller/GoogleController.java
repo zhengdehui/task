@@ -1,16 +1,13 @@
 package cn.dehui.task.browser.keywordtool.controller;
 
-import java.awt.BorderLayout;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.htmlparser.Node;
 import org.htmlparser.Parser;
@@ -24,8 +21,6 @@ import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 import org.htmlparser.visitors.NodeVisitor;
 
-import chrriis.common.UIUtils;
-import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
 import cn.dehui.task.browser.keywordtool.controller.util.AdwordsKeywordInfo;
@@ -36,6 +31,16 @@ import cn.dehui.task.browser.keywordtool.controller.util.Status;
  */
 public class GoogleController extends Controller {
 
+    private static final String __C_REGEX       = "__c=\\d+";
+
+    private static final String __U_REGEX       = "__u=\\d+";
+
+    private static Pattern      cPattern        = Pattern.compile(__C_REGEX);
+
+    private static Pattern      uPattern        = Pattern.compile(__U_REGEX);
+
+    private static final String KEYWORD_URL_TPL = "https://adwords.google.com/o/Targeting/Explorer?__o=kp&ideaRequestType=KEYWORD_IDEAS&%s&%s";
+
     @Override
     protected WebBrowserAdapter getWebBrowserListener() {
         return new WebBrowserAdapter() {
@@ -44,135 +49,140 @@ public class GoogleController extends Controller {
             public void loadingProgressChanged(WebBrowserEvent e) {
                 super.loadingProgressChanged(e);
                 if (webBrowser.getLoadingProgress() == 100) {
-                    String location = webBrowser.getResourceLocation();
-
-                    System.out.println("Loaded: " + location);
-                    if (location.startsWith("https://accounts.google.com/ServiceLogin")) {
-                        if (status == Status.UNSTARRED) {
-                            doLogin();
-                        }
-                    } else if (location.startsWith("https://adwords.google.com/cm/CampaignMgmt")) {
-                        if (status == Status.UNSTARRED || status == Status.WAIT_FOR_CM) {
-                            navigateToKeywordTool();
-                        }
-                    } else if (location.startsWith("https://adwords.google.com/o/Targeting/Explorer")) {
-
-                        if (status == Status.WAIT_FOR_TARGET_TOOL) {
-
-                            status = Status.EMTER_TARGET_TOOL;
-
-                            Runnable thread = new Runnable() {
-                                @Override
-                                public void run() {
-                                    //                                    sleep(5000);
-                                    //                                    webBrowser.stopLoading();
-                                    while (started) {
-
-                                        if (keywordIndex == keywordList.size()) {
-                                            System.out.println("All done.");
-                                            break;
-                                        }
-
-                                        String keyword = keywordList.get(keywordIndex++);
-                                        System.out.printf("[%s] started, number: %d.\r\n", keyword, keywordIndex - 1);
-
-                                        waitUntilLoadingFinished(false);
-
-                                        if (status == Status.EMTER_TARGET_TOOL) {
-                                            initFuncs();
-                                            initSearchConfig();
-                                        }
-
-                                        // input keyword
-                                        String js = "var textareas=document.getElementsByTagName('textarea');"
-                                                + "for(var i=0;i<textareas.length;i++){"
-                                                + "if(textareas[i].parentNode.children[0].innerHTML=='One per line'){textareas[i].value='"
-                                                + keyword + "';break;}" + "}";
-                                        executeJavascript(js);
-
-                                        // input Include terms
-                                        js = "findByTagInnerHTML('a','Remove all').click(); "
-                                                + "var div=findByTagInnerHTML('div','Include terms (0)');"
-                                                + "var inputParent=div.parentNode.parentNode.children[1].children[0].children[0];"
-                                                + "inputParent.children[0].value='" + keyword + "';"
-                                                + "inputParent.children[1].click();";
-                                        executeJavascript(js);
-
-                                        // click search
-                                        js = "findAndClick('button','Search');";
-                                        executeJavascript(js);
-
-                                        status = Status.SEARCHING_RESULT;
-
-                                        System.out.printf("[%s] searching.\r\n", keyword);
-
-                                        waitUntilLoadingFinished(false);
-
-                                        // click 'Keyword ideas'
-                                        js = "findAndClick('span','Keyword ideas')";
-                                        executeJavascript(js);
-
-                                        waitUntilLoadingFinished(false);
-
-                                        String initLabel = executeJavascriptWithResult(
-                                                "return getLabelAndClickAndNext(false,false);").toString();
-                                        //                                    System.out.println(initLabel);
-
-                                        String[] labelSlices = initLabel.split("</*b>");
-                                        // change to 100 items
-                                        if (!labelSlices[3].equals(labelSlices[5]) && !"100".equals(labelSlices[3])) {
-                                            executeJavascript("getLabelAndClickAndNext(true,false);");
-                                            executeJavascript("findAndClick('div','100 items');");
-                                        }
-
-                                        List<AdwordsKeywordInfo> infos = new ArrayList<AdwordsKeywordInfo>();
-                                        boolean meetEnd = false;
-                                        do {
-                                            if (!waitUntilLoadingFinished(false)) {
-                                                meetEnd = false;
-                                                break;
-                                            }
-                                            //collect data
-                                            String label = executeJavascriptWithResult(
-                                                    "return getLabelAndClickAndNext(false,false);").toString();
-                                            System.out.printf("[%s] data collecting: %s \r\n", keyword,
-                                                    label.replaceAll("</*b>", ""));
-                                            infos.addAll(collectData());
-
-                                            meetEnd = Boolean.parseBoolean(executeJavascriptWithResult(
-                                                    "return meetEnd();").toString());
-
-                                            if (meetEnd) {
-                                                System.out.printf("[%s] finished.\r\n", keyword);
-                                                output(infos, keyword);
-                                                break;
-                                            } else {
-                                                System.out.printf("[%s] next page.\r\n", keyword);
-                                                executeJavascript("getLabelAndClickAndNext(false,true)");
-                                            }
-                                        } while (started);
-
-                                        if (!started) {
-                                            // the keyword not done
-                                            if (!meetEnd) {
-                                                keywordIndex--;
-                                            }
-                                            status = Status.UNSTARRED;
-                                            System.out.printf("<STOP> next keyword: %s, index: %d \r\n",
-                                                    keywordList.get(keywordIndex), keywordIndex);
-                                        }
-                                    }
-                                }
-                            };
-                            new Thread(thread).start();
-                        }
-                    }
+                    execute();
                     //                    SwingUtilities.invokeLater(runnable);
                 }
                 //                if (webBrowser.getResourceLocation().startsWith("https://adwords.google.com/o/Targeting/Explorer")) {
                 //                    System.out.println(webBrowser.getLoadingProgress());
                 //                }
             }
+
+            private void execute() {
+                String location = webBrowser.getResourceLocation();
+
+                System.out.println("Loaded: " + location);
+                if (location.startsWith("https://accounts.google.com/ServiceLogin")) {
+                    if (status == Status.UNSTARRED) {
+                        doLogin();
+                    }
+                } else if (location.startsWith("https://adwords.google.com/cm/CampaignMgmt")) {
+                    if (status == Status.UNSTARRED || status == Status.WAIT_FOR_CM) {
+                        navigateToKeywordTool(location);
+                    }
+                } else if (location.startsWith("https://adwords.google.com/o/Targeting/Explorer")) {
+
+                    if (status == Status.WAIT_FOR_TARGET_TOOL) {
+
+                        status = Status.EMTER_TARGET_TOOL;
+
+                        Runnable thread = new Runnable() {
+                            @Override
+                            public void run() {
+                                //                                    sleep(5000);
+                                //                                    webBrowser.stopLoading();
+                                while (started) {
+
+                                    if (keywordIndex == keywordList.size()) {
+                                        System.out.println("All done.");
+                                        break;
+                                    }
+
+                                    String keyword = keywordList.get(keywordIndex++);
+                                    System.out.printf("[%s] started, number: %d.\r\n", keyword, keywordIndex - 1);
+
+                                    waitUntilLoadingFinished(false);
+
+                                    if (status == Status.EMTER_TARGET_TOOL) {
+                                        initFuncs();
+                                        initSearchConfig();
+                                    }
+
+                                    // input keyword
+                                    String js = "var textareas=document.getElementsByTagName('textarea');"
+                                            + "for(var i=0;i<textareas.length;i++){"
+                                            + "if(textareas[i].parentNode.children[0].innerHTML=='One per line'){textareas[i].value='"
+                                            + keyword + "';break;}" + "}";
+                                    executeJavascript(js);
+
+                                    // input Include terms
+                                    js = "findByTagInnerHTML('a','Remove all').click(); "
+                                            + "var div=findByTagInnerHTML('div','Include terms (0)');"
+                                            + "var inputParent=div.parentNode.parentNode.children[1].children[0].children[0];"
+                                            + "inputParent.children[0].value='" + keyword + "';"
+                                            + "inputParent.children[1].click();";
+                                    executeJavascript(js);
+
+                                    // click search
+                                    js = "findAndClick('button','Search');";
+                                    executeJavascript(js);
+
+                                    status = Status.SEARCHING_RESULT;
+
+                                    System.out.printf("[%s] searching.\r\n", keyword);
+
+                                    waitUntilLoadingFinished(false);
+
+                                    // click 'Keyword ideas'
+                                    js = "findAndClick('span','Keyword ideas')";
+                                    executeJavascript(js);
+
+                                    waitUntilLoadingFinished(false);
+
+                                    String initLabel = executeJavascriptWithResult(
+                                            "return getLabelAndClickAndNext(false,false);").toString();
+                                    //                                    System.out.println(initLabel);
+
+                                    String[] labelSlices = initLabel.split("</*b>");
+                                    // change to 100 items
+                                    if (!labelSlices[3].equals(labelSlices[5]) && !"100".equals(labelSlices[3])) {
+                                        executeJavascript("getLabelAndClickAndNext(true,false);");
+                                        executeJavascript("findAndClick('div','100 items');");
+                                    }
+
+                                    List<AdwordsKeywordInfo> infos = new ArrayList<AdwordsKeywordInfo>();
+                                    boolean meetEnd = false;
+                                    do {
+                                        if (!waitUntilLoadingFinished(false)) {
+                                            meetEnd = false;
+                                            break;
+                                        }
+                                        //collect data
+                                        String label = executeJavascriptWithResult(
+                                                "return getLabelAndClickAndNext(false,false);").toString();
+                                        System.out.printf("[%s] data collecting: %s \r\n", keyword,
+                                                label.replaceAll("</*b>", ""));
+                                        infos.addAll(collectData());
+
+                                        meetEnd = Boolean.parseBoolean(executeJavascriptWithResult("return meetEnd();")
+                                                .toString());
+
+                                        if (meetEnd) {
+                                            System.out.printf("[%s] finished.\r\n", keyword);
+                                            output(infos, keyword);
+                                            break;
+                                        } else {
+                                            System.out.printf("[%s] next page.\r\n", keyword);
+                                            executeJavascript("getLabelAndClickAndNext(false,true)");
+                                        }
+                                    } while (started);
+
+                                    if (!started) {
+                                        // the keyword not done
+                                        if (!meetEnd) {
+                                            keywordIndex--;
+                                        }
+                                        status = Status.UNSTARRED;
+                                        System.out.printf("<STOP> next keyword: %s, index: %d \r\n",
+                                                keywordList.get(keywordIndex), keywordIndex);
+                                    }
+                                }
+                            }
+                        };
+                        new Thread(thread).start();
+                    }
+                }
+            }
+
         };
     }
 
@@ -263,17 +273,35 @@ public class GoogleController extends Controller {
         }
     }
 
-    private void navigateToKeywordTool() {
+    private void navigateToKeywordTool(String CampaignMgmtUrl) {
         //        sleep(5000);
         //        webBrowser.stopLoading();
-        waitUntilLoadingFinished(true);
-        String js = "var tds=document.getElementsByTagName('td');"
-                + "for(var i=0;i<tds.length;i++){"
-                + "if(tds[i].getAttribute('gwtdebugid')&&tds[i].getAttribute('gwtdebugid')=='aw-cues-bar-reports-menu'){tds[i].click();}"
-                + "if(tds[i].getAttribute('gwtdebugid')&&tds[i].getAttribute('gwtdebugid')=='aw-cues-item-keyword-tool'){tds[i].click();break;}"
-                + "}";
-        webBrowser.executeJavascript(js);
-        System.out.println("Going to Target tool...");
+        //        waitUntilLoadingFinished(true);
+        //        String js = "var tds=document.getElementsByTagName('td');"
+        //                + "for(var i=0;i<tds.length;i++){"
+        //                + "if(tds[i].getAttribute('gwtdebugid')&&tds[i].getAttribute('gwtdebugid')=='aw-cues-bar-reports-menu'){tds[i].click();}"
+        //                + "if(tds[i].getAttribute('gwtdebugid')&&tds[i].getAttribute('gwtdebugid')=='aw-cues-item-keyword-tool'){tds[i].click();break;}"
+        //                + "}";
+        //        webBrowser.executeJavascript(js);
+
+        String __c = "";
+        Matcher matcher = cPattern.matcher(CampaignMgmtUrl);
+        if (matcher.find()) {
+            __c = matcher.group(0);
+        } else {
+            System.out.println("Cannot find __c for url: " + CampaignMgmtUrl);
+        }
+
+        String __u = "";
+        matcher = uPattern.matcher(CampaignMgmtUrl);
+        if (matcher.find()) {
+            __u = matcher.group(0);
+        } else {
+            System.out.println("Cannot find __u for url: " + CampaignMgmtUrl);
+        }
+
+        webBrowser.navigate(String.format(KEYWORD_URL_TPL, __c, __u));
+        System.out.println("Going to Keyword tool...");
         status = Status.WAIT_FOR_TARGET_TOOL;
     }
 
@@ -442,26 +470,26 @@ public class GoogleController extends Controller {
 
     /* Standard main method to try that test as a standalone application. */
     public static void main(String[] args) {
-        NativeInterface.open();
-        UIUtils.setPreferredLookAndFeel();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                GoogleController c = new GoogleController();
-                c.setKeywordList(Arrays.asList("earn money", "save money"));
-
-                JFrame frame = new JFrame("DJ Native Swing Test");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.getContentPane().add(c.getWebBrowser(), BorderLayout.CENTER);
-                frame.setSize(1280, 600);
-                frame.setLocationByPlatform(true);
-                frame.setVisible(true);
-                frame.setLocation(0, 0);
-
-                c.run();
-            }
-        });
-        NativeInterface.runEventPump();
+        //        NativeInterface.open();
+        //        UIUtils.setPreferredLookAndFeel();
+        //        SwingUtilities.invokeLater(new Runnable() {
+        //            @Override
+        //            public void run() {
+        //                GoogleController c = new GoogleController();
+        //                c.setKeywordList(Arrays.asList("earn money", "save money"));
+        //
+        //                JFrame frame = new JFrame("DJ Native Swing Test");
+        //                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //                frame.getContentPane().add(c.getWebBrowser(), BorderLayout.CENTER);
+        //                frame.setSize(1280, 600);
+        //                frame.setLocationByPlatform(true);
+        //                frame.setVisible(true);
+        //                frame.setLocation(0, 0);
+        //
+        //                c.run();
+        //            }
+        //        });
+        //        NativeInterface.runEventPump();
 
         //        String s = "<b>1</b> - <b>100</b> of <b>181</b>";
         //        String[] ss = s.split("</*b>");
@@ -483,5 +511,16 @@ public class GoogleController extends Controller {
         //            e.printStackTrace();
         //        }
 
+        String url = "https://adwords.google.com/cm/CampaignMgmt?__c=2012996510&__u=6295170950#r.ONLINE&app=cm";
+
+        String regex = "__u=\\d+";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(url);
+
+        System.out.println(matcher.find());
+
+        System.out.println(matcher.group(0));
     }
 }
