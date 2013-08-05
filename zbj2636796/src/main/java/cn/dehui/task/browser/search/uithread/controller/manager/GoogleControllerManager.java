@@ -87,6 +87,8 @@ public class GoogleControllerManager extends ControllerManager {
             //                                webBrowser.stopLoading();
             //                                webBrowser.navigate(webBrowser.getResourceLocation());
             //                                System.out.println("page reloaded...");
+
+            // sometimes the page stops after the captcha is input. It seems to be solved by changing to onLocationChanged
             if (runningController.getLastSearchUrl() != null
                     && runningController.getLastSearchUrl().startsWith("http://www.google.com/sorry/")) {
                 webBrowser.navigate(webBrowser.getResourceLocation());

@@ -139,8 +139,8 @@ public abstract class ControllerManager {
             String keyword = sc.keyword;
             String keywordToWrite = keyword.charAt(0) == '\"' && keyword.charAt(keyword.length() - 1) == '\"' ? keyword
                     : '\"' + keyword + '\"';
-            bwForSiteCount.write(String.format("%s,\"%d\",\"%d\"\r\n", keywordToWrite, sc.siteResultCount,
-                    sc.quoteResultCount));
+            bwForSiteCount.write(String.format("%s,\"%d\",\"%d\",\"%d\"\r\n", keywordToWrite, sc.siteResultCount,
+                    sc.quoteProbableResultCount, sc.quoteResultCount));
             bwForSiteCount.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -303,7 +303,7 @@ public abstract class ControllerManager {
             try {
                 bwForSiteCount = new BufferedWriter(new FileWriter(new File(outputFolder, String.format(
                         SITE_COUNT_FILE_TPL, System.currentTimeMillis()))));
-                bwForSiteCount.write("URL,site数量,引号搜索数量\r\n");
+                bwForSiteCount.write("URL,site数量,引号搜索估算数量,引号搜索实际数量\r\n");
                 bwForSiteCount.flush();
             } catch (IOException e) {
                 e.printStackTrace();

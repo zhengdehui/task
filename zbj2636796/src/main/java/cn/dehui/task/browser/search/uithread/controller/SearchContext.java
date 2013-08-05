@@ -13,18 +13,21 @@ public class SearchContext {
 
     public String               keyword;
 
-    public List<String>         urlList          = new ArrayList<String>();
+    public List<String>         urlList                  = new ArrayList<String>();
 
-    public Map<String, Integer> statisticMap     = new HashMap<String, Integer>();
+    public Map<String, Integer> statisticMap             = new HashMap<String, Integer>();
 
-    public long                 siteResultCount  = 0;
+    public long                 siteResultCount          = 0;
 
-    public long                 quoteResultCount = 0;
+    public long                 quoteResultCount         = 0;
+
+    public long                 quoteProbableResultCount = 0;
 
     public void clear() {
         urlList.clear();
         statisticMap.clear();
         siteResultCount = 0;
         quoteResultCount = 0;
+        quoteProbableResultCount = 0;
     }
 }

@@ -22,6 +22,11 @@ public class ResultCountGoogleController extends GoogleController {
         Object resultStatsObj;
         switch (status) {
             case KEYWORD_SEARCHING:
+                if (searchContext.quoteProbableResultCount == 0) {
+                    searchContext.quoteProbableResultCount = getNumberFromResultStats(webBrowser);
+                    System.out.print(searchContext.quoteProbableResultCount + ", ");
+                }
+
                 if (!meetEnd()) {
                     lastPage();
                     return;
@@ -48,19 +53,7 @@ public class ResultCountGoogleController extends GoogleController {
                 break;
 
             case SITE_SEARCHING:
-                resultStatsObj = webBrowser.executeJavascriptWithResult(resultStatsJs);
-
-                if (resultStatsObj != null) {
-                    resultStats = resultStatsObj.toString().replaceAll("About ", "");
-
-                    String[] parts = resultStats.split(" ", 2);
-
-                    try {
-                        searchContext.siteResultCount = Long.parseLong(parts[0].replaceAll(",", ""));
-                    } catch (Exception e) {
-                        System.err.println(resultStats);
-                    }
-                }
+                searchContext.siteResultCount = getNumberFromResultStats(webBrowser);
                 System.out.print(searchContext.siteResultCount + ", ");
                 System.out.printf("Used time: %d ms\r\n", System.currentTimeMillis() - timestamp);
                 callback.execute();
@@ -68,6 +61,26 @@ public class ResultCountGoogleController extends GoogleController {
             default:
                 break;
         }
+    }
+
+    private long getNumberFromResultStats(final JWebBrowser webBrowser) {
+        String resultStats;
+        Object resultStatsObj;
+        resultStatsObj = webBrowser.executeJavascriptWithResult(resultStatsJs);
+
+        if (resultStatsObj != null) {
+            resultStats = resultStatsObj.toString().replaceAll("About ", "");
+
+            String[] parts = resultStats.split(" ", 2);
+
+            try {
+                return Long.parseLong(parts[0].replaceAll(",", ""));
+            } catch (Exception e) {
+                System.err.println(resultStats);
+            }
+        }
+
+        return 0;
     }
 
     private void lastPage() {
