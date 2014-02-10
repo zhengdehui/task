@@ -14,6 +14,10 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+/**
+ * 超过60次封IP，但不报错，永远返回未注册
+ * @author dehui
+ */
 public class FanhuanEmailChecker extends EmailChecker {
 
     public static int           sleepTime          = System.getProperty("fanhuan.sleep") == null ? 100 : Integer
