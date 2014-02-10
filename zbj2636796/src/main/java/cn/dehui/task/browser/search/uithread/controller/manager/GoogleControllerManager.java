@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import cn.dehui.task.browser.search.uithread.controller.SearchContext;
+import cn.dehui.task.browser.search.uithread.controller.google.GoogleController;
 import cn.dehui.task.browser.search.uithread.controller.google.ResultCountGoogleController;
 import cn.dehui.task.browser.search.uithread.controller.google.StatisticGoogleController;
 import cn.dehui.task.browser.search.uithread.controller.google.UrlGoogleController;
@@ -83,14 +84,14 @@ public class GoogleControllerManager extends ControllerManager {
     @Override
     protected void handleTimeout() {
         if (webBrowser.getResourceLocation() != null
-                && !webBrowser.getResourceLocation().startsWith("http://www.google.com/sorry/")) {
+                && !webBrowser.getResourceLocation().contains(".google.com/sorry/")) {
             //                                webBrowser.stopLoading();
             //                                webBrowser.navigate(webBrowser.getResourceLocation());
             //                                System.out.println("page reloaded...");
 
             // sometimes the page stops after the captcha is input. It seems to be solved by changing to onLocationChanged
             if (runningController.getLastSearchUrl() != null
-                    && runningController.getLastSearchUrl().startsWith("http://www.google.com/sorry/")) {
+                    && (runningController.getLastSearchUrl().contains(".google.com/sorry/"))) {
                 webBrowser.navigate(webBrowser.getResourceLocation());
             } else {
                 runningController.research();

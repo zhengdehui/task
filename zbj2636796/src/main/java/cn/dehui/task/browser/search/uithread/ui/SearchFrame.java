@@ -322,7 +322,7 @@ public abstract class SearchFrame extends JFrame {
     }
 
     protected boolean isSiteSearchEnabled() {
-        return false;
+        return true;
     }
 
     protected abstract ControllerManager getControllerManager();

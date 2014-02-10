@@ -44,13 +44,18 @@ import cn.dehui.task.browser.search.util.Utils;
 
 public abstract class GoogleController extends Controller {
 
+    private static final String   GET_ELEMENT_BY_TEXT_FUNC    = "function getElementByText(tagName, text){"
+                                                                      + "var tags=document.getElementsByTagName(tagName);"
+                                                                      + "for(var i=0;i<tags.length;i++){if(tags[i].innerHTML==text){return tags[i];}}"
+                                                                      + "return null;" + "}";
+
     private static String         captchaPassword;
 
     private static String         captchaUserName;
 
-    protected static final String GOOGLE_URL                  = "http://www.google.com/";
+    public static final String    HTTPS_GOOGLE_URL            = "https://www.google.com/";
 
-    protected static final String GOOGLE_HK_URL               = "http://www.google.com.hk/";
+    public static final String    HTTP_GOOGLE_URL             = "http://www.google.com/";
 
     protected static final int    PROGRESS                    = 95;
 
@@ -70,9 +75,11 @@ public abstract class GoogleController extends Controller {
 
     private static final String   nextBtnInnerHtmlJs          = "return document.getElementById('pnnext').innerHTML;";
 
-    private static final String   clickGoogleDotComLinkJs     = "document.getElementById('fehl').click()";
+    //    private static final String   clickGoogleDotComLinkJs     = "document.getElementById('fehl').click()";
+    private static final String   clickGoogleDotComLinkJs     = "getElementByText('a','Google.com in English').click()";
 
-    private static final String   googleDotComLinkExistJs     = "return document.getElementById('fehl')!=null";
+    //    private static final String   googleDotComLinkExistJs     = "return document.getElementById('fehl')!=null";
+    private static final String   googleDotComLinkExistJs     = "return getElementByText('a','Google.com in English')!=null";
 
     protected static final String nextPageJs                  = "document.getElementById('pnnext').click();";
 
@@ -125,8 +132,9 @@ public abstract class GoogleController extends Controller {
     @Override
     protected boolean isWantedLocation(String newResourceLocation) {
         return newResourceLocation != null
-                && (GOOGLE_URL.equals(newResourceLocation) || newResourceLocation.startsWith(GOOGLE_URL + "sorry/") || newResourceLocation
-                        .startsWith(GOOGLE_URL + "search?"));
+                && (HTTPS_GOOGLE_URL.equals(newResourceLocation)
+                        || newResourceLocation.contains(".google.com/sorry/") || newResourceLocation
+                            .startsWith(HTTPS_GOOGLE_URL + "search?"));
     }
 
     @Override
@@ -137,15 +145,16 @@ public abstract class GoogleController extends Controller {
                 String location = getWebBrowser().getResourceLocation();
 
                 // detect duplicate entry
-                if (!location.equals(GOOGLE_URL)) {
+                if (!location.equals(HTTPS_GOOGLE_URL)) {
                     if (location.equals(lastSearchUrl)) {
                         System.err.println("old location: " + lastSearchUrl);
                         System.err.println("new location: " + location);
                         return;
                     }
 
-                    if (location.startsWith(GOOGLE_URL + "search?") && lastSearchUrl != null
-                            && lastSearchUrl.startsWith(GOOGLE_URL + "search?") && isOldStart(location, lastSearchUrl)) {
+                    if (location.startsWith(HTTPS_GOOGLE_URL + "search?") && lastSearchUrl != null
+                            && lastSearchUrl.startsWith(HTTPS_GOOGLE_URL + "search?")
+                            && isOldStart(location, lastSearchUrl)) {
                         System.err.println("old location: " + lastSearchUrl);
                         System.err.println("new location: " + location);
                         return;
@@ -158,10 +167,10 @@ public abstract class GoogleController extends Controller {
                 //                            } catch (IOException e) {
                 //                                e.printStackTrace();
                 //                            }
-                if (location.equals(GOOGLE_URL)) {
+                if (location.equals(HTTPS_GOOGLE_URL)) {
                     workerName = null;
                     handleEnterGoogleSite(getWebBrowser());
-                } else if (location.startsWith(GOOGLE_URL + "sorry/")) {
+                } else if (location.contains(".google.com/sorry/")) {
                     if ((Boolean) getWebBrowser().executeJavascriptWithResult(isRedirectPageJs)) {
                         return;
                     }
@@ -171,7 +180,7 @@ public abstract class GoogleController extends Controller {
                         FastVerCode.INSTANCE.ReportError(captchaUserName, workerName);
                     }
                     handleCaptcha();
-                } else if (location.startsWith(GOOGLE_URL + "search?")) {
+                } else if (location.startsWith(HTTPS_GOOGLE_URL + "search?")) {
                     workerName = null;
                     sleep(1000);
                     try {
@@ -211,6 +220,7 @@ public abstract class GoogleController extends Controller {
     protected void handleEnterGoogleSite(final JWebBrowser webBrowser) {
         //        System.out.println("handleEnterGoogleSite");
         webBrowser.stopLoading();
+        webBrowser.executeJavascript(GET_ELEMENT_BY_TEXT_FUNC);
         Object hasFehl = webBrowser.executeJavascriptWithResult(googleDotComLinkExistJs);
         if (Boolean.parseBoolean(hasFehl.toString())) {
             webBrowser.executeJavascript(clickGoogleDotComLinkJs);
@@ -365,7 +375,7 @@ public abstract class GoogleController extends Controller {
         super.run();
         timestamp = System.currentTimeMillis();
         webBrowser.stopLoading();
-        webBrowser.navigate(GOOGLE_URL);
+        webBrowser.navigate(HTTPS_GOOGLE_URL);
     }
 
     @Override

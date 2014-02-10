@@ -53,7 +53,7 @@ public class StatisticGoogleController extends UrlGoogleController implements IS
     private void renewBrowser() {
         // renew browser
         controllerManager.renewWebBrowser();
-        getWebBrowser().navigate(GOOGLE_URL);
+        getWebBrowser().navigate(HTTPS_GOOGLE_URL);
     }
 
     @Override

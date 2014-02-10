@@ -57,9 +57,10 @@ public abstract class BaiduController extends Controller {
     }
 
     protected boolean meetEnd() {
-        String js = "var as=document.getElementsByTagName('a');for(var i=as.length-1;i>=0;i--){if(as[i].innerHTML=='下一页&gt;') return false;}return true;";
+        //        String js = "var as=document.getElementsByTagName('a');for(var i=as.length-1;i>=0;i--){if(as[i].innerHTML=='下一页&gt;') return false;}return true;";
+        String js = "var as=document.getElementById('page').getElementsByTagName('a'); return !(as[as.length-1].innerHTML=='下一页&gt;');";
         Object o = webBrowser.executeJavascriptWithResult(js);
-        return Boolean.parseBoolean(o.toString());
+        return o == null ? true : Boolean.parseBoolean(o.toString());
     }
 
     protected String getRealUrl(String url) {
@@ -139,7 +140,7 @@ public abstract class BaiduController extends Controller {
     }
 
     protected void searchKeywordInMainPage(String keyword) {
-        webBrowser.executeJavascript("document.getElementById('kw').value='" + keyword + "';");
+        webBrowser.executeJavascript("document.getElementById('kw').value='" + keyword.replaceAll("'", "\\\\'") + "';");
         sleep(500);
         webBrowser.executeJavascript("document.getElementById('su').click();");
     }
