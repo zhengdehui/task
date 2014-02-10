@@ -11,6 +11,7 @@ target/
 libs/
 lib/
 *.log
+java接口/
 # Package Files #
 *.jar
 *.war
