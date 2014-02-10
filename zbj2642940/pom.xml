@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.dehui.task</groupId>
-	<artifactId>job-refresh</artifactId>
+	<artifactId>zbj2642940</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
@@ -38,9 +38,19 @@
 		<dependency>
 			<groupId>swt</groupId>
 			<artifactId>swt-win32</artifactId>
-			<version>4.2.1</version>
+			<version>4.3</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/libs/swt-4.2.1-win32-win32-x86.jar</systemPath>
+			<systemPath>${basedir}/libs/swt-4.3-win32-win32-x86.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>2.33.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>2.33.0</version>
 		</dependency>
 	</dependencies>
 </project>

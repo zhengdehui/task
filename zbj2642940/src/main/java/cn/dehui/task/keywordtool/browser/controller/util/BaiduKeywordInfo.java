@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.keywordtool.controller.util;
+package cn.dehui.task.keywordtool.browser.controller.util;
 
 public class BaiduKeywordInfo {
 

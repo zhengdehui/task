@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.keywordtool.ui;
+package cn.dehui.task.keywordtool;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -24,13 +24,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import cn.dehui.task.browser.keywordtool.controller.Controller;
+import chrriis.common.UIUtils;
+import cn.dehui.task.keywordtool.selenium.controller.AdwordsController;
 
-public abstract class KeywordToolFrame extends JFrame {
+public class KeywordToolFrame extends JFrame {
 
     private static final String ENCODING         = "GBK";
 
@@ -46,10 +47,6 @@ public abstract class KeywordToolFrame extends JFrame {
 
     private JTextField          encodingTextField;
 
-    private Controller          controller;
-
-    private JWebBrowser         webBrowser;
-
     private JTextField          usernameField;
 
     private JPasswordField      passwordField;
@@ -60,23 +57,23 @@ public abstract class KeywordToolFrame extends JFrame {
 
     private boolean             debug            = false;
 
+    private AdwordsController   controller;
+
     /**
      * Create the frame.
      */
     public KeywordToolFrame() {
         readAccount();
-        controller = createController();
-        //        controller = new GoogleController();
-        webBrowser = controller.getWebBrowser();
 
-        setTitle(controller.getTitle());
+        controller = new AdwordsController();
+
+        setTitle("Adwords Selenium");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                controller.destroy();
                 super.windowClosing(e);
-                webBrowser.stopLoading();
-                webBrowser.disposeNativePeer();
             }
         });
 
@@ -128,8 +125,9 @@ public abstract class KeywordToolFrame extends JFrame {
                 fc.setAcceptAllFileFilterUsed(false);
 
                 if (fc.showOpenDialog(KeywordToolFrame.this) == JFileChooser.APPROVE_OPTION) {
-                    controller.setOutputFolder(fc.getSelectedFile());
-                    outputPathTextField.setText(fc.getSelectedFile().getAbsolutePath());
+                    File selectedFile = fc.getSelectedFile();
+                    controller.setOutputFolder(selectedFile);
+                    outputPathTextField.setText(selectedFile.getAbsolutePath());
                 }
             }
         });
@@ -166,7 +164,7 @@ public abstract class KeywordToolFrame extends JFrame {
                     controller.setPassword(new String(passwordField.getPassword()));
                     controller.setDebug(debug);
 
-                    controller.run();
+                    new Thread(controller).start();
 
                 } else {
                     startBtn.setText("开始");
@@ -191,10 +189,7 @@ public abstract class KeywordToolFrame extends JFrame {
         passwordField.setText(password);
         panel.add(passwordField, "cell 3 2,grow");
 
-        contentPane.add(webBrowser, BorderLayout.CENTER);
     }
-
-    protected abstract Controller createController();
 
     private void readAccount() {
         File accountFile = new File(getConfigFile());
@@ -222,7 +217,9 @@ public abstract class KeywordToolFrame extends JFrame {
 
     }
 
-    protected abstract String getConfigFile();
+    protected String getConfigFile() {
+        return "adwords.txt";
+    }
 
     private void readFromText(File selectedFile) throws IOException {
         inputFileTextField.setText(selectedFile.getAbsolutePath());
@@ -239,5 +236,18 @@ public abstract class KeywordToolFrame extends JFrame {
 
         controller.setKeywordList(keywordList);
         startBtn.setEnabled(true);
+    }
+
+    public static void main(String[] args) {
+        UIUtils.setPreferredLookAndFeel();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                KeywordToolFrame frame = new KeywordToolFrame();
+                frame.setSize(600, 200);
+                frame.setLocationByPlatform(true);
+                frame.setVisible(true);
+            }
+        });
     }
 }

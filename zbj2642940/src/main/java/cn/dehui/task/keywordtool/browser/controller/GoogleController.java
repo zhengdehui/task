@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.keywordtool.controller;
+package cn.dehui.task.keywordtool.browser.controller;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,8 +23,8 @@ import org.htmlparser.visitors.NodeVisitor;
 
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
-import cn.dehui.task.browser.keywordtool.controller.util.AdwordsKeywordInfo;
-import cn.dehui.task.browser.keywordtool.controller.util.Status;
+import cn.dehui.task.keywordtool.browser.controller.util.AdwordsKeywordInfo;
+import cn.dehui.task.keywordtool.browser.controller.util.Status;
 
 /**
  * @author Christopher Deckers
@@ -39,7 +39,7 @@ public class GoogleController extends Controller {
 
     private static Pattern      uPattern        = Pattern.compile(__U_REGEX);
 
-    private static final String KEYWORD_URL_TPL = "https://adwords.google.com/o/Targeting/Explorer?__o=kp&ideaRequestType=KEYWORD_IDEAS&%s&%s";
+    private static final String KEYWORD_URL_TPL = "https://adwords.google.com/ko/KeywordPlanner/Home?%s&%s&__o=cues";
 
     @Override
     protected WebBrowserAdapter getWebBrowserListener() {
@@ -67,11 +67,14 @@ public class GoogleController extends Controller {
                     }
                 } else if (location.startsWith("https://adwords.google.com/cm/CampaignMgmt")) {
                     if (status == Status.UNSTARRED || status == Status.WAIT_FOR_CM) {
-                        navigateToKeywordTool(location);
+                        navigateToKeywordPlan1stPage(location);
                     }
-                } else if (location.startsWith("https://adwords.google.com/o/Targeting/Explorer")) {
+                } else if (location.startsWith("https://adwords.google.com/ko/KeywordPlanner/Home")) {
+                    if (status == Status.WAIT_FOR_KEYWORD_PLAN_1ST_PAGE) {
+                        navigateToKeywordPlan2ndPage();
+                    }
 
-                    if (status == Status.WAIT_FOR_TARGET_TOOL) {
+                    if (status == Status.WAIT_FOR_KEYWORD_PLAN_2ND_PAGE) {
 
                         status = Status.EMTER_TARGET_TOOL;
 
@@ -273,7 +276,11 @@ public class GoogleController extends Controller {
         }
     }
 
-    private void navigateToKeywordTool(String CampaignMgmtUrl) {
+    private void navigateToKeywordPlan2ndPage() {
+
+    }
+
+    private void navigateToKeywordPlan1stPage(String CampaignMgmtUrl) {
         //        sleep(5000);
         //        webBrowser.stopLoading();
         //        waitUntilLoadingFinished(true);
@@ -301,8 +308,8 @@ public class GoogleController extends Controller {
         }
 
         webBrowser.navigate(String.format(KEYWORD_URL_TPL, __c, __u));
-        System.out.println("Going to Keyword tool...");
-        status = Status.WAIT_FOR_TARGET_TOOL;
+        System.out.println("Going to Keyword plan...");
+        status = Status.WAIT_FOR_KEYWORD_PLAN_1ST_PAGE;
     }
 
     private void initFuncs() {

@@ -1,13 +1,13 @@
-package cn.dehui.task.browser.keywordtool.ui;
+package cn.dehui.task.keywordtool.browser.ui;
 
 import javax.swing.SwingUtilities;
 
 import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import cn.dehui.task.browser.keywordtool.controller.Controller;
-import cn.dehui.task.browser.keywordtool.controller.GoogleController;
+import cn.dehui.task.keywordtool.browser.controller.BaiduController;
+import cn.dehui.task.keywordtool.browser.controller.Controller;
 
-public class AdwordsKeywordToolFrame extends KeywordToolFrame {
+public class BaiduKeywordToolFrame extends KeywordToolFrameWithBrowser {
 
     /**
      * Launch the application.
@@ -18,7 +18,7 @@ public class AdwordsKeywordToolFrame extends KeywordToolFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AdwordsKeywordToolFrame frame = new AdwordsKeywordToolFrame();
+                BaiduKeywordToolFrame frame = new BaiduKeywordToolFrame();
                 frame.setSize(1280, 600);
                 frame.setLocationByPlatform(true);
                 frame.setVisible(true);
@@ -29,11 +29,11 @@ public class AdwordsKeywordToolFrame extends KeywordToolFrame {
 
     @Override
     protected Controller createController() {
-        return new GoogleController();
+        return new BaiduController();
     }
 
     @Override
     protected String getConfigFile() {
-        return "adwords.txt";
+        return "fengchao.txt";
     }
 }

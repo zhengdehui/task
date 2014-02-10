@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.keywordtool.controller;
+package cn.dehui.task.keywordtool.browser.controller;
 
 import java.awt.AWTException;
 import java.awt.Point;
@@ -28,8 +28,8 @@ import org.htmlparser.visitors.NodeVisitor;
 
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
-import cn.dehui.task.browser.keywordtool.controller.util.BaiduKeywordInfo;
-import cn.dehui.task.browser.keywordtool.controller.util.Status;
+import cn.dehui.task.keywordtool.browser.controller.util.BaiduKeywordInfo;
+import cn.dehui.task.keywordtool.browser.controller.util.Status;
 
 /**
  * @author Christopher Deckers
@@ -138,14 +138,14 @@ public class BaiduController extends Controller {
         if (location.startsWith(CAS_BAIDU_URL)) {
             if (status == Status.UNSTARRED
                     || Boolean.parseBoolean(executeJavascriptWithResult(isLoginErrorJs).toString())) {
-                doLogin();
+//                doLogin();
                 status = Status.WAIT_FOR_FC;
             }
         } else if (location.startsWith("https://cas.baidu.com/?")) {
             JOptionPane.showMessageDialog(webBrowser, "请回答验证问题");
         } else if ((location.startsWith(FENGCHAO_BAIDU_URL + "main.html") || location.startsWith(TUIGUANG_BAIDU_URL
                 + "main.html"))
-                && location.endsWith("#")) {
+                && location.endsWith("#/")) {
             if (status == Status.UNSTARRED || status == Status.WAIT_FOR_FC) {
                 status = Status.WAIT_FOR_MP;
                 //                sleep(2000);
@@ -153,7 +153,7 @@ public class BaiduController extends Controller {
 
                 // http://fengchao.baidu.com/main.html?userid=6187503#
                 navigate(FENGCHAO_BAIDU_URL + "nirvana/main.html" + location.substring(location.indexOf('?'))
-                        + "/manage/plan");
+                        + "manage/plan");
                 // goto http://fengchao.baidu.com/nirvana/main.html?userid=6187503
             }
         } else if (location.startsWith(FENGCHAO_BAIDU_URL + "nirvana/main.html") && location.endsWith("#")) {
@@ -194,7 +194,9 @@ public class BaiduController extends Controller {
                             // input keyword
                             String js = "var inputs=document.getElementsByTagName('input');"
                                     + "for(var i=0;i<inputs.length;i++){"
-                                    + "if(inputs[i].type=='text'&&inputs[i].getAttribute('_placeholder')&&inputs[i].getAttribute('_placeholder')=='请输入关键词或URL以搜索相关词...'){"
+                                    + "if(inputs[i].type=='text'&&inputs[i].getAttribute('_placeholder')" +
+                                    //"&&(inputs[i].getAttribute('_placeholder')=='请输入关键词或URL以搜索相关词...'||inputs[i].getAttribute('_placeholder')=='还可输入URL搜索相关词...')" +
+                                    "){"
                                     + "var className=inputs[i].className; inputs[i].className=className.replace(/input-placeholder/,''); inputs[i].value='"
                                     + keyword + "';}}";
                             executeJavascript(js);

@@ -1,4 +1,4 @@
-package cn.dehui.task.browser.keywordtool.controller;
+package cn.dehui.task.keywordtool.browser.controller;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -8,8 +8,8 @@ import javax.swing.SwingUtilities;
 
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import cn.dehui.task.browser.keywordtool.controller.util.Callback;
-import cn.dehui.task.browser.keywordtool.controller.util.Status;
+import cn.dehui.task.keywordtool.browser.controller.util.Callback;
+import cn.dehui.task.keywordtool.browser.controller.util.Status;
 
 /**
  * @author Christopher Deckers
