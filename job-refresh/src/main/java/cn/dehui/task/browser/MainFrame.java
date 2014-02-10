@@ -37,8 +37,10 @@ public class MainFrame extends JFrame {
 
     private static final long   serialVersionUID   = 6144722027050898517L;
 
-    private static final String LOGIN_JS           = "document.getElementById('txtusername').value='zhiyuandg';"
-                                                           + "document.getElementById('txtpwd').value='197888';"
+    private static final String LOGIN_JS           = "document.getElementById('txtusername').value='"
+                                                           + System.getProperty("cn.dehui.58job.username") + "';"
+                                                           + "document.getElementById('txtpwd').value='"
+                                                           + System.getProperty("cn.dehui.58job.password") + "';"
                                                            + "document.getElementById('isremember').click();"
                                                            + "document.getElementById('loginButton').click();";
 
